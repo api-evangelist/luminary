@@ -1,0 +1,876 @@
+openapi: 3.0.3
+info:
+  description: RESTful API for managing Luminary data
+  title: Luminary Documents Households API
+  version: 1.0.0
+servers:
+- description: Luminary API v1 server
+  url: https://{subdomain}.withluminary.com/api/public/v1
+  variables:
+    subdomain:
+      default: lum
+      description: Your Luminary subdomain
+security:
+- oauth2Profiles: []
+tags:
+- name: Households
+paths:
+  /households:
+    get:
+      description: Retrieve a paginated list of households using cursor-based pagination
+      operationId: listHouseholds
+      parameters:
+      - description: Filter by external ID (exact match within the caller's tenant)
+        in: query
+        name: external_id
+        schema:
+          minLength: 1
+          type: string
+      - $ref: '#/components/parameters/AfterCursor'
+      - $ref: '#/components/parameters/BeforeCursor'
+      - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HouseholdList'
+          description: List of households
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: List all households
+      tags:
+      - Households
+    post:
+      description: Create a new household with the provided data
+      operationId: createHousehold
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateHouseholdRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Household'
+          description: Household created successfully
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: Create a new household
+      tags:
+      - Households
+  /households/{id}:
+    parameters:
+    - description: Household ID
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
+    delete:
+      description: Soft delete a household (marks as deleted but preserves data)
+      operationId: deleteHousehold
+      responses:
+        '204':
+          description: Household deleted successfully
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: Delete a household
+      tags:
+      - Households
+    get:
+      description: Retrieve detailed information about a specific household
+      operationId: getHousehold
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Household'
+          description: Household found
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: Get a household by ID
+      tags:
+      - Households
+    put:
+      description: Update an existing household with new data
+      operationId: updateHousehold
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateHouseholdRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Household'
+          description: Household updated successfully
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: Update a household
+      tags:
+      - Households
+  /households/{id}/documents:
+    parameters:
+    - description: Household ID
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
+    get:
+      description: Retrieve a paginated list of documents belonging to a specific household
+      operationId: listHouseholdDocuments
+      parameters:
+      - description: Filter by document type
+        in: query
+        name: type
+        schema:
+          $ref: '#/components/schemas/DocumentType'
+      - $ref: '#/components/parameters/AfterCursor'
+      - $ref: '#/components/parameters/BeforeCursor'
+      - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentList'
+          description: List of documents in the household
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: List all documents in a household
+      tags:
+      - Households
+  /households/{id}/entities:
+    parameters:
+    - description: Household ID
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
+    get:
+      description: Retrieve a paginated list of entities belonging to a specific household
+      operationId: listHouseholdEntities
+      parameters:
+      - description: Filter by entity kind/type
+        in: query
+        name: kind
+        schema:
+          $ref: '#/components/schemas/EntityKind'
+      - $ref: '#/components/parameters/AfterCursor'
+      - $ref: '#/components/parameters/BeforeCursor'
+      - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityList'
+          description: List of entities in the household
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: List all entities in a household
+      tags:
+      - Households
+  /households/{id}/individuals:
+    parameters:
+    - description: Household ID
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
+    get:
+      description: Retrieve a paginated list of client profiles/individuals belonging to a specific household
+      operationId: listHouseholdIndividuals
+      parameters:
+      - description: Filter by primary client status
+        in: query
+        name: is_primary
+        schema:
+          type: boolean
+      - $ref: '#/components/parameters/AfterCursor'
+      - $ref: '#/components/parameters/BeforeCursor'
+      - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndividualList'
+          description: List of individuals in the household
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: List all individuals in a household
+      tags:
+      - Households
+components:
+  schemas:
+    DocumentType:
+      description: Type of document
+      enum:
+      - GRAT_DESIGN_SUMMARY
+      - GENERATED_PRESENTATION
+      - ASSET_VALUATION
+      - SIGNED_TRUST_DOCUMENT
+      - TRUST_AMENDMENT
+      - TRANSFER_CONFIRMATION
+      - EXISTING_REMAINDER_TRUST_DOCUMENT
+      - BALANCE_SHEET
+      - WILL
+      - WILL_CODICIL
+      - POWER_OF_ATTORNEY
+      - ASSIGNMENT_OF_INTEREST
+      - ASSIGNMENT_OF_TANGIBLE_PROPERTY
+      - LOAN_NOTE_AGREEMENT
+      - ARTICLES_OF_INCORPORATION
+      - OPERATING_AGREEMENT
+      - PARTNERSHIP_AGREEMENT
+      - ACCOUNT_DOCUMENTATION_STATEMENT
+      - TAX_ID_CONFIRMATION
+      - GIFT_TAX_RETURN
+      - INCOME_TAX_RETURN
+      - TAX_RECEIPT
+      - TAX_FILING
+      - CORPORATE_BYLAWS
+      - LLC_AGREEMENT
+      - LLC_AGREEMENT_AMENDMENT
+      - OPERATING_AGREEMENT_AMENDMENT
+      - PARTNERSHIP_AGREEMENT_AMENDMENT
+      - SHAREHOLDERS_AGREEMENT
+      - STATE_BUSINESS_FILING
+      - LOGGED_CONTRIBUTION
+      - LOGGED_DISTRIBUTION
+      - INSURANCE_POLICY
+      - CRUMMEY_LETTER
+      - INSURANCE_PREMIUM_PAYMENT
+      - BENEFICIAL_OWNERSHIP_INFORMATION_REPORT
+      - FINCEN_FILING
+      - HEALTHCARE_PROXY
+      - LIVING_WILL
+      - DRIVERS_LICENSE
+      - PASSPORT
+      - DEED
+      - OTHER
+      type: string
+    Household:
+      properties:
+        created_at:
+          description: Timestamp when the household was created
+          example: '2024-01-15T09:30:00Z'
+          format: date-time
+          type: string
+        external_id:
+          description: Customer-supplied identifier from an external system. Unique within the caller's tenant when set.
+          example: crm-household-12345
+          minLength: 1
+          nullable: true
+          type: string
+        id:
+          description: Unique identifier with household_ prefix
+          example: household_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        name:
+          description: Display name for the household
+          example: Smith Family
+          type: string
+        notes:
+          description: Notes about the household
+          maxLength: 65536
+          nullable: true
+          type: string
+        primary_individuals:
+          description: Primary client profiles for this household (at most 2)
+          items:
+            $ref: '#/components/schemas/Individual'
+          maxItems: 2
+          type: array
+        primary_relationship_owner_id:
+          description: User ID of the primary relationship owner
+          example: user_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        updated_at:
+          description: Timestamp when the household was last updated
+          example: '2024-01-20T14:45:00Z'
+          format: date-time
+          type: string
+      required:
+      - id
+      - primary_relationship_owner_id
+      - created_at
+      - updated_at
+      type: object
+    UpdateHouseholdRequest:
+      properties:
+        external_id:
+          description: Customer-supplied identifier from an external system. Unique within the caller's tenant when set. Send null to clear.
+          example: crm-household-12345
+          minLength: 1
+          nullable: true
+          type: string
+        notes:
+          description: Notes about the household
+          maxLength: 65536
+          nullable: true
+          type: string
+        primary_relationship_owner_id:
+          description: User ID of the primary relationship owner
+          example: user_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+      type: object
+    Document:
+      properties:
+        created_at:
+          description: Timestamp when the document was created
+          example: '2024-01-15T09:30:00Z'
+          format: date-time
+          type: string
+        enable_ai_suggestions:
+          default: false
+          description: Whether this document should be used for AI suggestions
+          type: boolean
+        entity_id:
+          description: Entity ID if this document is owned by an entity
+          example: entity_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          nullable: true
+          type: string
+        household_id:
+          description: Household ID this document belongs to
+          example: household_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        id:
+          description: Unique identifier with document_ prefix
+          example: document_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        individual_id:
+          description: Individual ID if this document is associated with an individual
+          example: client_profile_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          nullable: true
+          type: string
+        name:
+          description: Display name of the document
+          example: Trust Agreement.pdf
+          type: string
+        type:
+          $ref: '#/components/schemas/DocumentType'
+        updated_at:
+          description: Timestamp when the document was last updated
+          example: '2024-01-20T14:45:00Z'
+          format: date-time
+          type: string
+      required:
+      - id
+      - name
+      - type
+      - household_id
+      - created_at
+      - updated_at
+      type: object
+    InEstateStatus:
+      description: Whether the entity is in or out of the estate
+      enum:
+      - in_estate
+      - out_of_estate
+      - none
+      type: string
+    IndividualList:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Individual'
+          type: array
+        page_info:
+          $ref: '#/components/schemas/PageInfo'
+        total_count:
+          description: Total number of items matching the query (across all pages)
+          example: 100
+          type: integer
+      required:
+      - data
+      - page_info
+      - total_count
+      type: object
+    EntityList:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Entity'
+          type: array
+        page_info:
+          $ref: '#/components/schemas/PageInfo'
+        total_count:
+          description: Total number of items matching the query (across all pages)
+          example: 100
+          type: integer
+      required:
+      - data
+      - page_info
+      - total_count
+      type: object
+    FieldError:
+      properties:
+        field:
+          description: Field that failed validation
+          example: name
+          type: string
+        message:
+          description: Error message
+          example: Name is required
+          type: string
+      required:
+      - field
+      - message
+      type: object
+    PageInfo:
+      properties:
+        end_cursor:
+          description: Cursor pointing to the last item in the current page
+          example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+          nullable: true
+          type: string
+        has_next_page:
+          description: When paginating forwards, are there more items?
+          example: true
+          type: boolean
+        has_previous_page:
+          description: When paginating backwards, are there more items?
+          example: false
+          type: boolean
+        start_cursor:
+          description: Cursor pointing to the first item in the current page
+          example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+          nullable: true
+          type: string
+      required:
+      - has_next_page
+      - has_previous_page
+      type: object
+    CreatePrimaryIndividualRequest:
+      properties:
+        address_line1:
+          description: Street address line 1
+          minLength: 1
+          nullable: true
+          type: string
+        address_line2:
+          description: Street address line 2
+          minLength: 1
+          nullable: true
+          type: string
+        city:
+          description: City
+          minLength: 1
+          nullable: true
+          type: string
+        country:
+          description: Country
+          minLength: 1
+          nullable: true
+          type: string
+        date_of_birth:
+          description: Date of birth
+          format: date
+          nullable: true
+          type: string
+        email:
+          description: Email address
+          format: email
+          nullable: true
+          type: string
+        first_name:
+          description: First name of the individual
+          example: John
+          minLength: 1
+          type: string
+        is_beneficiary:
+          default: false
+          description: Whether this client profile should be an eligible beneficiary for entities and gifts
+          type: boolean
+        is_deceased:
+          default: false
+          description: Whether the individual is deceased
+          type: boolean
+        is_trustee:
+          default: false
+          description: Whether this client profile should be an eligible trustee for entities
+          type: boolean
+        last_name:
+          description: Last name of the individual
+          example: Smith
+          minLength: 1
+          type: string
+        middle_name:
+          description: Middle name of the individual
+          minLength: 1
+          nullable: true
+          type: string
+        notes:
+          description: Notes about the client profile
+          maxLength: 65536
+          nullable: true
+          type: string
+        postal_code:
+          description: ZIP or postal code
+          minLength: 1
+          nullable: true
+          type: string
+        state:
+          description: State or province code (2 letter code)
+          maxLength: 2
+          minLength: 2
+          type: string
+        suffix:
+          description: Name suffix
+          minLength: 1
+          nullable: true
+          type: string
+      required:
+      - first_name
+      - last_name
+      - state
+      type: object
+    Individual:
+      properties:
+        address_line1:
+          description: Street address line 1 (from address edge)
+          example: 123 Main St
+          nullable: true
+          type: string
+        address_line2:
+          description: Street address line 2 (from address edge)
+          example: Apt 4B
+          nullable: true
+          type: string
+        city:
+          description: City (from address edge)
+          example: San Francisco
+          nullable: true
+          type: string
+        country:
+          description: Country (from address edge)
+          example: USA
+          nullable: true
+          type: string
+        created_at:
+          description: Timestamp when the individual was created
+          example: '2024-01-15T09:30:00Z'
+          format: date-time
+          type: string
+        date_of_birth:
+          description: Date of birth (encrypted field)
+          example: '1980-05-15'
+          format: date
+          nullable: true
+          type: string
+        date_of_death:
+          description: Date of death if applicable (encrypted field)
+          format: date
+          nullable: true
+          type: string
+        deleted_at:
+          description: Timestamp when the individual was soft deleted
+          format: date-time
+          nullable: true
+          type: string
+        email:
+          description: Email address
+          example: john.smith@example.com
+          format: email
+          nullable: true
+          type: string
+        first_name:
+          description: First name of the individual
+          example: John
+          type: string
+        household_id:
+          description: Household ID this individual belongs to
+          example: household_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        id:
+          description: Unique identifier with client_profile_ prefix
+          example: client_profile_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        is_beneficiary:
+          default: false
+          description: Whether this client profile should be an eligible beneficiary for entities and gifts
+          type: boolean
+        is_deceased:
+          default: false
+          description: Whether this client profile is deceased
+          type: boolean
+        is_grantor:
+          default: false
+          description: Whether this client profile should be an eligible grantor/owner/other principal for entities
+          type: boolean
+        is_primary:
+          default: false
+          description: Whether this is one of the (at most) two primary clients on this household
+          type: boolean
+        is_trustee:
+          default: false
+          description: Whether this client profile should be an eligible trustee for entities
+          type: boolean
+        last_name:
+          description: Last name of the individual
+          example: Smith
+          type: string
+        middle_name:
+          description: Middle name of the individual
+          example: Michael
+          nullable: true
+          type: string
+        notes:
+          description: Notes about the client profile
+          maxLength: 65536
+          nullable: true
+          type: string
+        postal_code:
+          description: ZIP or postal code (from address edge)
+          example: '94102'
+          nullable: true
+          type: string
+        state:
+          description: State or province (from address edge)
+          example: CA
+          nullable: true
+          type: string
+        suffix:
+          description: Name suffix (Jr., Sr., III, etc.)
+          example: Jr.
+          nullable: true
+          type: string
+        updated_at:
+          description: Timestamp when the individual was last updated
+          example: '2024-01-20T14:45:00Z'
+          format: date-time
+          type: string
+      required:
+      - id
+      - first_name
+      - last_name
+      - household_id
+      - is_primary
+      - is_grantor
+      - is_trustee
+      - is_beneficiary
+      - is_deceased
+      - created_at
+      - updated_at
+      type: object
+    HouseholdList:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Household'
+          type: array
+        page_info:
+          $ref: '#/components/schemas/PageInfo'
+        total_count:
+          description: Total number of items matching the query (across all pages)
+          example: 100
+          type: integer
+      required:
+      - data
+      - page_info
+      - total_count
+      type: object
+    DocumentList:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Document'
+          type: array
+        page_info:
+          $ref: '#/components/schemas/PageInfo'
+        total_count:
+          description: Total number of items matching the query (across all pages)
+          example: 100
+          type: integer
+      required:
+      - data
+      - page_info
+      - total_count
+      type: object
+    EntityStage:
+      description: Lifecycle stage of the entity
+      enum:
+      - PRE_CREATED
+      - AI_CREATING
+      - AI_CREATION_FAILED
+      - AI_NEEDS_REVIEW
+      - DRAFT
+      - READY_FOR_PROPOSAL
+      - IMPLEMENTATION
+      - ACTIVE
+      - COMPLETED
+      - ARCHIVED
+      type: string
+    Error:
+      properties:
+        code:
+          description: Error code
+          example: INVALID_REQUEST
+          type: string
+        details:
+          items:
+            $ref: '#/components/schemas/FieldError'
+          nullable: true
+          type: array
+        message:
+          description: Error message
+          example: Invalid request parameters
+          type: string
+      required:
+      - code
+      - message
+      type: object
+    Entity:
+      properties:
+        created_at:
+          description: Timestamp when the entity was created
+          example: '2024-01-15T09:30:00Z'
+          format: date-time
+          type: string
+        display_name:
+          description: Display name of the entity
+          example: My Revocable Trust
+          type: string
+        external_id:
+          description: Customer-supplied identifier from an external system. Unique within the caller's tenant when set.
+          example: crm-entity-12345
+          minLength: 1
+          nullable: true
+          type: string
+        household_id:
+          description: Household ID this entity belongs to
+          example: household_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        id:
+          description: Unique identifier with entity_ prefix
+          example: entity_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        in_estate_status:
+          $ref: '#/components/schemas/InEstateStatus'
+        kind:
+          $ref: '#/components/schemas/EntityKind'
+        stage:
+          $ref: '#/components/schemas/EntityStage'
+        updated_at:
+          description: Timestamp when the entity was last updated
+          example: '2024-01-20T14:45:00Z'
+          format: date-time
+          type: string
+      required:
+      - id
+      - display_name
+      - kind
+      - stage
+      - in_estate_status
+      - household_id
+      - created_at
+      - updated_at
+      type: object
+    CreateHouseholdRequest:
+      properties:
+        external_id:
+          description: Customer-supplied identifier from an external system. Unique within the caller's tenant when set.
+          example: crm-household-12345
+          minLength: 1
+          nullable: true
+          type: string
+        notes:
+          description: Optional notes about the household
+          maxLength: 65536
+          nullable: true
+          type: string
+        primary_individuals:
+          description: Primary client profiles to create for this household (at most 2)
+          items:
+            $ref: '#/components/schemas/CreatePrimaryIndividualRequest'
+          maxItems: 2
+          minItems: 1
+          type: array
+        primary_relationship_owner_id:
+          description: User ID of the primary relationship owner
+          example: user_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+      required:
+      - primary_relationship_owner_id
+      type: object
+    EntityKind:
+      description: Type of entity - determines the specific subtype and applicable fields
+      enum:
+      - REVOCABLE_TRUST
+      - IRREVOCABLE_TRUST
+      - SLAT_TRUST
+      - ILIT_TRUST
+      - QPRT_TRUST
+      - GRAT_TRUST
+      - CRT_TRUST
+      - CLT_TRUST
+      - INDIVIDUAL_PERSONAL_ACCOUNT
+      - JOINT_PERSONAL_ACCOUNT
+      - CUSTODIAL_PERSONAL_ACCOUNT
+      - INSURANCE_PERSONAL_ACCOUNT
+      - QUALIFIED_TUITION_PERSONAL_ACCOUNT
+      - RETIREMENT_PERSONAL_ACCOUNT
+      - DONOR_ADVISED_FUND
+      - PRIVATE_FOUNDATION
+      - LLC_BUSINESS_ENTITY
+      - LP_BUSINESS_ENTITY
+      - GP_BUSINESS_ENTITY
+      - SOLE_PROPRIETORSHIP_BUSINESS_ENTITY
+      - SCORP_BUSINESS_ENTITY
+      - CCORP_BUSINESS_ENTITY
+      type: string
+  parameters:
+    BeforeCursor:
+      description: Cursor for backward pagination. Returns items before this cursor.
+      in: query
+      name: before
+      schema:
+        example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+        type: string
+    AfterCursor:
+      description: Cursor for forward pagination. Returns items after this cursor.
+      in: query
+      name: after
+      schema:
+        example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+        type: string
+    Limit:
+      description: Maximum number of items to return
+      in: query
+      name: limit
+      schema:
+        default: 50
+        maximum: 1000
+        minimum: 1
+        type: integer
+  responses:
+    DefaultError:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: General Error
+  securitySchemes:
+    oauth2Profiles:
+      flows:
+        authorizationCode:
+          authorizationUrl: https://auth.withluminary.com/oauth2/authorize
+          scopes: {}
+          tokenUrl: https://auth.withluminary.com/oauth2/token
+        clientCredentials:
+          scopes: {}
+          tokenUrl: https://auth.withluminary.com/oauth2/token
+      type: oauth2

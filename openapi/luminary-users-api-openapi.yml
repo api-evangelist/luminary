@@ -1,0 +1,215 @@
+openapi: 3.0.3
+info:
+  description: RESTful API for managing Luminary data
+  title: Luminary Documents Users API
+  version: 1.0.0
+servers:
+- description: Luminary API v1 server
+  url: https://{subdomain}.withluminary.com/api/public/v1
+  variables:
+    subdomain:
+      default: lum
+      description: Your Luminary subdomain
+security:
+- oauth2Profiles: []
+tags:
+- name: Users
+paths:
+  /users:
+    get:
+      description: Retrieve a paginated list of users using cursor-based pagination
+      operationId: listUsers
+      parameters:
+      - $ref: '#/components/parameters/AfterCursor'
+      - $ref: '#/components/parameters/BeforeCursor'
+      - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserList'
+          description: List of users
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: List all users
+      tags:
+      - Users
+  /users/{id}:
+    parameters:
+    - description: User ID
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
+    get:
+      description: Retrieve detailed information about a specific user
+      operationId: getUser
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: User found
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: Get a user by ID
+      tags:
+      - Users
+components:
+  schemas:
+    PageInfo:
+      properties:
+        end_cursor:
+          description: Cursor pointing to the last item in the current page
+          example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+          nullable: true
+          type: string
+        has_next_page:
+          description: When paginating forwards, are there more items?
+          example: true
+          type: boolean
+        has_previous_page:
+          description: When paginating backwards, are there more items?
+          example: false
+          type: boolean
+        start_cursor:
+          description: Cursor pointing to the first item in the current page
+          example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+          nullable: true
+          type: string
+      required:
+      - has_next_page
+      - has_previous_page
+      type: object
+    Error:
+      properties:
+        code:
+          description: Error code
+          example: INVALID_REQUEST
+          type: string
+        details:
+          items:
+            $ref: '#/components/schemas/FieldError'
+          nullable: true
+          type: array
+        message:
+          description: Error message
+          example: Invalid request parameters
+          type: string
+      required:
+      - code
+      - message
+      type: object
+    FieldError:
+      properties:
+        field:
+          description: Field that failed validation
+          example: name
+          type: string
+        message:
+          description: Error message
+          example: Name is required
+          type: string
+      required:
+      - field
+      - message
+      type: object
+    User:
+      properties:
+        created_at:
+          description: Timestamp when the user was created
+          example: '2024-01-15T09:30:00Z'
+          format: date-time
+          type: string
+        email:
+          description: Email address of the user
+          example: jane.doe@example.com
+          format: email
+          type: string
+        first_name:
+          description: First name of the user
+          example: Jane
+          type: string
+        id:
+          description: Unique identifier with user_ prefix
+          example: user_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        last_name:
+          description: Last name of the user
+          example: Doe
+          type: string
+        updated_at:
+          description: Timestamp when the user was last updated
+          example: '2024-01-20T14:45:00Z'
+          format: date-time
+          type: string
+      required:
+      - id
+      - email
+      - first_name
+      - last_name
+      - created_at
+      - updated_at
+      type: object
+    UserList:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/User'
+          type: array
+        page_info:
+          $ref: '#/components/schemas/PageInfo'
+        total_count:
+          description: Total number of items matching the query (across all pages)
+          example: 100
+          type: integer
+      required:
+      - data
+      - page_info
+      - total_count
+      type: object
+  responses:
+    DefaultError:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: General Error
+  parameters:
+    Limit:
+      description: Maximum number of items to return
+      in: query
+      name: limit
+      schema:
+        default: 50
+        maximum: 1000
+        minimum: 1
+        type: integer
+    AfterCursor:
+      description: Cursor for forward pagination. Returns items after this cursor.
+      in: query
+      name: after
+      schema:
+        example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+        type: string
+    BeforeCursor:
+      description: Cursor for backward pagination. Returns items before this cursor.
+      in: query
+      name: before
+      schema:
+        example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+        type: string
+  securitySchemes:
+    oauth2Profiles:
+      flows:
+        authorizationCode:
+          authorizationUrl: https://auth.withluminary.com/oauth2/authorize
+          scopes: {}
+          tokenUrl: https://auth.withluminary.com/oauth2/token
+        clientCredentials:
+          scopes: {}
+          tokenUrl: https://auth.withluminary.com/oauth2/token
+      type: oauth2

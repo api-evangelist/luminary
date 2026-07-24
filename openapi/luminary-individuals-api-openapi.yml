@@ -1,0 +1,585 @@
+openapi: 3.0.3
+info:
+  description: RESTful API for managing Luminary data
+  title: Luminary Documents Individuals API
+  version: 1.0.0
+servers:
+- description: Luminary API v1 server
+  url: https://{subdomain}.withluminary.com/api/public/v1
+  variables:
+    subdomain:
+      default: lum
+      description: Your Luminary subdomain
+security:
+- oauth2Profiles: []
+tags:
+- name: Individuals
+paths:
+  /households/{id}/individuals:
+    parameters:
+    - description: Household ID
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
+    get:
+      description: Retrieve a paginated list of client profiles/individuals belonging to a specific household
+      operationId: listHouseholdIndividuals
+      parameters:
+      - description: Filter by primary client status
+        in: query
+        name: is_primary
+        schema:
+          type: boolean
+      - $ref: '#/components/parameters/AfterCursor'
+      - $ref: '#/components/parameters/BeforeCursor'
+      - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndividualList'
+          description: List of individuals in the household
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: List all individuals in a household
+      tags:
+      - Individuals
+  /individuals:
+    get:
+      description: Retrieve a paginated list of client profiles/individuals using cursor-based pagination
+      operationId: listIndividuals
+      parameters:
+      - description: Filter individuals by household ID
+        in: query
+        name: household_id
+        schema:
+          type: string
+      - description: Filter by primary client status
+        in: query
+        name: is_primary
+        schema:
+          type: boolean
+      - $ref: '#/components/parameters/AfterCursor'
+      - $ref: '#/components/parameters/BeforeCursor'
+      - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndividualList'
+          description: List of individuals
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: List all individuals (client profiles)
+      tags:
+      - Individuals
+    post:
+      description: Create a new client profile/individual with the provided data
+      operationId: createIndividual
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateIndividualRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Individual'
+          description: Individual created successfully
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: Create a new individual (client profile)
+      tags:
+      - Individuals
+  /individuals/{id}:
+    parameters:
+    - description: Individual ID
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
+    delete:
+      description: Soft delete a client profile (marks as deleted but preserves data)
+      operationId: deleteIndividual
+      responses:
+        '204':
+          description: Individual deleted successfully
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: Delete an individual
+      tags:
+      - Individuals
+    get:
+      description: Retrieve detailed information about a specific client profile
+      operationId: getIndividual
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Individual'
+          description: Individual found
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: Get an individual by ID
+      tags:
+      - Individuals
+    put:
+      description: Update an existing client profile with new data
+      operationId: updateIndividual
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateIndividualRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Individual'
+          description: Individual updated successfully
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: Update an individual
+      tags:
+      - Individuals
+components:
+  schemas:
+    PageInfo:
+      properties:
+        end_cursor:
+          description: Cursor pointing to the last item in the current page
+          example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+          nullable: true
+          type: string
+        has_next_page:
+          description: When paginating forwards, are there more items?
+          example: true
+          type: boolean
+        has_previous_page:
+          description: When paginating backwards, are there more items?
+          example: false
+          type: boolean
+        start_cursor:
+          description: Cursor pointing to the first item in the current page
+          example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+          nullable: true
+          type: string
+      required:
+      - has_next_page
+      - has_previous_page
+      type: object
+    Error:
+      properties:
+        code:
+          description: Error code
+          example: INVALID_REQUEST
+          type: string
+        details:
+          items:
+            $ref: '#/components/schemas/FieldError'
+          nullable: true
+          type: array
+        message:
+          description: Error message
+          example: Invalid request parameters
+          type: string
+      required:
+      - code
+      - message
+      type: object
+    Individual:
+      properties:
+        address_line1:
+          description: Street address line 1 (from address edge)
+          example: 123 Main St
+          nullable: true
+          type: string
+        address_line2:
+          description: Street address line 2 (from address edge)
+          example: Apt 4B
+          nullable: true
+          type: string
+        city:
+          description: City (from address edge)
+          example: San Francisco
+          nullable: true
+          type: string
+        country:
+          description: Country (from address edge)
+          example: USA
+          nullable: true
+          type: string
+        created_at:
+          description: Timestamp when the individual was created
+          example: '2024-01-15T09:30:00Z'
+          format: date-time
+          type: string
+        date_of_birth:
+          description: Date of birth (encrypted field)
+          example: '1980-05-15'
+          format: date
+          nullable: true
+          type: string
+        date_of_death:
+          description: Date of death if applicable (encrypted field)
+          format: date
+          nullable: true
+          type: string
+        deleted_at:
+          description: Timestamp when the individual was soft deleted
+          format: date-time
+          nullable: true
+          type: string
+        email:
+          description: Email address
+          example: john.smith@example.com
+          format: email
+          nullable: true
+          type: string
+        first_name:
+          description: First name of the individual
+          example: John
+          type: string
+        household_id:
+          description: Household ID this individual belongs to
+          example: household_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        id:
+          description: Unique identifier with client_profile_ prefix
+          example: client_profile_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        is_beneficiary:
+          default: false
+          description: Whether this client profile should be an eligible beneficiary for entities and gifts
+          type: boolean
+        is_deceased:
+          default: false
+          description: Whether this client profile is deceased
+          type: boolean
+        is_grantor:
+          default: false
+          description: Whether this client profile should be an eligible grantor/owner/other principal for entities
+          type: boolean
+        is_primary:
+          default: false
+          description: Whether this is one of the (at most) two primary clients on this household
+          type: boolean
+        is_trustee:
+          default: false
+          description: Whether this client profile should be an eligible trustee for entities
+          type: boolean
+        last_name:
+          description: Last name of the individual
+          example: Smith
+          type: string
+        middle_name:
+          description: Middle name of the individual
+          example: Michael
+          nullable: true
+          type: string
+        notes:
+          description: Notes about the client profile
+          maxLength: 65536
+          nullable: true
+          type: string
+        postal_code:
+          description: ZIP or postal code (from address edge)
+          example: '94102'
+          nullable: true
+          type: string
+        state:
+          description: State or province (from address edge)
+          example: CA
+          nullable: true
+          type: string
+        suffix:
+          description: Name suffix (Jr., Sr., III, etc.)
+          example: Jr.
+          nullable: true
+          type: string
+        updated_at:
+          description: Timestamp when the individual was last updated
+          example: '2024-01-20T14:45:00Z'
+          format: date-time
+          type: string
+      required:
+      - id
+      - first_name
+      - last_name
+      - household_id
+      - is_primary
+      - is_grantor
+      - is_trustee
+      - is_beneficiary
+      - is_deceased
+      - created_at
+      - updated_at
+      type: object
+    CreateIndividualRequest:
+      properties:
+        address_line1:
+          description: Street address line 1
+          minLength: 1
+          nullable: true
+          type: string
+        address_line2:
+          description: Street address line 2
+          minLength: 1
+          nullable: true
+          type: string
+        city:
+          description: City
+          minLength: 1
+          nullable: true
+          type: string
+        country:
+          description: Country
+          minLength: 1
+          nullable: true
+          type: string
+        date_of_birth:
+          description: Date of birth
+          format: date
+          nullable: true
+          type: string
+        email:
+          description: Email address
+          format: email
+          nullable: true
+          type: string
+        first_name:
+          description: First name of the individual
+          example: John
+          minLength: 1
+          type: string
+        household_id:
+          description: Household ID this individual belongs to
+          example: household_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        is_beneficiary:
+          default: false
+          description: Whether this client profile should be an eligible beneficiary for entities and gifts
+          type: boolean
+        is_deceased:
+          default: false
+          description: Whether the individual is deceased
+          type: boolean
+        is_grantor:
+          default: false
+          description: Whether this client profile should be an eligible grantor/owner/other principal for entities
+          type: boolean
+        is_primary:
+          default: false
+          description: Whether this is a primary client of the household (at most 2 per household)
+          type: boolean
+        is_trustee:
+          default: false
+          description: Whether this client profile should be an eligible trustee for entities
+          type: boolean
+        last_name:
+          description: Last name of the individual
+          example: Smith
+          minLength: 1
+          type: string
+        middle_name:
+          description: Middle name of the individual
+          minLength: 1
+          nullable: true
+          type: string
+        notes:
+          description: Notes about the client profile
+          maxLength: 65536
+          nullable: true
+          type: string
+        postal_code:
+          description: ZIP or postal code
+          minLength: 1
+          nullable: true
+          type: string
+        state:
+          description: State or province code (2 letter code)
+          maxLength: 2
+          minLength: 2
+          nullable: true
+          type: string
+        suffix:
+          description: Name suffix
+          minLength: 1
+          nullable: true
+          type: string
+      required:
+      - first_name
+      - last_name
+      - household_id
+      type: object
+    IndividualList:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Individual'
+          type: array
+        page_info:
+          $ref: '#/components/schemas/PageInfo'
+        total_count:
+          description: Total number of items matching the query (across all pages)
+          example: 100
+          type: integer
+      required:
+      - data
+      - page_info
+      - total_count
+      type: object
+    UpdateIndividualRequest:
+      properties:
+        address_line1:
+          description: Street address line 1
+          minLength: 1
+          nullable: true
+          type: string
+        address_line2:
+          description: Street address line 2
+          minLength: 1
+          nullable: true
+          type: string
+        city:
+          description: City
+          minLength: 1
+          nullable: true
+          type: string
+        country:
+          description: Country
+          minLength: 1
+          nullable: true
+          type: string
+        date_of_birth:
+          description: Date of birth
+          format: date
+          nullable: true
+          type: string
+        date_of_death:
+          description: Date of death if applicable
+          format: date
+          nullable: true
+          type: string
+        email:
+          description: Email address
+          format: email
+          nullable: true
+          type: string
+        first_name:
+          description: First name of the individual
+          minLength: 1
+          type: string
+        is_beneficiary:
+          description: Whether this client profile should be an eligible beneficiary for entities and gifts
+          type: boolean
+        is_deceased:
+          description: Whether the individual is deceased
+          type: boolean
+        is_grantor:
+          description: Whether this client profile should be an eligible grantor/owner/other principal for entities
+          type: boolean
+        is_primary:
+          description: Whether this is a primary client of the household (at most 2 per household)
+          type: boolean
+        is_trustee:
+          description: Whether this client profile should be an eligible trustee for entities
+          type: boolean
+        last_name:
+          description: Last name of the individual
+          minLength: 1
+          type: string
+        middle_name:
+          description: Middle name of the individual
+          minLength: 1
+          nullable: true
+          type: string
+        notes:
+          description: Notes about the client profile
+          maxLength: 65536
+          nullable: true
+          type: string
+        postal_code:
+          description: ZIP or postal code
+          minLength: 1
+          nullable: true
+          type: string
+        state:
+          description: State or province code (2 letter code)
+          maxLength: 2
+          minLength: 2
+          nullable: true
+          type: string
+        suffix:
+          description: Name suffix
+          minLength: 1
+          nullable: true
+          type: string
+      type: object
+    FieldError:
+      properties:
+        field:
+          description: Field that failed validation
+          example: name
+          type: string
+        message:
+          description: Error message
+          example: Name is required
+          type: string
+      required:
+      - field
+      - message
+      type: object
+  responses:
+    DefaultError:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: General Error
+  parameters:
+    Limit:
+      description: Maximum number of items to return
+      in: query
+      name: limit
+      schema:
+        default: 50
+        maximum: 1000
+        minimum: 1
+        type: integer
+    AfterCursor:
+      description: Cursor for forward pagination. Returns items after this cursor.
+      in: query
+      name: after
+      schema:
+        example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+        type: string
+    BeforeCursor:
+      description: Cursor for backward pagination. Returns items before this cursor.
+      in: query
+      name: before
+      schema:
+        example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+        type: string
+  securitySchemes:
+    oauth2Profiles:
+      flows:
+        authorizationCode:
+          authorizationUrl: https://auth.withluminary.com/oauth2/authorize
+          scopes: {}
+          tokenUrl: https://auth.withluminary.com/oauth2/token
+        clientCredentials:
+          scopes: {}
+          tokenUrl: https://auth.withluminary.com/oauth2/token
+      type: oauth2

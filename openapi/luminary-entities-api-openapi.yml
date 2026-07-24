@@ -1,0 +1,519 @@
+openapi: 3.0.3
+info:
+  description: RESTful API for managing Luminary data
+  title: Luminary Documents Entities API
+  version: 1.0.0
+servers:
+- description: Luminary API v1 server
+  url: https://{subdomain}.withluminary.com/api/public/v1
+  variables:
+    subdomain:
+      default: lum
+      description: Your Luminary subdomain
+security:
+- oauth2Profiles: []
+tags:
+- name: Entities
+paths:
+  /entities:
+    get:
+      description: Retrieve a paginated list of entities (trusts, businesses, accounts, etc.) using cursor-based pagination
+      operationId: listEntities
+      parameters:
+      - description: Filter entities by household ID
+        in: query
+        name: household_id
+        schema:
+          type: string
+      - description: Filter by entity kind/type
+        in: query
+        name: kind
+        schema:
+          $ref: '#/components/schemas/EntityKind'
+      - description: Filter by external ID (exact match within the caller's tenant)
+        in: query
+        name: external_id
+        schema:
+          minLength: 1
+          type: string
+      - $ref: '#/components/parameters/AfterCursor'
+      - $ref: '#/components/parameters/BeforeCursor'
+      - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityList'
+          description: List of entities
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: List all entities
+      tags:
+      - Entities
+  /entities/{id}:
+    parameters:
+    - description: Entity ID
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
+    delete:
+      description: Delete an entity and all of it's related data
+      operationId: deleteEntity
+      responses:
+        '204':
+          description: Entity deleted successfully
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: Delete an entity
+      tags:
+      - Entities
+    get:
+      description: Retrieve detailed information about a specific entity
+      operationId: getEntity
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entity'
+          description: Entity found
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: Get an entity by ID
+      tags:
+      - Entities
+  /entities/{id}/valuation:
+    parameters:
+    - description: Entity ID
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
+    get:
+      description: Retrieve the most recent valuation with flattened asset values by type
+      operationId: getEntityCurrentValuation
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Valuation'
+          description: Current valuation found
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: Get the current valuation for an entity
+      tags:
+      - Entities
+    post:
+      description: Add a new valuation to the entity's history
+      operationId: createEntityValuation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateValuationRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Valuation'
+          description: Valuation created successfully
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: Create a new valuation for an entity
+      tags:
+      - Entities
+  /households/{id}/entities:
+    parameters:
+    - description: Household ID
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
+    get:
+      description: Retrieve a paginated list of entities belonging to a specific household
+      operationId: listHouseholdEntities
+      parameters:
+      - description: Filter by entity kind/type
+        in: query
+        name: kind
+        schema:
+          $ref: '#/components/schemas/EntityKind'
+      - $ref: '#/components/parameters/AfterCursor'
+      - $ref: '#/components/parameters/BeforeCursor'
+      - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityList'
+          description: List of entities in the household
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: List all entities in a household
+      tags:
+      - Entities
+components:
+  schemas:
+    PageInfo:
+      properties:
+        end_cursor:
+          description: Cursor pointing to the last item in the current page
+          example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+          nullable: true
+          type: string
+        has_next_page:
+          description: When paginating forwards, are there more items?
+          example: true
+          type: boolean
+        has_previous_page:
+          description: When paginating backwards, are there more items?
+          example: false
+          type: boolean
+        start_cursor:
+          description: Cursor pointing to the first item in the current page
+          example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+          nullable: true
+          type: string
+      required:
+      - has_next_page
+      - has_previous_page
+      type: object
+    EntityStage:
+      description: Lifecycle stage of the entity
+      enum:
+      - PRE_CREATED
+      - AI_CREATING
+      - AI_CREATION_FAILED
+      - AI_NEEDS_REVIEW
+      - DRAFT
+      - READY_FOR_PROPOSAL
+      - IMPLEMENTATION
+      - ACTIVE
+      - COMPLETED
+      - ARCHIVED
+      type: string
+    Error:
+      properties:
+        code:
+          description: Error code
+          example: INVALID_REQUEST
+          type: string
+        details:
+          items:
+            $ref: '#/components/schemas/FieldError'
+          nullable: true
+          type: array
+        message:
+          description: Error message
+          example: Invalid request parameters
+          type: string
+      required:
+      - code
+      - message
+      type: object
+    AssetClass:
+      properties:
+        display_name:
+          description: Display name of the asset class
+          example: Equities
+          type: string
+        id:
+          description: Asset class ID
+          example: asset_class_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+      required:
+      - id
+      - display_name
+      type: object
+    Asset:
+      properties:
+        asset_class:
+          $ref: '#/components/schemas/AssetClass'
+        display_name:
+          description: Display name of the asset
+          example: Apple Inc. Stock
+          type: string
+        external_id:
+          description: External ID from the static asset (if available)
+          example: AAPL-12345
+          nullable: true
+          type: string
+        id:
+          description: Asset ID
+          example: assetv2_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        value:
+          description: Value of this asset in USD
+          example: 50000
+          format: double
+          type: number
+      required:
+      - id
+      - display_name
+      - value
+      - asset_class
+      type: object
+    Entity:
+      properties:
+        created_at:
+          description: Timestamp when the entity was created
+          example: '2024-01-15T09:30:00Z'
+          format: date-time
+          type: string
+        display_name:
+          description: Display name of the entity
+          example: My Revocable Trust
+          type: string
+        external_id:
+          description: Customer-supplied identifier from an external system. Unique within the caller's tenant when set.
+          example: crm-entity-12345
+          minLength: 1
+          nullable: true
+          type: string
+        household_id:
+          description: Household ID this entity belongs to
+          example: household_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        id:
+          description: Unique identifier with entity_ prefix
+          example: entity_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        in_estate_status:
+          $ref: '#/components/schemas/InEstateStatus'
+        kind:
+          $ref: '#/components/schemas/EntityKind'
+        stage:
+          $ref: '#/components/schemas/EntityStage'
+        updated_at:
+          description: Timestamp when the entity was last updated
+          example: '2024-01-20T14:45:00Z'
+          format: date-time
+          type: string
+      required:
+      - id
+      - display_name
+      - kind
+      - stage
+      - in_estate_status
+      - household_id
+      - created_at
+      - updated_at
+      type: object
+    CreateAssetRequest:
+      properties:
+        asset_class_id:
+          description: Asset class ID to associate with this asset
+          example: asset_class_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        display_name:
+          description: Display name of the asset
+          example: Apple Inc. Stock
+          minLength: 1
+          type: string
+        external_id:
+          description: External ID for the asset
+          example: AAPL-12345
+          minLength: 1
+          nullable: true
+          type: string
+        value:
+          description: Value of this asset in USD
+          example: 50000
+          format: double
+          type: number
+      required:
+      - display_name
+      - value
+      - asset_class_id
+      type: object
+    EntityKind:
+      description: Type of entity - determines the specific subtype and applicable fields
+      enum:
+      - REVOCABLE_TRUST
+      - IRREVOCABLE_TRUST
+      - SLAT_TRUST
+      - ILIT_TRUST
+      - QPRT_TRUST
+      - GRAT_TRUST
+      - CRT_TRUST
+      - CLT_TRUST
+      - INDIVIDUAL_PERSONAL_ACCOUNT
+      - JOINT_PERSONAL_ACCOUNT
+      - CUSTODIAL_PERSONAL_ACCOUNT
+      - INSURANCE_PERSONAL_ACCOUNT
+      - QUALIFIED_TUITION_PERSONAL_ACCOUNT
+      - RETIREMENT_PERSONAL_ACCOUNT
+      - DONOR_ADVISED_FUND
+      - PRIVATE_FOUNDATION
+      - LLC_BUSINESS_ENTITY
+      - LP_BUSINESS_ENTITY
+      - GP_BUSINESS_ENTITY
+      - SOLE_PROPRIETORSHIP_BUSINESS_ENTITY
+      - SCORP_BUSINESS_ENTITY
+      - CCORP_BUSINESS_ENTITY
+      type: string
+    CreateValuationRequest:
+      properties:
+        description:
+          description: Free-form notes about this valuation
+          maxLength: 2048
+          nullable: true
+          type: string
+        directly_held_assets:
+          description: List of assets to include in this valuation
+          items:
+            $ref: '#/components/schemas/CreateAssetRequest'
+          type: array
+        effective_date:
+          description: The date this valuation is effective
+          example: '2024-01-15'
+          format: date
+          type: string
+      required:
+      - effective_date
+      - directly_held_assets
+      type: object
+    InEstateStatus:
+      description: Whether the entity is in or out of the estate
+      enum:
+      - in_estate
+      - out_of_estate
+      - none
+      type: string
+    Valuation:
+      properties:
+        created_at:
+          description: Timestamp when the valuation was created
+          example: '2024-01-15T09:30:00Z'
+          format: date-time
+          type: string
+        description:
+          description: Free-form notes about this valuation
+          maxLength: 2048
+          nullable: true
+          type: string
+        directly_held_asset_value:
+          description: Total value of all directly held assets in USD
+          example: 1e+06
+          format: double
+          type: number
+        directly_held_assets:
+          description: List of individual assets in this valuation
+          items:
+            $ref: '#/components/schemas/Asset'
+          type: array
+        effective_date:
+          description: The date this valuation is effective
+          example: '2024-01-15'
+          format: date
+          type: string
+        entity_id:
+          description: Entity ID this valuation belongs to
+          example: entity_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        id:
+          description: Unique identifier with valuationv2_ prefix
+          example: valuationv2_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        total_value:
+          description: Total value of all assets minus liabilities in USD
+          example: 1e+06
+          format: double
+          type: number
+        updated_at:
+          description: Timestamp when the valuation was last updated
+          example: '2024-01-20T14:45:00Z'
+          format: date-time
+          type: string
+      required:
+      - id
+      - entity_id
+      - effective_date
+      - total_value
+      - directly_held_asset_value
+      - directly_held_assets
+      - created_at
+      - updated_at
+      type: object
+    EntityList:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Entity'
+          type: array
+        page_info:
+          $ref: '#/components/schemas/PageInfo'
+        total_count:
+          description: Total number of items matching the query (across all pages)
+          example: 100
+          type: integer
+      required:
+      - data
+      - page_info
+      - total_count
+      type: object
+    FieldError:
+      properties:
+        field:
+          description: Field that failed validation
+          example: name
+          type: string
+        message:
+          description: Error message
+          example: Name is required
+          type: string
+      required:
+      - field
+      - message
+      type: object
+  parameters:
+    Limit:
+      description: Maximum number of items to return
+      in: query
+      name: limit
+      schema:
+        default: 50
+        maximum: 1000
+        minimum: 1
+        type: integer
+    AfterCursor:
+      description: Cursor for forward pagination. Returns items after this cursor.
+      in: query
+      name: after
+      schema:
+        example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+        type: string
+    BeforeCursor:
+      description: Cursor for backward pagination. Returns items before this cursor.
+      in: query
+      name: before
+      schema:
+        example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+        type: string
+  responses:
+    DefaultError:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: General Error
+  securitySchemes:
+    oauth2Profiles:
+      flows:
+        authorizationCode:
+          authorizationUrl: https://auth.withluminary.com/oauth2/authorize
+          scopes: {}
+          tokenUrl: https://auth.withluminary.com/oauth2/token
+        clientCredentials:
+          scopes: {}
+          tokenUrl: https://auth.withluminary.com/oauth2/token
+      type: oauth2

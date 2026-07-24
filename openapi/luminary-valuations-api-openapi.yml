@@ -1,0 +1,259 @@
+openapi: 3.0.3
+info:
+  description: RESTful API for managing Luminary data
+  title: Luminary Documents Valuations API
+  version: 1.0.0
+servers:
+- description: Luminary API v1 server
+  url: https://{subdomain}.withluminary.com/api/public/v1
+  variables:
+    subdomain:
+      default: lum
+      description: Your Luminary subdomain
+security:
+- oauth2Profiles: []
+tags:
+- name: Valuations
+paths:
+  /entities/{id}/valuation:
+    parameters:
+    - description: Entity ID
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
+    get:
+      description: Retrieve the most recent valuation with flattened asset values by type
+      operationId: getEntityCurrentValuation
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Valuation'
+          description: Current valuation found
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: Get the current valuation for an entity
+      tags:
+      - Valuations
+    post:
+      description: Add a new valuation to the entity's history
+      operationId: createEntityValuation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateValuationRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Valuation'
+          description: Valuation created successfully
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: Create a new valuation for an entity
+      tags:
+      - Valuations
+components:
+  schemas:
+    Error:
+      properties:
+        code:
+          description: Error code
+          example: INVALID_REQUEST
+          type: string
+        details:
+          items:
+            $ref: '#/components/schemas/FieldError'
+          nullable: true
+          type: array
+        message:
+          description: Error message
+          example: Invalid request parameters
+          type: string
+      required:
+      - code
+      - message
+      type: object
+    AssetClass:
+      properties:
+        display_name:
+          description: Display name of the asset class
+          example: Equities
+          type: string
+        id:
+          description: Asset class ID
+          example: asset_class_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+      required:
+      - id
+      - display_name
+      type: object
+    Asset:
+      properties:
+        asset_class:
+          $ref: '#/components/schemas/AssetClass'
+        display_name:
+          description: Display name of the asset
+          example: Apple Inc. Stock
+          type: string
+        external_id:
+          description: External ID from the static asset (if available)
+          example: AAPL-12345
+          nullable: true
+          type: string
+        id:
+          description: Asset ID
+          example: assetv2_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        value:
+          description: Value of this asset in USD
+          example: 50000
+          format: double
+          type: number
+      required:
+      - id
+      - display_name
+      - value
+      - asset_class
+      type: object
+    CreateAssetRequest:
+      properties:
+        asset_class_id:
+          description: Asset class ID to associate with this asset
+          example: asset_class_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        display_name:
+          description: Display name of the asset
+          example: Apple Inc. Stock
+          minLength: 1
+          type: string
+        external_id:
+          description: External ID for the asset
+          example: AAPL-12345
+          minLength: 1
+          nullable: true
+          type: string
+        value:
+          description: Value of this asset in USD
+          example: 50000
+          format: double
+          type: number
+      required:
+      - display_name
+      - value
+      - asset_class_id
+      type: object
+    Valuation:
+      properties:
+        created_at:
+          description: Timestamp when the valuation was created
+          example: '2024-01-15T09:30:00Z'
+          format: date-time
+          type: string
+        description:
+          description: Free-form notes about this valuation
+          maxLength: 2048
+          nullable: true
+          type: string
+        directly_held_asset_value:
+          description: Total value of all directly held assets in USD
+          example: 1e+06
+          format: double
+          type: number
+        directly_held_assets:
+          description: List of individual assets in this valuation
+          items:
+            $ref: '#/components/schemas/Asset'
+          type: array
+        effective_date:
+          description: The date this valuation is effective
+          example: '2024-01-15'
+          format: date
+          type: string
+        entity_id:
+          description: Entity ID this valuation belongs to
+          example: entity_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        id:
+          description: Unique identifier with valuationv2_ prefix
+          example: valuationv2_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        total_value:
+          description: Total value of all assets minus liabilities in USD
+          example: 1e+06
+          format: double
+          type: number
+        updated_at:
+          description: Timestamp when the valuation was last updated
+          example: '2024-01-20T14:45:00Z'
+          format: date-time
+          type: string
+      required:
+      - id
+      - entity_id
+      - effective_date
+      - total_value
+      - directly_held_asset_value
+      - directly_held_assets
+      - created_at
+      - updated_at
+      type: object
+    CreateValuationRequest:
+      properties:
+        description:
+          description: Free-form notes about this valuation
+          maxLength: 2048
+          nullable: true
+          type: string
+        directly_held_assets:
+          description: List of assets to include in this valuation
+          items:
+            $ref: '#/components/schemas/CreateAssetRequest'
+          type: array
+        effective_date:
+          description: The date this valuation is effective
+          example: '2024-01-15'
+          format: date
+          type: string
+      required:
+      - effective_date
+      - directly_held_assets
+      type: object
+    FieldError:
+      properties:
+        field:
+          description: Field that failed validation
+          example: name
+          type: string
+        message:
+          description: Error message
+          example: Name is required
+          type: string
+      required:
+      - field
+      - message
+      type: object
+  responses:
+    DefaultError:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: General Error
+  securitySchemes:
+    oauth2Profiles:
+      flows:
+        authorizationCode:
+          authorizationUrl: https://auth.withluminary.com/oauth2/authorize
+          scopes: {}
+          tokenUrl: https://auth.withluminary.com/oauth2/token
+        clientCredentials:
+          scopes: {}
+          tokenUrl: https://auth.withluminary.com/oauth2/token
+      type: oauth2
