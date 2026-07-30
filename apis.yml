@@ -1,20 +1,109 @@
 aid: luminary
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/luminary.png
 name: Luminary
-description: Luminary is a company surfaced as a portfolio company of 8vc and added to the API Evangelist
-  network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Luminary is AI-powered estate planning software for wealth advisors, family
+  offices, attorneys, and professional services firms. It turns static estate
+  planning documents into organized, digital records — with AI document
+  digitization and summarization, dynamic estate flowcharts and waterfalls,
+  scenario modeling, and role-based collaboration. Its public REST API (v1)
+  exposes households, individuals, entities, documents, AI document summaries,
+  and entity valuations so estate data can sync with CRMs, client portals, and
+  planning tools. First-party TypeScript and Go SDKs are published on GitHub.
+  OAuth2-secured (authorizationCode + clientCredentials) and SOC 2 Type II
+  audited. Backed by 8vc.
 url: https://raw.githubusercontent.com/api-evangelist/luminary/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - 8vc
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: active
+x-tier-reason: public-api-found
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
-apis: []
+- Estate Planning
+- Wealth Management
+- Financial Services
+- Legal Tech
+- Document AI
+- Family Office
+- OAuth2
+apis:
+- aid: luminary:luminary-documents-api
+  name: Luminary Documents API
+  description: The Documents API from Luminary — 8 operation(s) for documents.
+  humanURL: https://withluminary.com/integrations
+  baseURL: https://lum.withluminary.com/api/public/v1
+  tags:
+  - Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/luminary-documents-api-openapi.yml
+- aid: luminary:luminary-entities-api
+  name: Luminary Entities API
+  description: The Entities API from Luminary — 4 operation(s) for entities.
+  humanURL: https://withluminary.com/integrations
+  baseURL: https://lum.withluminary.com/api/public/v1
+  tags:
+  - Entities
+  properties:
+  - type: OpenAPI
+    url: openapi/luminary-entities-api-openapi.yml
+- aid: luminary:luminary-households-api
+  name: Luminary Households API
+  description: The Households API from Luminary — 5 operation(s) for households.
+  humanURL: https://withluminary.com/integrations
+  baseURL: https://lum.withluminary.com/api/public/v1
+  tags:
+  - Households
+  properties:
+  - type: OpenAPI
+    url: openapi/luminary-households-api-openapi.yml
+- aid: luminary:luminary-individuals-api
+  name: Luminary Individuals API
+  description: The Individuals API from Luminary — 3 operation(s) for individuals.
+  humanURL: https://withluminary.com/integrations
+  baseURL: https://lum.withluminary.com/api/public/v1
+  tags:
+  - Individuals
+  properties:
+  - type: OpenAPI
+    url: openapi/luminary-individuals-api-openapi.yml
+- aid: luminary:luminary-users-api
+  name: Luminary Users API
+  description: The Users API from Luminary — 2 operation(s) for users.
+  humanURL: https://withluminary.com/integrations
+  baseURL: https://lum.withluminary.com/api/public/v1
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/luminary-users-api-openapi.yml
+- aid: luminary:luminary-valuations-api
+  name: Luminary Valuations API
+  description: The Valuations API from Luminary — 1 operation(s) for valuations.
+  humanURL: https://withluminary.com/integrations
+  baseURL: https://lum.withluminary.com/api/public/v1
+  tags:
+  - Valuations
+  properties:
+  - type: OpenAPI
+    url: openapi/luminary-valuations-api-openapi.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -23,3 +112,56 @@ maintainers:
 common:
 - type: Website
   url: https://withluminary.com
+- type: GitHubOrganization
+  url: https://github.com/withluminary
+- type: Blog
+  url: https://withluminary.com/resources
+- type: Pricing
+  url: https://withluminary.com/pricing
+- type: Login
+  url: https://app.withluminary.com
+- type: Support
+  url: https://withluminary.com/contact
+- type: TermsOfService
+  url: https://withluminary.com/terms
+- type: PrivacyPolicy
+  url: https://withluminary.com/privacy
+- type: Compliance
+  url: https://withluminary.com/security
+- type: TrustCenter
+  url: security/luminary-trust-center.yml
+- type: DomainSecurity
+  url: security/luminary-domain-security.yml
+- type: Authentication
+  url: authentication/luminary-authentication.yml
+- type: OAuthScopes
+  url: scopes/luminary-scopes.yml
+- type: WellKnown
+  url: well-known/luminary-well-known.yml
+- type: Packages
+  url: packages/luminary-packages.yml
+- type: SDKs
+  url: packages/luminary-packages.yml
+- type: MCPServer
+  url: mcp/luminary-mcp.yml
+- type: LLMsTxt
+  url: llms/luminary-llms.txt
+- type: Conformance
+  url: conformance/luminary-conformance.yml
+- type: ErrorCatalog
+  url: errors/luminary-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/luminary-lifecycle.yml
+- type: Conventions
+  url: conventions/luminary-conventions.yml
+- type: DataModel
+  url: data-model/luminary-data-model.yml
+- type: AgenticAccess
+  url: agentic-access/luminary-agentic-access.yml
+- type: AgentSkill
+  url: skills/_index.yml
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 22
+  pass: local-v1
