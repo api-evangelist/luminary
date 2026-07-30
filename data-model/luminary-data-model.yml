@@ -1,0 +1,65 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/luminary-openapi-original.yml
+entities:
+- name: Household
+  id_prefix: household_
+  key_fields: [id, name, external_id, primary_individuals, primary_relationship_owner_id]
+- name: Individual
+  id_prefix: client_profile_
+  key_fields: [id, household_id, first_name, last_name, is_grantor, is_trustee, is_beneficiary, is_primary, is_deceased]
+- name: Entity
+  id_prefix: entity_
+  key_fields: [id, household_id, kind, stage, in_estate_status, external_id, display_name]
+- name: Document
+  id_prefix: document_
+  key_fields: [id, household_id, individual_id, entity_id, type, name, enable_ai_suggestions]
+- name: DocumentSummary
+  key_fields: [id, entry_mode, format]
+- name: Valuation
+  key_fields: [id, entity_id, effective_date, total_value, directly_held_asset_value, directly_held_assets]
+- name: Asset
+  key_fields: [id, asset_class, display_name, value, external_id]
+- name: User
+  key_fields: [id]
+relationships:
+- from: Individual
+  type: belongs_to
+  to: Household
+  via: household_id
+- from: Entity
+  type: belongs_to
+  to: Household
+  via: household_id
+- from: Household
+  type: has_many
+  to: Individual
+  via: primary_individuals
+- from: Household
+  type: has_one
+  to: User
+  via: primary_relationship_owner_id
+- from: Document
+  type: belongs_to
+  to: Household
+  via: household_id
+- from: Document
+  type: belongs_to
+  to: Individual
+  via: individual_id
+- from: Document
+  type: belongs_to
+  to: Entity
+  via: entity_id
+- from: DocumentSummary
+  type: belongs_to
+  to: Document
+  via: nested under /documents/{id}/document-summaries
+- from: Valuation
+  type: belongs_to
+  to: Entity
+  via: entity_id
+- from: Valuation
+  type: has_many
+  to: Asset
+  via: directly_held_assets

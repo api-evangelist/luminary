@@ -1,0 +1,24 @@
+generated: '2026-07-20'
+method: searched
+source: https://github.com/withluminary
+packages:
+- language: typescript
+  registry: npm
+  name: withluminary
+  url: https://www.npmjs.com/package/withluminary
+  install: npm install withluminary
+  repository: https://github.com/withluminary/typescript-sdk
+  generator: stainless
+  official: true
+- language: go
+  registry: pkg.go.dev
+  name: github.com/withluminary/go-sdk
+  url: https://pkg.go.dev/github.com/withluminary/go-sdk
+  install: go get github.com/withluminary/go-sdk
+  repository: https://github.com/withluminary/go-sdk
+  generator: stainless
+  official: true
+notes: >-
+  Both first-party SDKs are published under the withluminary GitHub org
+  (Apache-2.0) and generated with Stainless from the Luminary API OpenAPI spec.
+  Authentication is OAuth2 client credentials (CLIENT_ID / CLIENT_SECRET).

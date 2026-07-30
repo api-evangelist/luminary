@@ -1,0 +1,16 @@
+generated: '2026-07-20'
+method: generated
+source: openapi/luminary-openapi-original.yml
+skills:
+- file: luminary-onboard-household.md
+  name: Onboard an estate-planning household
+  api: openapi/luminary-openapi-original.yml
+  operations: [createHousehold, createIndividual, listHouseholdIndividuals, listHouseholdEntities]
+- file: luminary-document-summaries.md
+  name: Ingest a document and retrieve its AI summary
+  api: openapi/luminary-openapi-original.yml
+  operations: [createDocument, listDocumentSummaries, getDocumentSummary, downloadDocumentSummary]
+- file: luminary-entity-valuation.md
+  name: Value an estate entity
+  api: openapi/luminary-openapi-original.yml
+  operations: [listHouseholdEntities, getEntity, createEntityValuation, getEntityCurrentValuation]

@@ -1,0 +1,104 @@
+generated: '2026-07-20'
+method: derived
+status: candidate
+source: openapi/luminary-openapi-original.yml
+server:
+  name: luminary
+  transport: http
+  url: null
+  note: No official hosted MCP server was found. Candidate tool list derived one-per-operation from the
+    Luminary API OpenAPI; not an official Luminary product.
+tools:
+- name: listAllDocumentSummaries
+  description: List all document summaries
+  source_operation: openapi/luminary-openapi-original.yml#listAllDocumentSummaries
+- name: getDocumentSummary
+  description: Get a document summary by ID
+  source_operation: openapi/luminary-openapi-original.yml#getDocumentSummary
+- name: updateDocumentSummary
+  description: Update a document summary
+  source_operation: openapi/luminary-openapi-original.yml#updateDocumentSummary
+- name: downloadDocumentSummary
+  description: Download document summary as PDF
+  source_operation: openapi/luminary-openapi-original.yml#downloadDocumentSummary
+- name: listDocuments
+  description: List all documents
+  source_operation: openapi/luminary-openapi-original.yml#listDocuments
+- name: createDocument
+  description: Upload a new document
+  source_operation: openapi/luminary-openapi-original.yml#createDocument
+- name: deleteDocument
+  description: Delete a document
+  source_operation: openapi/luminary-openapi-original.yml#deleteDocument
+- name: getDocument
+  description: Get a document by ID
+  source_operation: openapi/luminary-openapi-original.yml#getDocument
+- name: updateDocument
+  description: Update a document
+  source_operation: openapi/luminary-openapi-original.yml#updateDocument
+- name: listDocumentSummaries
+  description: Get summaries for a document
+  source_operation: openapi/luminary-openapi-original.yml#listDocumentSummaries
+- name: downloadDocument
+  description: Download document file content
+  source_operation: openapi/luminary-openapi-original.yml#downloadDocument
+- name: listEntities
+  description: List all entities
+  source_operation: openapi/luminary-openapi-original.yml#listEntities
+- name: deleteEntity
+  description: Delete an entity
+  source_operation: openapi/luminary-openapi-original.yml#deleteEntity
+- name: getEntity
+  description: Get an entity by ID
+  source_operation: openapi/luminary-openapi-original.yml#getEntity
+- name: getEntityCurrentValuation
+  description: Get the current valuation for an entity
+  source_operation: openapi/luminary-openapi-original.yml#getEntityCurrentValuation
+- name: createEntityValuation
+  description: Create a new valuation for an entity
+  source_operation: openapi/luminary-openapi-original.yml#createEntityValuation
+- name: listHouseholds
+  description: List all households
+  source_operation: openapi/luminary-openapi-original.yml#listHouseholds
+- name: createHousehold
+  description: Create a new household
+  source_operation: openapi/luminary-openapi-original.yml#createHousehold
+- name: deleteHousehold
+  description: Delete a household
+  source_operation: openapi/luminary-openapi-original.yml#deleteHousehold
+- name: getHousehold
+  description: Get a household by ID
+  source_operation: openapi/luminary-openapi-original.yml#getHousehold
+- name: updateHousehold
+  description: Update a household
+  source_operation: openapi/luminary-openapi-original.yml#updateHousehold
+- name: listHouseholdDocuments
+  description: List all documents in a household
+  source_operation: openapi/luminary-openapi-original.yml#listHouseholdDocuments
+- name: listHouseholdEntities
+  description: List all entities in a household
+  source_operation: openapi/luminary-openapi-original.yml#listHouseholdEntities
+- name: listHouseholdIndividuals
+  description: List all individuals in a household
+  source_operation: openapi/luminary-openapi-original.yml#listHouseholdIndividuals
+- name: listIndividuals
+  description: List all individuals (client profiles)
+  source_operation: openapi/luminary-openapi-original.yml#listIndividuals
+- name: createIndividual
+  description: Create a new individual (client profile)
+  source_operation: openapi/luminary-openapi-original.yml#createIndividual
+- name: deleteIndividual
+  description: Delete an individual
+  source_operation: openapi/luminary-openapi-original.yml#deleteIndividual
+- name: getIndividual
+  description: Get an individual by ID
+  source_operation: openapi/luminary-openapi-original.yml#getIndividual
+- name: updateIndividual
+  description: Update an individual
+  source_operation: openapi/luminary-openapi-original.yml#updateIndividual
+- name: listUsers
+  description: List all users
+  source_operation: openapi/luminary-openapi-original.yml#listUsers
+- name: getUser
+  description: Get a user by ID
+  source_operation: openapi/luminary-openapi-original.yml#getUser

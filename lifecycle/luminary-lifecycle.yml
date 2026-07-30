@@ -1,0 +1,21 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/luminary-openapi-original.yml
+versioning:
+  scheme: uri-path
+  current: v1
+  path: /api/public/v1
+deprecation:
+  policy_url: null
+  sunset_header: null
+  notes: No public deprecation policy or Sunset/Deprecation header support was found.
+sla:
+  url: null
+status_page: null
+security_page: https://www.withluminary.com/security
+trust_center: https://trust.withluminary.com/
+deprecated_operations: []
+notes: >-
+  Luminary is a closed B2B SaaS (estate planning). No public status page,
+  changelog, or deprecation policy is published. Versioning is via the /v1 URI
+  path. API v1.0.0 per the OpenAPI info.version.

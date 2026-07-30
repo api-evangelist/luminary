@@ -1,0 +1,34 @@
+generated: '2026-07-20'
+method: searched
+source: openapi/luminary-openapi-original.yml
+docs: https://api.withluminary.com/.well-known/openid-configuration
+summary:
+  types:
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+  - clientCredentials
+  # From the authorization-server discovery docs (well-known/): PKCE S256 is
+  # supported, plus the device_code grant and refresh_token. SDKs default to the
+  # client_credentials flow (CLIENT_ID / CLIENT_SECRET env vars).
+  discovery:
+  - https://api.withluminary.com/.well-known/openid-configuration
+  - https://api.withluminary.com/.well-known/oauth-authorization-server
+  pkce: S256
+  additional_grants:
+  - refresh_token
+  - urn:ietf:params:oauth:grant-type:device_code
+  issuer: https://auth.withluminary.com
+schemes:
+- name: oauth2Profiles
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://auth.withluminary.com/oauth2/authorize
+    tokenUrl: https://auth.withluminary.com/oauth2/token
+    scopes: 0
+  - flow: clientCredentials
+    tokenUrl: https://auth.withluminary.com/oauth2/token
+    scopes: 0
+  sources:
+  - openapi/luminary-openapi-original.yml

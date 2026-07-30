@@ -1,0 +1,44 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/luminary-openapi-original.yml
+authentication:
+  style: oauth2
+  flows: [authorizationCode, clientCredentials]
+  issuer: https://auth.withluminary.com
+  ref: authentication/luminary-authentication.yml
+base_url: https://{subdomain}.withluminary.com/api/public/v1
+subdomain: Each customer accesses the API on their own tenant subdomain (default example "lum").
+pagination:
+  style: cursor
+  request_params: [external_id]
+  response_fields:
+    envelope: '{ data: [...], page_info: {...}, total_count: N }'
+    page_info: [start_cursor, end_cursor, has_next_page, has_previous_page]
+    total_count: Total items across all pages.
+  cursor_example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+identifiers:
+  style: prefixed-ulid
+  prefixes:
+    household: household_
+    individual: client_profile_
+    entity: entity_
+    document: document_
+  external_id: Most resources accept an external_id for cross-system correlation with CRMs/planning tools.
+idempotency:
+  supported: false
+  notes: >-
+    No Idempotency-Key header or parameter is declared in the OpenAPI spec.
+    Writes use standard REST verbs (POST create, PUT full-update, DELETE).
+error_envelope:
+  media_type: application/json
+  shape: '{ code, message, details?: [{ field, message }] }'
+  ref: errors/luminary-problem-types.yml
+versioning:
+  scheme: uri-path
+  current: v1
+  path: /api/public/v1
+  ref: lifecycle/luminary-lifecycle.yml
+content_type: application/json
+file_uploads: >-
+  createDocument (POST /documents) and document/summary downloads handle binary
+  payloads (multipart upload; download endpoints stream file bytes).

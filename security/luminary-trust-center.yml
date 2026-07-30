@@ -1,0 +1,13 @@
+generated: '2026-07-20'
+method: searched
+probe: true
+source: https://www.withluminary.com/security
+url: https://www.withluminary.com/security
+certifications:
+- SOC 2
+evidence:
+- source: https://www.withluminary.com/security
+  keywords:
+  - soc 2
+  - soc2
+  - trust center

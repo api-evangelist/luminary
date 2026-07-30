@@ -1,0 +1,24 @@
+{
+  "provider": "luminary",
+  "sources": [
+    "luminary-documents-api-openapi.yml",
+    "luminary-entities-api-openapi.yml",
+    "luminary-households-api-openapi.yml",
+    "luminary-individuals-api-openapi.yml",
+    "luminary-users-api-openapi.yml",
+    "luminary-valuations-api-openapi.yml"
+  ],
+  "outputs": [
+    "luminary-documents-api-openapi.yml",
+    "luminary-entities-api-openapi.yml",
+    "luminary-households-api-openapi.yml",
+    "luminary-individuals-api-openapi.yml",
+    "luminary-users-api-openapi.yml",
+    "luminary-valuations-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

@@ -1,0 +1,43 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/luminary-openapi-original.yml
+# Luminary uses a custom JSON error envelope (NOT RFC 9457 application/problem+json).
+format: custom-envelope
+envelope:
+  media_type: application/json
+  schema: '#/components/schemas/Error'
+  fields:
+    code: Machine-readable error code (e.g. INVALID_REQUEST).
+    message: Human-readable error message.
+    details: Optional array of field-level validation errors (FieldError = field + message).
+  example:
+    code: INVALID_REQUEST
+    message: Invalid request parameters
+    details:
+    - field: name
+      message: Name is required
+# Every operation returns a `default` error response using the Error envelope
+# above; the spec does not enumerate per-status problem types, so the catalog
+# below is the conventional HTTP status set implied by an OAuth2 CRUD API plus
+# the one documented error code.
+problems:
+- status: 400
+  code: INVALID_REQUEST
+  title: Invalid request parameters
+  remediation: Fix the request body/query per the details[] field errors.
+  source: '#/components/schemas/Error'
+- status: 401
+  title: Unauthorized
+  remediation: Present a valid OAuth2 bearer token (client_credentials or authorization_code).
+- status: 403
+  title: Forbidden
+  remediation: The token's profile lacks access to this resource.
+- status: 404
+  title: Resource not found
+  remediation: Verify the {id} path parameter references an existing resource.
+- status: 429
+  title: Too Many Requests
+  remediation: Back off and retry; honor rate-limit signaling.
+- status: 500
+  title: Internal Server Error
+  remediation: Retry with backoff; contact support@withluminary.com if it persists.

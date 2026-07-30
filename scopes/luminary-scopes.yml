@@ -1,0 +1,30 @@
+generated: '2026-07-20'
+method: searched
+source: openapi/luminary-openapi-original.yml
+docs: https://api.withluminary.com/.well-known/oauth-authorization-server
+schemes:
+- name: oauth2Profiles
+  source: openapi/luminary-openapi-original.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://auth.withluminary.com/oauth2/authorize
+    tokenUrl: https://auth.withluminary.com/oauth2/token
+  - flow: clientCredentials
+    tokenUrl: https://auth.withluminary.com/oauth2/token
+# The OpenAPI oauth2Profiles scheme declares empty scope maps (API access is
+# governed per-profile, not per-scope). The scopes below are the OIDC/OAuth
+# scopes advertised by the authorization server discovery documents
+# (scopes_supported in /.well-known/oauth-authorization-server).
+scopes:
+- scope: openid
+  description: OpenID Connect authentication; issue an ID token.
+  sources: [https://auth.withluminary.com/.well-known/openid-configuration]
+- scope: profile
+  description: Access to the authenticated user's basic profile claims.
+  sources: [https://auth.withluminary.com/.well-known/openid-configuration]
+- scope: email
+  description: Access to the authenticated user's email address claim.
+  sources: [https://auth.withluminary.com/.well-known/openid-configuration]
+- scope: offline_access
+  description: Issue a refresh token for long-lived access without re-consent.
+  sources: [https://auth.withluminary.com/.well-known/openid-configuration]

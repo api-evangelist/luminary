@@ -1,0 +1,27 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Luminary API
+  version: 1.0.0
+extends: openapi/luminary-openapi-original.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-slug: luminary
+    x-apievangelist-category: estate-planning
+    x-apievangelist-auth: oauth2
+    x-apievangelist-pagination: cursor
+    x-apievangelist-error-envelope: custom
+    x-apievangelist-notes: >-
+      Luminary API v1 (Stainless-generated SDKs). OAuth2 authorizationCode +
+      clientCredentials against auth.withluminary.com. Per-tenant subdomain base
+      URL. SOC 2 Type II. No RFC 9457, no idempotency keys, no webhooks surface.
+- target: $
+  update:
+    x-apievangelist-derived-artifacts:
+    - authentication/luminary-authentication.yml
+    - scopes/luminary-scopes.yml
+    - conventions/luminary-conventions.yml
+    - errors/luminary-problem-types.yml
+    - data-model/luminary-data-model.yml
+    - conformance/luminary-conformance.yml
+    - agentic-access/luminary-agentic-access.yml
