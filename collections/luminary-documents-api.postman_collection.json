@@ -1,0 +1,2450 @@
+{
+  "item": [
+    {
+      "id": "0374a48e-e06d-480c-8b2b-7ce16754ada1",
+      "name": "Documents",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c670bbd5-d227-4ca2-b45b-63957ae63b39",
+          "name": "List all document summaries",
+          "request": {
+            "name": "List all document summaries",
+            "description": {
+              "content": "Retrieve a paginated list of document summaries using cursor-based pagination",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "document-summaries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "household_id",
+                  "value": "<string>",
+                  "description": "Filter summaries by household ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "document_id",
+                  "value": "<string>",
+                  "description": "Filter summaries by document ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>",
+                  "description": "Cursor for forward pagination. Returns items after this cursor."
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<string>",
+                  "description": "Cursor for backward pagination. Returns items before this cursor."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of items to return"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your Luminary subdomain",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b38c4f55-981f-471f-990c-336a4686f577",
+              "name": "List of document summaries",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "document-summaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "household_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "document_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9"
+                    },
+                    {
+                      "key": "before",
+                      "value": "eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"document_summary_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"document_id\": \"document_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"household_id\": \"household_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"summary\": \"string\",\n      \"display_name\": \"Default summary\",\n      \"created_at\": \"1996-10-27T17:37:50.095Z\",\n      \"updated_at\": \"1972-01-11T20:18:21.630Z\",\n      \"entry_mode\": \"AI_AUTO\",\n      \"summary_format\": \"MARKDOWN\"\n    },\n    {\n      \"id\": \"document_summary_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"document_id\": \"document_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"household_id\": \"household_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"summary\": \"string\",\n      \"display_name\": \"Default summary\",\n      \"created_at\": \"1954-03-05T14:18:28.185Z\",\n      \"updated_at\": \"1957-12-08T03:45:43.193Z\",\n      \"entry_mode\": \"AI_AUTO\",\n      \"summary_format\": \"MARKDOWN\"\n    }\n  ],\n  \"page_info\": {\n    \"has_next_page\": true,\n    \"has_previous_page\": false,\n    \"end_cursor\": \"eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9\",\n    \"start_cursor\": \"eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9\"\n  },\n  \"total_count\": 100\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13c0766f-3914-43bd-ac61-4a8cf14265fc",
+              "name": "General Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "document-summaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "household_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "document_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9"
+                    },
+                    {
+                      "key": "before",
+                      "value": "eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"Invalid request parameters\",\n  \"details\": [\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    },\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "390fc3f1-6ed5-4836-a23c-2cdaad663e62",
+          "name": "Get a document summary by ID",
+          "request": {
+            "name": "Get a document summary by ID",
+            "description": {
+              "content": "Retrieve a specific document summary",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "document-summaries",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Document Summary ID"
+                },
+                {
+                  "description": "Your Luminary subdomain",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d3669da5-ded7-4a09-8c8e-14318267c6ee",
+              "name": "Document summary found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "document-summaries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Document Summary ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"document_summary_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"document_id\": \"document_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"household_id\": \"household_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"summary\": \"string\",\n  \"display_name\": \"Default summary\",\n  \"created_at\": \"2022-07-06T09:52:43.081Z\",\n  \"updated_at\": \"1995-06-09T22:09:52.243Z\",\n  \"entry_mode\": \"AI_AUTO\",\n  \"summary_format\": \"MARKDOWN\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "732e48ef-96ac-4c99-aef3-2fe40b21293b",
+              "name": "General Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "document-summaries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Document Summary ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"Invalid request parameters\",\n  \"details\": [\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    },\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "22cf045b-4a10-44aa-bbb2-322695a00222",
+          "name": "Update a document summary",
+          "request": {
+            "name": "Update a document summary",
+            "description": {
+              "content": "Update an existing document summary",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "document-summaries",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Document Summary ID"
+                },
+                {
+                  "description": "Your Luminary subdomain",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"display_name\": \"<string>\",\n  \"entry_mode\": \"AI_AUTO\",\n  \"summary\": \"<string>\",\n  \"summary_format\": \"MARKDOWN\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "361a0db4-8846-4d42-a4c3-9573e35497bf",
+              "name": "Document summary updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "document-summaries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Document Summary ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"display_name\": \"<string>\",\n  \"entry_mode\": \"AI_AUTO\",\n  \"summary\": \"<string>\",\n  \"summary_format\": \"MARKDOWN\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"document_summary_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"document_id\": \"document_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"household_id\": \"household_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"summary\": \"string\",\n  \"display_name\": \"Default summary\",\n  \"created_at\": \"2022-07-06T09:52:43.081Z\",\n  \"updated_at\": \"1995-06-09T22:09:52.243Z\",\n  \"entry_mode\": \"AI_AUTO\",\n  \"summary_format\": \"MARKDOWN\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0dd9bcc0-110d-4ace-9bf4-b345748cdf67",
+              "name": "General Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "document-summaries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Document Summary ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"display_name\": \"<string>\",\n  \"entry_mode\": \"AI_AUTO\",\n  \"summary\": \"<string>\",\n  \"summary_format\": \"MARKDOWN\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"Invalid request parameters\",\n  \"details\": [\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    },\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4761038e-0de0-4784-90fe-ab97ac093156",
+          "name": "Download document summary as PDF",
+          "request": {
+            "name": "Download document summary as PDF",
+            "description": {
+              "content": "Download the document summary content in the specified format",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "document-summaries",
+                ":id",
+                "download"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "pdf",
+                  "description": "Output format for the download"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Document Summary ID"
+                },
+                {
+                  "description": "Your Luminary subdomain",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/pdf"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3c02309c-a7af-48af-93e4-d5219302fcc9",
+              "name": "Document summary file",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "document-summaries",
+                    ":id",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "pdf"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Document Summary ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/pdf"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/pdf"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fba9d783-657a-4f8a-a1f5-ac4186e9ed70",
+              "name": "General Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "document-summaries",
+                    ":id",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "pdf"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Document Summary ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"Invalid request parameters\",\n  \"details\": [\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    },\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1a3bccfb-d8bf-43a4-b5c8-b8d3bf57affc",
+          "name": "List all documents",
+          "request": {
+            "name": "List all documents",
+            "description": {
+              "content": "Retrieve a paginated list of documents using cursor-based pagination",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "documents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "household_id",
+                  "value": "<string>",
+                  "description": "Filter documents by household ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Filter by document type"
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>",
+                  "description": "Cursor for forward pagination. Returns items after this cursor."
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<string>",
+                  "description": "Cursor for backward pagination. Returns items before this cursor."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of items to return"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your Luminary subdomain",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "df2258bc-e044-4a73-ac25-3c8d34e0051d",
+              "name": "List of documents",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "household_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9"
+                    },
+                    {
+                      "key": "before",
+                      "value": "eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"document_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"name\": \"Trust Agreement.pdf\",\n      \"type\": \"<string>\",\n      \"household_id\": \"household_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"created_at\": \"2024-01-15T09:30:00Z\",\n      \"updated_at\": \"2024-01-20T14:45:00Z\",\n      \"enable_ai_suggestions\": false,\n      \"entity_id\": \"entity_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"individual_id\": \"client_profile_01ARZ3NDEKTSV4RRFFQ69G5FAV\"\n    },\n    {\n      \"id\": \"document_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"name\": \"Trust Agreement.pdf\",\n      \"type\": \"<string>\",\n      \"household_id\": \"household_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"created_at\": \"2024-01-15T09:30:00Z\",\n      \"updated_at\": \"2024-01-20T14:45:00Z\",\n      \"enable_ai_suggestions\": false,\n      \"entity_id\": \"entity_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"individual_id\": \"client_profile_01ARZ3NDEKTSV4RRFFQ69G5FAV\"\n    }\n  ],\n  \"page_info\": {\n    \"has_next_page\": true,\n    \"has_previous_page\": false,\n    \"end_cursor\": \"eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9\",\n    \"start_cursor\": \"eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9\"\n  },\n  \"total_count\": 100\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc4668ab-8ee3-4bb4-8eaf-051b43c32534",
+              "name": "General Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "household_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9"
+                    },
+                    {
+                      "key": "before",
+                      "value": "eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"Invalid request parameters\",\n  \"details\": [\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    },\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e9b03d63-e189-4f35-8523-6f3bb9733fce",
+          "name": "Upload a new document",
+          "request": {
+            "name": "Upload a new document",
+            "description": {
+              "content": "Create a new document with file content",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "documents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Luminary subdomain",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Display name of the document"
+                },
+                {
+                  "key": "type",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) "
+                },
+                {
+                  "key": "household_id",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Household ID this document belongs to"
+                },
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "(Required) The document file to upload"
+                },
+                {
+                  "key": "enable_ai_suggestions",
+                  "value": "false",
+                  "type": "text",
+                  "description": "Whether this document should be used for AI suggestions"
+                },
+                {
+                  "key": "entity_id",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Entity ID if this document is owned by an entity"
+                },
+                {
+                  "key": "individual_id",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Individual ID if associated with an individual"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b43a7da7-ee9d-4bbb-bd66-8d9a526981e1",
+              "name": "Document created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Display name of the document",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "Trust Agreement.pdf",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Household ID this document belongs to",
+                        "type": "text/plain"
+                      },
+                      "key": "household_id",
+                      "value": "household_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The document file to upload",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Whether this document should be used for AI suggestions",
+                        "type": "text/plain"
+                      },
+                      "key": "enable_ai_suggestions",
+                      "value": "false",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Entity ID if this document is owned by an entity",
+                        "type": "text/plain"
+                      },
+                      "key": "entity_id",
+                      "value": "entity_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Individual ID if associated with an individual",
+                        "type": "text/plain"
+                      },
+                      "key": "individual_id",
+                      "value": "client_profile_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"document_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"name\": \"Trust Agreement.pdf\",\n  \"type\": \"<string>\",\n  \"household_id\": \"household_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"created_at\": \"2024-01-15T09:30:00Z\",\n  \"updated_at\": \"2024-01-20T14:45:00Z\",\n  \"enable_ai_suggestions\": false,\n  \"entity_id\": \"entity_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"individual_id\": \"client_profile_01ARZ3NDEKTSV4RRFFQ69G5FAV\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "03426f5b-297b-461a-9d92-64d216a19e85",
+              "name": "General Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Display name of the document",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "Trust Agreement.pdf",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Household ID this document belongs to",
+                        "type": "text/plain"
+                      },
+                      "key": "household_id",
+                      "value": "household_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The document file to upload",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Whether this document should be used for AI suggestions",
+                        "type": "text/plain"
+                      },
+                      "key": "enable_ai_suggestions",
+                      "value": "false",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Entity ID if this document is owned by an entity",
+                        "type": "text/plain"
+                      },
+                      "key": "entity_id",
+                      "value": "entity_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Individual ID if associated with an individual",
+                        "type": "text/plain"
+                      },
+                      "key": "individual_id",
+                      "value": "client_profile_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"Invalid request parameters\",\n  \"details\": [\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    },\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b0e15248-8734-4e0f-8167-7dc502c75e52",
+          "name": "Delete a document",
+          "request": {
+            "name": "Delete a document",
+            "description": {
+              "content": "Soft delete a document (marks as deleted but preserves data)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "documents",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Document ID"
+                },
+                {
+                  "description": "Your Luminary subdomain",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f493946e-3027-4756-94f3-d955a770ac86",
+              "name": "Document deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Document ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "554b2664-13f9-42c3-90de-78893865cba7",
+              "name": "General Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Document ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"Invalid request parameters\",\n  \"details\": [\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    },\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cdc27bbc-dd10-49fd-aa96-44df49ab03be",
+          "name": "Get a document by ID",
+          "request": {
+            "name": "Get a document by ID",
+            "description": {
+              "content": "Retrieve document metadata",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "documents",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Document ID"
+                },
+                {
+                  "description": "Your Luminary subdomain",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "422cf9a5-6019-4999-a1dc-ac2e5d3cb9d1",
+              "name": "Document found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Document ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"document_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"name\": \"Trust Agreement.pdf\",\n  \"type\": \"<string>\",\n  \"household_id\": \"household_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"created_at\": \"2024-01-15T09:30:00Z\",\n  \"updated_at\": \"2024-01-20T14:45:00Z\",\n  \"enable_ai_suggestions\": false,\n  \"entity_id\": \"entity_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"individual_id\": \"client_profile_01ARZ3NDEKTSV4RRFFQ69G5FAV\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a33265d3-80d8-4633-8c4f-d50ee294b3a1",
+              "name": "General Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Document ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"Invalid request parameters\",\n  \"details\": [\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    },\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4a93e8e0-d96b-4a91-946c-17172cadd1ed",
+          "name": "Update a document",
+          "request": {
+            "name": "Update a document",
+            "description": {
+              "content": "Update document metadata only",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "documents",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Document ID"
+                },
+                {
+                  "description": "Your Luminary subdomain",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"enable_ai_suggestions\": \"<boolean>\",\n  \"entity_id\": \"<string>\",\n  \"individual_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a7c0ca88-6af8-49df-a370-db6c88ed63b1",
+              "name": "Document updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Document ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enable_ai_suggestions\": \"<boolean>\",\n  \"entity_id\": \"<string>\",\n  \"individual_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"document_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"name\": \"Trust Agreement.pdf\",\n  \"type\": \"<string>\",\n  \"household_id\": \"household_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"created_at\": \"2024-01-15T09:30:00Z\",\n  \"updated_at\": \"2024-01-20T14:45:00Z\",\n  \"enable_ai_suggestions\": false,\n  \"entity_id\": \"entity_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"individual_id\": \"client_profile_01ARZ3NDEKTSV4RRFFQ69G5FAV\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "145a9528-7978-4aa0-905a-68218776d3e9",
+              "name": "General Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Document ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enable_ai_suggestions\": \"<boolean>\",\n  \"entity_id\": \"<string>\",\n  \"individual_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"Invalid request parameters\",\n  \"details\": [\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    },\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0c6ede5e-f0eb-41a6-8afa-a049e97aa8a8",
+          "name": "Get summaries for a document",
+          "request": {
+            "name": "Get summaries for a document",
+            "description": {
+              "content": "Retrieve all summaries associated with a specific document",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "documents",
+                ":id",
+                "document-summaries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Document ID"
+                },
+                {
+                  "description": "Your Luminary subdomain",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9e95737c-aa5e-46a9-8732-a3d98b87d807",
+              "name": "List of document summaries",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    ":id",
+                    "document-summaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Document ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"document_summary_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"document_id\": \"document_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"household_id\": \"household_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"summary\": \"string\",\n      \"display_name\": \"Default summary\",\n      \"created_at\": \"2007-12-03T16:03:32.211Z\",\n      \"updated_at\": \"1973-03-14T13:56:11.939Z\",\n      \"entry_mode\": \"AI_AUTO\",\n      \"summary_format\": \"MARKDOWN\"\n    },\n    {\n      \"id\": \"document_summary_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"document_id\": \"document_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"household_id\": \"household_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"summary\": \"string\",\n      \"display_name\": \"Default summary\",\n      \"created_at\": \"2000-08-20T05:08:30.317Z\",\n      \"updated_at\": \"1974-01-18T07:22:32.793Z\",\n      \"entry_mode\": \"AI_AUTO\",\n      \"summary_format\": \"MARKDOWN\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d3c7b617-c6f6-46f3-a0b1-a1535576b8e5",
+              "name": "General Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    ":id",
+                    "document-summaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Document ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"Invalid request parameters\",\n  \"details\": [\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    },\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9594e0d9-2922-40c3-be57-013b470ba857",
+          "name": "Download document file content",
+          "request": {
+            "name": "Download document file content",
+            "description": {
+              "content": "Download the binary content of the document file",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "documents",
+                ":id",
+                "download"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Document ID"
+                },
+                {
+                  "description": "Your Luminary subdomain",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "53efdf7a-2005-4d91-b1d7-06dd6b031ade",
+              "name": "Document file content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    ":id",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Document ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3f529cb6-590b-4779-9442-d49ba39e04fd",
+              "name": "General Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    ":id",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Document ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"Invalid request parameters\",\n  \"details\": [\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    },\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9b10c9a4-fa65-4bd3-a072-160e41aebca6",
+          "name": "List all documents in a household",
+          "request": {
+            "name": "List all documents in a household",
+            "description": {
+              "content": "Retrieve a paginated list of documents belonging to a specific household",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "households",
+                ":id",
+                "documents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Filter by document type"
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>",
+                  "description": "Cursor for forward pagination. Returns items after this cursor."
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<string>",
+                  "description": "Cursor for backward pagination. Returns items before this cursor."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of items to return"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Household ID"
+                },
+                {
+                  "description": "Your Luminary subdomain",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9bb58757-0bbd-4b51-8d6d-2fc99e707330",
+              "name": "List of documents in the household",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "households",
+                    ":id",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9"
+                    },
+                    {
+                      "key": "before",
+                      "value": "eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Household ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"document_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"name\": \"Trust Agreement.pdf\",\n      \"type\": \"<string>\",\n      \"household_id\": \"household_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"created_at\": \"2024-01-15T09:30:00Z\",\n      \"updated_at\": \"2024-01-20T14:45:00Z\",\n      \"enable_ai_suggestions\": false,\n      \"entity_id\": \"entity_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"individual_id\": \"client_profile_01ARZ3NDEKTSV4RRFFQ69G5FAV\"\n    },\n    {\n      \"id\": \"document_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"name\": \"Trust Agreement.pdf\",\n      \"type\": \"<string>\",\n      \"household_id\": \"household_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"created_at\": \"2024-01-15T09:30:00Z\",\n      \"updated_at\": \"2024-01-20T14:45:00Z\",\n      \"enable_ai_suggestions\": false,\n      \"entity_id\": \"entity_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"individual_id\": \"client_profile_01ARZ3NDEKTSV4RRFFQ69G5FAV\"\n    }\n  ],\n  \"page_info\": {\n    \"has_next_page\": true,\n    \"has_previous_page\": false,\n    \"end_cursor\": \"eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9\",\n    \"start_cursor\": \"eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9\"\n  },\n  \"total_count\": 100\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d383be67-bdd2-43fc-8753-437ee719e454",
+              "name": "General Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "households",
+                    ":id",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9"
+                    },
+                    {
+                      "key": "before",
+                      "value": "eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Household ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"Invalid request parameters\",\n  \"details\": [\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    },\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Luminary subdomain",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "lum",
+      "key": "subdomain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{subdomain}}.withluminary.com/api/public/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://auth.withluminary.com/oauth2/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://auth.withluminary.com/oauth2/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6439ac78-dd8b-4d31-bbf1-12e67b36674d",
+    "name": "Luminary Documents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "RESTful API for managing Luminary data",
+      "type": "text/plain"
+    }
+  }
+}

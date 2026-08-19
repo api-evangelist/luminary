@@ -1,0 +1,1195 @@
+{
+  "item": [
+    {
+      "id": "af1f296b-4c35-43bd-8336-50d3f9163cf1",
+      "name": "Individuals",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f8bc7b06-35db-4378-9bfd-6bd37bb8ae19",
+          "name": "List all individuals in a household",
+          "request": {
+            "name": "List all individuals in a household",
+            "description": {
+              "content": "Retrieve a paginated list of client profiles/individuals belonging to a specific household",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "households",
+                ":id",
+                "individuals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "is_primary",
+                  "value": "<boolean>",
+                  "description": "Filter by primary client status"
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>",
+                  "description": "Cursor for forward pagination. Returns items after this cursor."
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<string>",
+                  "description": "Cursor for backward pagination. Returns items before this cursor."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of items to return"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Household ID"
+                },
+                {
+                  "description": "Your Luminary subdomain",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "91853f36-5496-435d-8e4a-98ba88157e30",
+              "name": "List of individuals in the household",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "households",
+                    ":id",
+                    "individuals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "is_primary",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9"
+                    },
+                    {
+                      "key": "before",
+                      "value": "eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Household ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"client_profile_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"first_name\": \"John\",\n      \"last_name\": \"Smith\",\n      \"household_id\": \"household_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"is_primary\": false,\n      \"is_grantor\": false,\n      \"is_trustee\": false,\n      \"is_beneficiary\": false,\n      \"is_deceased\": false,\n      \"created_at\": \"2024-01-15T09:30:00Z\",\n      \"updated_at\": \"2024-01-20T14:45:00Z\",\n      \"address_line1\": \"123 Main St\",\n      \"address_line2\": \"Apt 4B\",\n      \"city\": \"San Francisco\",\n      \"country\": \"USA\",\n      \"date_of_birth\": \"1980-05-15\",\n      \"date_of_death\": \"1998-01-22\",\n      \"deleted_at\": \"2019-02-27T02:45:41.965Z\",\n      \"email\": \"john.smith@example.com\",\n      \"middle_name\": \"Michael\",\n      \"notes\": \"string\",\n      \"postal_code\": \"94102\",\n      \"state\": \"CA\",\n      \"suffix\": \"Jr.\"\n    },\n    {\n      \"id\": \"client_profile_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"first_name\": \"John\",\n      \"last_name\": \"Smith\",\n      \"household_id\": \"household_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"is_primary\": false,\n      \"is_grantor\": false,\n      \"is_trustee\": false,\n      \"is_beneficiary\": false,\n      \"is_deceased\": false,\n      \"created_at\": \"2024-01-15T09:30:00Z\",\n      \"updated_at\": \"2024-01-20T14:45:00Z\",\n      \"address_line1\": \"123 Main St\",\n      \"address_line2\": \"Apt 4B\",\n      \"city\": \"San Francisco\",\n      \"country\": \"USA\",\n      \"date_of_birth\": \"1980-05-15\",\n      \"date_of_death\": \"2018-08-05\",\n      \"deleted_at\": \"1961-12-27T18:38:17.890Z\",\n      \"email\": \"john.smith@example.com\",\n      \"middle_name\": \"Michael\",\n      \"notes\": \"string\",\n      \"postal_code\": \"94102\",\n      \"state\": \"CA\",\n      \"suffix\": \"Jr.\"\n    }\n  ],\n  \"page_info\": {\n    \"has_next_page\": true,\n    \"has_previous_page\": false,\n    \"end_cursor\": \"eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9\",\n    \"start_cursor\": \"eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9\"\n  },\n  \"total_count\": 100\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ff2cde6-55eb-473b-96b0-bb26b93ec759",
+              "name": "General Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "households",
+                    ":id",
+                    "individuals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "is_primary",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9"
+                    },
+                    {
+                      "key": "before",
+                      "value": "eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Household ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"Invalid request parameters\",\n  \"details\": [\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    },\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2db86d79-6d6d-4b6e-a0f2-66d893a86b88",
+          "name": "List all individuals (client profiles)",
+          "request": {
+            "name": "List all individuals (client profiles)",
+            "description": {
+              "content": "Retrieve a paginated list of client profiles/individuals using cursor-based pagination",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "individuals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "household_id",
+                  "value": "<string>",
+                  "description": "Filter individuals by household ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_primary",
+                  "value": "<boolean>",
+                  "description": "Filter by primary client status"
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>",
+                  "description": "Cursor for forward pagination. Returns items after this cursor."
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<string>",
+                  "description": "Cursor for backward pagination. Returns items before this cursor."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of items to return"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your Luminary subdomain",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5f9c86ca-89ef-4233-87eb-2946aef5e09f",
+              "name": "List of individuals",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "individuals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "household_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_primary",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9"
+                    },
+                    {
+                      "key": "before",
+                      "value": "eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"client_profile_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"first_name\": \"John\",\n      \"last_name\": \"Smith\",\n      \"household_id\": \"household_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"is_primary\": false,\n      \"is_grantor\": false,\n      \"is_trustee\": false,\n      \"is_beneficiary\": false,\n      \"is_deceased\": false,\n      \"created_at\": \"2024-01-15T09:30:00Z\",\n      \"updated_at\": \"2024-01-20T14:45:00Z\",\n      \"address_line1\": \"123 Main St\",\n      \"address_line2\": \"Apt 4B\",\n      \"city\": \"San Francisco\",\n      \"country\": \"USA\",\n      \"date_of_birth\": \"1980-05-15\",\n      \"date_of_death\": \"1961-10-01\",\n      \"deleted_at\": \"1953-07-04T17:15:28.496Z\",\n      \"email\": \"john.smith@example.com\",\n      \"middle_name\": \"Michael\",\n      \"notes\": \"string\",\n      \"postal_code\": \"94102\",\n      \"state\": \"CA\",\n      \"suffix\": \"Jr.\"\n    },\n    {\n      \"id\": \"client_profile_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"first_name\": \"John\",\n      \"last_name\": \"Smith\",\n      \"household_id\": \"household_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"is_primary\": false,\n      \"is_grantor\": false,\n      \"is_trustee\": false,\n      \"is_beneficiary\": false,\n      \"is_deceased\": false,\n      \"created_at\": \"2024-01-15T09:30:00Z\",\n      \"updated_at\": \"2024-01-20T14:45:00Z\",\n      \"address_line1\": \"123 Main St\",\n      \"address_line2\": \"Apt 4B\",\n      \"city\": \"San Francisco\",\n      \"country\": \"USA\",\n      \"date_of_birth\": \"1980-05-15\",\n      \"date_of_death\": \"1980-05-20\",\n      \"deleted_at\": \"1983-09-28T19:44:46.288Z\",\n      \"email\": \"john.smith@example.com\",\n      \"middle_name\": \"Michael\",\n      \"notes\": \"string\",\n      \"postal_code\": \"94102\",\n      \"state\": \"CA\",\n      \"suffix\": \"Jr.\"\n    }\n  ],\n  \"page_info\": {\n    \"has_next_page\": true,\n    \"has_previous_page\": false,\n    \"end_cursor\": \"eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9\",\n    \"start_cursor\": \"eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9\"\n  },\n  \"total_count\": 100\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "843d160b-ef92-4a1f-b66f-9e5228ae8bb4",
+              "name": "General Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "individuals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "household_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_primary",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9"
+                    },
+                    {
+                      "key": "before",
+                      "value": "eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"Invalid request parameters\",\n  \"details\": [\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    },\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca2163d4-9d49-429f-aab1-f64ebbebce97",
+          "name": "Create a new individual (client profile)",
+          "request": {
+            "name": "Create a new individual (client profile)",
+            "description": {
+              "content": "Create a new client profile/individual with the provided data",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "individuals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Luminary subdomain",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"household_id\": \"<string>\",\n  \"address_line1\": \"<string>\",\n  \"address_line2\": \"<string>\",\n  \"city\": \"<string>\",\n  \"country\": \"<string>\",\n  \"date_of_birth\": \"<date>\",\n  \"email\": \"<email>\",\n  \"is_beneficiary\": false,\n  \"is_deceased\": false,\n  \"is_grantor\": false,\n  \"is_primary\": false,\n  \"is_trustee\": false,\n  \"middle_name\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"postal_code\": \"<string>\",\n  \"state\": \"<string>\",\n  \"suffix\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8151bb17-bb44-41f7-9b16-606049bac259",
+              "name": "Individual created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "individuals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"John\",\n  \"last_name\": \"Smith\",\n  \"household_id\": \"household_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"address_line1\": \"<string>\",\n  \"address_line2\": \"<string>\",\n  \"city\": \"<string>\",\n  \"country\": \"<string>\",\n  \"date_of_birth\": \"<date>\",\n  \"email\": \"<email>\",\n  \"is_beneficiary\": false,\n  \"is_deceased\": false,\n  \"is_grantor\": false,\n  \"is_primary\": false,\n  \"is_trustee\": false,\n  \"middle_name\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"postal_code\": \"<string>\",\n  \"state\": \"<string>\",\n  \"suffix\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"client_profile_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"first_name\": \"John\",\n  \"last_name\": \"Smith\",\n  \"household_id\": \"household_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"is_primary\": false,\n  \"is_grantor\": false,\n  \"is_trustee\": false,\n  \"is_beneficiary\": false,\n  \"is_deceased\": false,\n  \"created_at\": \"2024-01-15T09:30:00Z\",\n  \"updated_at\": \"2024-01-20T14:45:00Z\",\n  \"address_line1\": \"123 Main St\",\n  \"address_line2\": \"Apt 4B\",\n  \"city\": \"San Francisco\",\n  \"country\": \"USA\",\n  \"date_of_birth\": \"1980-05-15\",\n  \"date_of_death\": \"2026-08-10\",\n  \"deleted_at\": \"2018-02-25T03:24:09.829Z\",\n  \"email\": \"john.smith@example.com\",\n  \"middle_name\": \"Michael\",\n  \"notes\": \"string\",\n  \"postal_code\": \"94102\",\n  \"state\": \"CA\",\n  \"suffix\": \"Jr.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45e6b25e-98c3-4e6b-a355-7cfbb1c0568f",
+              "name": "General Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "individuals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"John\",\n  \"last_name\": \"Smith\",\n  \"household_id\": \"household_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"address_line1\": \"<string>\",\n  \"address_line2\": \"<string>\",\n  \"city\": \"<string>\",\n  \"country\": \"<string>\",\n  \"date_of_birth\": \"<date>\",\n  \"email\": \"<email>\",\n  \"is_beneficiary\": false,\n  \"is_deceased\": false,\n  \"is_grantor\": false,\n  \"is_primary\": false,\n  \"is_trustee\": false,\n  \"middle_name\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"postal_code\": \"<string>\",\n  \"state\": \"<string>\",\n  \"suffix\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"Invalid request parameters\",\n  \"details\": [\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    },\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1ffcd6e2-70b8-4f9f-ab38-34c1abca4889",
+          "name": "Delete an individual",
+          "request": {
+            "name": "Delete an individual",
+            "description": {
+              "content": "Soft delete a client profile (marks as deleted but preserves data)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "individuals",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Individual ID"
+                },
+                {
+                  "description": "Your Luminary subdomain",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d480e6c5-14a9-4f62-9f9f-8bcef8933b80",
+              "name": "Individual deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "individuals",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Individual ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "721bad24-7847-4d20-b592-91278abd5561",
+              "name": "General Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "individuals",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Individual ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"Invalid request parameters\",\n  \"details\": [\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    },\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "90154c85-4001-4a15-a31a-5516c8b8e9c3",
+          "name": "Get an individual by ID",
+          "request": {
+            "name": "Get an individual by ID",
+            "description": {
+              "content": "Retrieve detailed information about a specific client profile",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "individuals",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Individual ID"
+                },
+                {
+                  "description": "Your Luminary subdomain",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d11a542a-0641-4ca7-87d2-284ab5720a1f",
+              "name": "Individual found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "individuals",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Individual ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"client_profile_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"first_name\": \"John\",\n  \"last_name\": \"Smith\",\n  \"household_id\": \"household_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"is_primary\": false,\n  \"is_grantor\": false,\n  \"is_trustee\": false,\n  \"is_beneficiary\": false,\n  \"is_deceased\": false,\n  \"created_at\": \"2024-01-15T09:30:00Z\",\n  \"updated_at\": \"2024-01-20T14:45:00Z\",\n  \"address_line1\": \"123 Main St\",\n  \"address_line2\": \"Apt 4B\",\n  \"city\": \"San Francisco\",\n  \"country\": \"USA\",\n  \"date_of_birth\": \"1980-05-15\",\n  \"date_of_death\": \"2026-08-10\",\n  \"deleted_at\": \"2018-02-25T03:24:09.829Z\",\n  \"email\": \"john.smith@example.com\",\n  \"middle_name\": \"Michael\",\n  \"notes\": \"string\",\n  \"postal_code\": \"94102\",\n  \"state\": \"CA\",\n  \"suffix\": \"Jr.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba83a9af-f651-436e-b3e0-87981873bfc7",
+              "name": "General Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "individuals",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Individual ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"Invalid request parameters\",\n  \"details\": [\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    },\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "413f6ed8-f0f0-4e8f-bc0d-ad2ac5fbdd28",
+          "name": "Update an individual",
+          "request": {
+            "name": "Update an individual",
+            "description": {
+              "content": "Update an existing client profile with new data",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "individuals",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Individual ID"
+                },
+                {
+                  "description": "Your Luminary subdomain",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address_line1\": \"<string>\",\n  \"address_line2\": \"<string>\",\n  \"city\": \"<string>\",\n  \"country\": \"<string>\",\n  \"date_of_birth\": \"<date>\",\n  \"date_of_death\": \"<date>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"is_beneficiary\": \"<boolean>\",\n  \"is_deceased\": \"<boolean>\",\n  \"is_grantor\": \"<boolean>\",\n  \"is_primary\": \"<boolean>\",\n  \"is_trustee\": \"<boolean>\",\n  \"last_name\": \"<string>\",\n  \"middle_name\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"postal_code\": \"<string>\",\n  \"state\": \"<string>\",\n  \"suffix\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "53887b88-5a05-465b-b966-ee8a122cf9cd",
+              "name": "Individual updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "individuals",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Individual ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address_line1\": \"<string>\",\n  \"address_line2\": \"<string>\",\n  \"city\": \"<string>\",\n  \"country\": \"<string>\",\n  \"date_of_birth\": \"<date>\",\n  \"date_of_death\": \"<date>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"is_beneficiary\": \"<boolean>\",\n  \"is_deceased\": \"<boolean>\",\n  \"is_grantor\": \"<boolean>\",\n  \"is_primary\": \"<boolean>\",\n  \"is_trustee\": \"<boolean>\",\n  \"last_name\": \"<string>\",\n  \"middle_name\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"postal_code\": \"<string>\",\n  \"state\": \"<string>\",\n  \"suffix\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"client_profile_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"first_name\": \"John\",\n  \"last_name\": \"Smith\",\n  \"household_id\": \"household_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"is_primary\": false,\n  \"is_grantor\": false,\n  \"is_trustee\": false,\n  \"is_beneficiary\": false,\n  \"is_deceased\": false,\n  \"created_at\": \"2024-01-15T09:30:00Z\",\n  \"updated_at\": \"2024-01-20T14:45:00Z\",\n  \"address_line1\": \"123 Main St\",\n  \"address_line2\": \"Apt 4B\",\n  \"city\": \"San Francisco\",\n  \"country\": \"USA\",\n  \"date_of_birth\": \"1980-05-15\",\n  \"date_of_death\": \"2026-08-10\",\n  \"deleted_at\": \"2018-02-25T03:24:09.829Z\",\n  \"email\": \"john.smith@example.com\",\n  \"middle_name\": \"Michael\",\n  \"notes\": \"string\",\n  \"postal_code\": \"94102\",\n  \"state\": \"CA\",\n  \"suffix\": \"Jr.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16e863a9-bdfe-46cc-8f16-ff0a4ae45eba",
+              "name": "General Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "individuals",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Individual ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address_line1\": \"<string>\",\n  \"address_line2\": \"<string>\",\n  \"city\": \"<string>\",\n  \"country\": \"<string>\",\n  \"date_of_birth\": \"<date>\",\n  \"date_of_death\": \"<date>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"is_beneficiary\": \"<boolean>\",\n  \"is_deceased\": \"<boolean>\",\n  \"is_grantor\": \"<boolean>\",\n  \"is_primary\": \"<boolean>\",\n  \"is_trustee\": \"<boolean>\",\n  \"last_name\": \"<string>\",\n  \"middle_name\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"postal_code\": \"<string>\",\n  \"state\": \"<string>\",\n  \"suffix\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"Invalid request parameters\",\n  \"details\": [\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    },\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Luminary subdomain",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "lum",
+      "key": "subdomain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{subdomain}}.withluminary.com/api/public/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://auth.withluminary.com/oauth2/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://auth.withluminary.com/oauth2/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "31f28e4b-aa8d-4dde-95d1-5a78e917e663",
+    "name": "Luminary Documents Individuals API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "RESTful API for managing Luminary data",
+      "type": "text/plain"
+    }
+  }
+}

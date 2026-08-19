@@ -1,0 +1,1210 @@
+{
+  "item": [
+    {
+      "id": "2a5d0f97-9434-439a-9725-823849623866",
+      "name": "Entities",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "483133b8-1561-4fe5-87be-f5c7c251d8b9",
+          "name": "List all entities",
+          "request": {
+            "name": "List all entities",
+            "description": {
+              "content": "Retrieve a paginated list of entities (trusts, businesses, accounts, etc.) using cursor-based pagination",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "entities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "household_id",
+                  "value": "<string>",
+                  "description": "Filter entities by household ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "kind",
+                  "value": "<string>",
+                  "description": "Filter by entity kind/type"
+                },
+                {
+                  "disabled": false,
+                  "key": "external_id",
+                  "value": "<string>",
+                  "description": "Filter by external ID (exact match within the caller's tenant)"
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>",
+                  "description": "Cursor for forward pagination. Returns items after this cursor."
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<string>",
+                  "description": "Cursor for backward pagination. Returns items before this cursor."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of items to return"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your Luminary subdomain",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c25d42f5-94c4-4791-a592-519adad10887",
+              "name": "List of entities",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "household_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "kind",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9"
+                    },
+                    {
+                      "key": "before",
+                      "value": "eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"entity_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"display_name\": \"My Revocable Trust\",\n      \"kind\": \"<string>\",\n      \"stage\": \"IMPLEMENTATION\",\n      \"in_estate_status\": \"none\",\n      \"household_id\": \"household_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"created_at\": \"2024-01-15T09:30:00Z\",\n      \"updated_at\": \"2024-01-20T14:45:00Z\",\n      \"external_id\": \"crm-entity-12345\"\n    },\n    {\n      \"id\": \"entity_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"display_name\": \"My Revocable Trust\",\n      \"kind\": \"<string>\",\n      \"stage\": \"DRAFT\",\n      \"in_estate_status\": \"in_estate\",\n      \"household_id\": \"household_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"created_at\": \"2024-01-15T09:30:00Z\",\n      \"updated_at\": \"2024-01-20T14:45:00Z\",\n      \"external_id\": \"crm-entity-12345\"\n    }\n  ],\n  \"page_info\": {\n    \"has_next_page\": true,\n    \"has_previous_page\": false,\n    \"end_cursor\": \"eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9\",\n    \"start_cursor\": \"eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9\"\n  },\n  \"total_count\": 100\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5c7eca9-5547-427f-9e35-5a0a1782710c",
+              "name": "General Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "household_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "kind",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9"
+                    },
+                    {
+                      "key": "before",
+                      "value": "eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"Invalid request parameters\",\n  \"details\": [\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    },\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c597496d-2ab4-4b4f-8bc8-272df4a58127",
+          "name": "Delete an entity",
+          "request": {
+            "name": "Delete an entity",
+            "description": {
+              "content": "Delete an entity and all of it's related data",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "entities",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Entity ID"
+                },
+                {
+                  "description": "Your Luminary subdomain",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cde5f7e4-7b28-4d1b-994e-a349300b37c1",
+              "name": "Entity deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Entity ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6aa85ab6-23c1-4542-b509-b05b98af34eb",
+              "name": "General Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Entity ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"Invalid request parameters\",\n  \"details\": [\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    },\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cc624b22-259b-4fae-a41f-0512b288446c",
+          "name": "Get an entity by ID",
+          "request": {
+            "name": "Get an entity by ID",
+            "description": {
+              "content": "Retrieve detailed information about a specific entity",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "entities",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Entity ID"
+                },
+                {
+                  "description": "Your Luminary subdomain",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c2f10d4f-e75c-4573-8323-391ec39b2ff0",
+              "name": "Entity found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Entity ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"entity_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"display_name\": \"My Revocable Trust\",\n  \"kind\": \"<string>\",\n  \"stage\": \"IMPLEMENTATION\",\n  \"in_estate_status\": \"out_of_estate\",\n  \"household_id\": \"household_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"created_at\": \"2024-01-15T09:30:00Z\",\n  \"updated_at\": \"2024-01-20T14:45:00Z\",\n  \"external_id\": \"crm-entity-12345\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99dcf976-0860-4cdf-97a1-f616028dc9e2",
+              "name": "General Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Entity ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"Invalid request parameters\",\n  \"details\": [\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    },\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9da77cc3-3476-4148-b07e-fbec7507e296",
+          "name": "Get the current valuation for an entity",
+          "request": {
+            "name": "Get the current valuation for an entity",
+            "description": {
+              "content": "Retrieve the most recent valuation with flattened asset values by type",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "entities",
+                ":id",
+                "valuation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Entity ID"
+                },
+                {
+                  "description": "Your Luminary subdomain",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "71987f99-45fa-456f-a2af-d9ca1d0d433e",
+              "name": "Current valuation found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":id",
+                    "valuation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Entity ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"valuationv2_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"entity_id\": \"entity_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"effective_date\": \"2024-01-15\",\n  \"total_value\": 1000000,\n  \"directly_held_asset_value\": 1000000,\n  \"directly_held_assets\": [\n    {\n      \"id\": \"assetv2_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"display_name\": \"Apple Inc. Stock\",\n      \"value\": 50000,\n      \"asset_class\": {\n        \"id\": \"asset_class_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n        \"display_name\": \"Equities\"\n      },\n      \"external_id\": \"AAPL-12345\"\n    },\n    {\n      \"id\": \"assetv2_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"display_name\": \"Apple Inc. Stock\",\n      \"value\": 50000,\n      \"asset_class\": {\n        \"id\": \"asset_class_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n        \"display_name\": \"Equities\"\n      },\n      \"external_id\": \"AAPL-12345\"\n    }\n  ],\n  \"created_at\": \"2024-01-15T09:30:00Z\",\n  \"updated_at\": \"2024-01-20T14:45:00Z\",\n  \"description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "85cdb145-8122-4442-bb24-c0dd2b7c1bcd",
+              "name": "General Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":id",
+                    "valuation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Entity ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"Invalid request parameters\",\n  \"details\": [\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    },\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "79729921-8c32-484d-a88a-c19b91dd5df2",
+          "name": "Create a new valuation for an entity",
+          "request": {
+            "name": "Create a new valuation for an entity",
+            "description": {
+              "content": "Add a new valuation to the entity's history",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "entities",
+                ":id",
+                "valuation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Entity ID"
+                },
+                {
+                  "description": "Your Luminary subdomain",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"effective_date\": \"<date>\",\n  \"directly_held_assets\": [\n    {\n      \"display_name\": \"<string>\",\n      \"value\": \"<double>\",\n      \"asset_class_id\": \"<string>\",\n      \"external_id\": \"<string>\"\n    },\n    {\n      \"display_name\": \"<string>\",\n      \"value\": \"<double>\",\n      \"asset_class_id\": \"<string>\",\n      \"external_id\": \"<string>\"\n    }\n  ],\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a887b3d9-01a2-4239-abfd-8c797b0be087",
+              "name": "Valuation created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":id",
+                    "valuation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Entity ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"effective_date\": \"2024-01-15\",\n  \"directly_held_assets\": [\n    {\n      \"display_name\": \"Apple Inc. Stock\",\n      \"value\": 50000,\n      \"asset_class_id\": \"asset_class_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"external_id\": \"AAPL-12345\"\n    },\n    {\n      \"display_name\": \"Apple Inc. Stock\",\n      \"value\": 50000,\n      \"asset_class_id\": \"asset_class_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"external_id\": \"AAPL-12345\"\n    }\n  ],\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"valuationv2_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"entity_id\": \"entity_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"effective_date\": \"2024-01-15\",\n  \"total_value\": 1000000,\n  \"directly_held_asset_value\": 1000000,\n  \"directly_held_assets\": [\n    {\n      \"id\": \"assetv2_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"display_name\": \"Apple Inc. Stock\",\n      \"value\": 50000,\n      \"asset_class\": {\n        \"id\": \"asset_class_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n        \"display_name\": \"Equities\"\n      },\n      \"external_id\": \"AAPL-12345\"\n    },\n    {\n      \"id\": \"assetv2_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"display_name\": \"Apple Inc. Stock\",\n      \"value\": 50000,\n      \"asset_class\": {\n        \"id\": \"asset_class_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n        \"display_name\": \"Equities\"\n      },\n      \"external_id\": \"AAPL-12345\"\n    }\n  ],\n  \"created_at\": \"2024-01-15T09:30:00Z\",\n  \"updated_at\": \"2024-01-20T14:45:00Z\",\n  \"description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28588091-454f-44a8-9d0e-78e992d5a80d",
+              "name": "General Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":id",
+                    "valuation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Entity ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"effective_date\": \"2024-01-15\",\n  \"directly_held_assets\": [\n    {\n      \"display_name\": \"Apple Inc. Stock\",\n      \"value\": 50000,\n      \"asset_class_id\": \"asset_class_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"external_id\": \"AAPL-12345\"\n    },\n    {\n      \"display_name\": \"Apple Inc. Stock\",\n      \"value\": 50000,\n      \"asset_class_id\": \"asset_class_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"external_id\": \"AAPL-12345\"\n    }\n  ],\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"Invalid request parameters\",\n  \"details\": [\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    },\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "15ffa95d-9633-4a7e-973d-71f1b2ad0496",
+          "name": "List all entities in a household",
+          "request": {
+            "name": "List all entities in a household",
+            "description": {
+              "content": "Retrieve a paginated list of entities belonging to a specific household",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "households",
+                ":id",
+                "entities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "kind",
+                  "value": "<string>",
+                  "description": "Filter by entity kind/type"
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>",
+                  "description": "Cursor for forward pagination. Returns items after this cursor."
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<string>",
+                  "description": "Cursor for backward pagination. Returns items before this cursor."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of items to return"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Household ID"
+                },
+                {
+                  "description": "Your Luminary subdomain",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "50fc3516-4cf8-4a93-a1fc-c45821ae55c2",
+              "name": "List of entities in the household",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "households",
+                    ":id",
+                    "entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "kind",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9"
+                    },
+                    {
+                      "key": "before",
+                      "value": "eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Household ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"entity_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"display_name\": \"My Revocable Trust\",\n      \"kind\": \"<string>\",\n      \"stage\": \"PRE_CREATED\",\n      \"in_estate_status\": \"in_estate\",\n      \"household_id\": \"household_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"created_at\": \"2024-01-15T09:30:00Z\",\n      \"updated_at\": \"2024-01-20T14:45:00Z\",\n      \"external_id\": \"crm-entity-12345\"\n    },\n    {\n      \"id\": \"entity_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"display_name\": \"My Revocable Trust\",\n      \"kind\": \"<string>\",\n      \"stage\": \"ACTIVE\",\n      \"in_estate_status\": \"in_estate\",\n      \"household_id\": \"household_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"created_at\": \"2024-01-15T09:30:00Z\",\n      \"updated_at\": \"2024-01-20T14:45:00Z\",\n      \"external_id\": \"crm-entity-12345\"\n    }\n  ],\n  \"page_info\": {\n    \"has_next_page\": true,\n    \"has_previous_page\": false,\n    \"end_cursor\": \"eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9\",\n    \"start_cursor\": \"eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9\"\n  },\n  \"total_count\": 100\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc03a592-0582-42dd-8e8b-5bb774ba053b",
+              "name": "General Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "households",
+                    ":id",
+                    "entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "kind",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9"
+                    },
+                    {
+                      "key": "before",
+                      "value": "eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Household ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"Invalid request parameters\",\n  \"details\": [\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    },\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Luminary subdomain",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "lum",
+      "key": "subdomain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{subdomain}}.withluminary.com/api/public/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://auth.withluminary.com/oauth2/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://auth.withluminary.com/oauth2/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f7b95461-d68c-47e4-92da-c14df3cfaa52",
+    "name": "Luminary Documents Entities API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "RESTful API for managing Luminary data",
+      "type": "text/plain"
+    }
+  }
+}

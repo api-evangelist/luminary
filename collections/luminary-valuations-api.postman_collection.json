@@ -1,0 +1,425 @@
+{
+  "item": [
+    {
+      "id": "79c4e6f0-5c33-454e-ba4c-69995e986b31",
+      "name": "Valuations",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4f13646f-6e3c-434f-a77c-3fa3c3357d01",
+          "name": "Get the current valuation for an entity",
+          "request": {
+            "name": "Get the current valuation for an entity",
+            "description": {
+              "content": "Retrieve the most recent valuation with flattened asset values by type",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "entities",
+                ":id",
+                "valuation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Entity ID"
+                },
+                {
+                  "description": "Your Luminary subdomain",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "89bd65ef-7512-49dd-9026-196f1a8d7140",
+              "name": "Current valuation found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":id",
+                    "valuation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Entity ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"valuationv2_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"entity_id\": \"entity_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"effective_date\": \"2024-01-15\",\n  \"total_value\": 1000000,\n  \"directly_held_asset_value\": 1000000,\n  \"directly_held_assets\": [\n    {\n      \"id\": \"assetv2_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"display_name\": \"Apple Inc. Stock\",\n      \"value\": 50000,\n      \"asset_class\": {\n        \"id\": \"asset_class_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n        \"display_name\": \"Equities\"\n      },\n      \"external_id\": \"AAPL-12345\"\n    },\n    {\n      \"id\": \"assetv2_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"display_name\": \"Apple Inc. Stock\",\n      \"value\": 50000,\n      \"asset_class\": {\n        \"id\": \"asset_class_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n        \"display_name\": \"Equities\"\n      },\n      \"external_id\": \"AAPL-12345\"\n    }\n  ],\n  \"created_at\": \"2024-01-15T09:30:00Z\",\n  \"updated_at\": \"2024-01-20T14:45:00Z\",\n  \"description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc6bc52a-5a78-47d0-8ab6-4114263f1a5e",
+              "name": "General Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":id",
+                    "valuation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Entity ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"Invalid request parameters\",\n  \"details\": [\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    },\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2913dc6d-0346-4bbd-88b1-dc513a5b50c0",
+          "name": "Create a new valuation for an entity",
+          "request": {
+            "name": "Create a new valuation for an entity",
+            "description": {
+              "content": "Add a new valuation to the entity's history",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "entities",
+                ":id",
+                "valuation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Entity ID"
+                },
+                {
+                  "description": "Your Luminary subdomain",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"effective_date\": \"<date>\",\n  \"directly_held_assets\": [\n    {\n      \"display_name\": \"<string>\",\n      \"value\": \"<double>\",\n      \"asset_class_id\": \"<string>\",\n      \"external_id\": \"<string>\"\n    },\n    {\n      \"display_name\": \"<string>\",\n      \"value\": \"<double>\",\n      \"asset_class_id\": \"<string>\",\n      \"external_id\": \"<string>\"\n    }\n  ],\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9fccfc78-4445-4e15-99e3-0caec5bddf0e",
+              "name": "Valuation created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":id",
+                    "valuation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Entity ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"effective_date\": \"2024-01-15\",\n  \"directly_held_assets\": [\n    {\n      \"display_name\": \"Apple Inc. Stock\",\n      \"value\": 50000,\n      \"asset_class_id\": \"asset_class_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"external_id\": \"AAPL-12345\"\n    },\n    {\n      \"display_name\": \"Apple Inc. Stock\",\n      \"value\": 50000,\n      \"asset_class_id\": \"asset_class_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"external_id\": \"AAPL-12345\"\n    }\n  ],\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"valuationv2_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"entity_id\": \"entity_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  \"effective_date\": \"2024-01-15\",\n  \"total_value\": 1000000,\n  \"directly_held_asset_value\": 1000000,\n  \"directly_held_assets\": [\n    {\n      \"id\": \"assetv2_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"display_name\": \"Apple Inc. Stock\",\n      \"value\": 50000,\n      \"asset_class\": {\n        \"id\": \"asset_class_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n        \"display_name\": \"Equities\"\n      },\n      \"external_id\": \"AAPL-12345\"\n    },\n    {\n      \"id\": \"assetv2_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"display_name\": \"Apple Inc. Stock\",\n      \"value\": 50000,\n      \"asset_class\": {\n        \"id\": \"asset_class_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n        \"display_name\": \"Equities\"\n      },\n      \"external_id\": \"AAPL-12345\"\n    }\n  ],\n  \"created_at\": \"2024-01-15T09:30:00Z\",\n  \"updated_at\": \"2024-01-20T14:45:00Z\",\n  \"description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f70eb430-ac7d-40c4-adc5-41e27f990cfa",
+              "name": "General Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":id",
+                    "valuation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Entity ID"
+                    },
+                    {
+                      "description": "Your Luminary subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"effective_date\": \"2024-01-15\",\n  \"directly_held_assets\": [\n    {\n      \"display_name\": \"Apple Inc. Stock\",\n      \"value\": 50000,\n      \"asset_class_id\": \"asset_class_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"external_id\": \"AAPL-12345\"\n    },\n    {\n      \"display_name\": \"Apple Inc. Stock\",\n      \"value\": 50000,\n      \"asset_class_id\": \"asset_class_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n      \"external_id\": \"AAPL-12345\"\n    }\n  ],\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"Invalid request parameters\",\n  \"details\": [\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    },\n    {\n      \"field\": \"name\",\n      \"message\": \"Name is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Luminary subdomain",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "lum",
+      "key": "subdomain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{subdomain}}.withluminary.com/api/public/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://auth.withluminary.com/oauth2/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://auth.withluminary.com/oauth2/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "819722e8-7f1e-47a8-bbf1-99c6664e4adb",
+    "name": "Luminary Documents Valuations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "RESTful API for managing Luminary data",
+      "type": "text/plain"
+    }
+  }
+}

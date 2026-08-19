@@ -102,3 +102,9 @@ tools:
 - name: getUser
   description: Get a user by ID
   source_operation: openapi/luminary-openapi-original.yml#getUser
+deployment:
+  mode: none
+  verified: derived
+  tools: 31
+  checked: '2026-08-12'
+  source: catalog MCP census
