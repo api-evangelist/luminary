@@ -38,6 +38,15 @@ tags:
 - Company
 - Estate Planning
 - Wealth Management
+- Financial-Services
+- Legal Tech
+- Document AI
+- Family Office
+- Authentication
+tags_raw:
+- Company
+- Estate Planning
+- Wealth Management
 - Financial Services
 - Legal Tech
 - Document AI
@@ -90,6 +99,8 @@ apis:
   humanURL: https://withluminary.com/integrations
   baseURL: https://lum.withluminary.com/api/public/v1
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
