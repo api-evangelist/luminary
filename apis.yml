@@ -123,6 +123,8 @@ apis:
   humanURL: https://withluminary.com/integrations
   baseURL: https://lum.withluminary.com/api/public/v1
   tags:
+  - Valuation
+  tags_raw:
   - Valuations
   properties:
   - type: OpenAPI
