@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   description: RESTful API for managing Luminary data
-  title: Luminary Documents Users API
+  title: Luminary Users API
   version: 1.0.0
 servers:
 - description: Luminary API v1 server
@@ -60,30 +60,6 @@ paths:
       - Users
 components:
   schemas:
-    PageInfo:
-      properties:
-        end_cursor:
-          description: Cursor pointing to the last item in the current page
-          example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
-          nullable: true
-          type: string
-        has_next_page:
-          description: When paginating forwards, are there more items?
-          example: true
-          type: boolean
-        has_previous_page:
-          description: When paginating backwards, are there more items?
-          example: false
-          type: boolean
-        start_cursor:
-          description: Cursor pointing to the first item in the current page
-          example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
-          nullable: true
-          type: string
-      required:
-      - has_next_page
-      - has_previous_page
-      type: object
     Error:
       properties:
         code:
@@ -93,8 +69,9 @@ components:
         details:
           items:
             $ref: '#/components/schemas/FieldError'
-          nullable: true
-          type: array
+          type:
+          - array
+          - 'null'
         message:
           description: Error message
           example: Invalid request parameters
@@ -102,6 +79,23 @@ components:
       required:
       - code
       - message
+      type: object
+    UserList:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/User'
+          type: array
+        page_info:
+          $ref: '#/components/schemas/PageInfo'
+        total_count:
+          description: Total number of items matching the query (across all pages)
+          example: 100
+          type: integer
+      required:
+      - data
+      - page_info
+      - total_count
       type: object
     FieldError:
       properties:
@@ -116,6 +110,32 @@ components:
       required:
       - field
       - message
+      type: object
+    PageInfo:
+      properties:
+        end_cursor:
+          description: Cursor pointing to the last item in the current page
+          example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+          type:
+          - string
+          - 'null'
+        has_next_page:
+          description: When paginating forwards, are there more items?
+          example: true
+          type: boolean
+        has_previous_page:
+          description: When paginating backwards, are there more items?
+          example: false
+          type: boolean
+        start_cursor:
+          description: Cursor pointing to the first item in the current page
+          example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+          type:
+          - string
+          - 'null'
+      required:
+      - has_next_page
+      - has_previous_page
       type: object
     User:
       properties:
@@ -154,23 +174,6 @@ components:
       - created_at
       - updated_at
       type: object
-    UserList:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/User'
-          type: array
-        page_info:
-          $ref: '#/components/schemas/PageInfo'
-        total_count:
-          description: Total number of items matching the query (across all pages)
-          example: 100
-          type: integer
-      required:
-      - data
-      - page_info
-      - total_count
-      type: object
   responses:
     DefaultError:
       content:
@@ -188,17 +191,17 @@ components:
         maximum: 1000
         minimum: 1
         type: integer
-    AfterCursor:
-      description: Cursor for forward pagination. Returns items after this cursor.
-      in: query
-      name: after
-      schema:
-        example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
-        type: string
     BeforeCursor:
       description: Cursor for backward pagination. Returns items before this cursor.
       in: query
       name: before
+      schema:
+        example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+        type: string
+    AfterCursor:
+      description: Cursor for forward pagination. Returns items after this cursor.
+      in: query
+      name: after
       schema:
         example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
         type: string

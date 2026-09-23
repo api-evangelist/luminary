@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   description: RESTful API for managing Luminary data
-  title: Luminary Documents Entities API
+  title: Luminary Entities API
   version: 1.0.0
 servers:
 - description: Luminary API v1 server
@@ -163,77 +163,6 @@ paths:
       - Entities
 components:
   schemas:
-    PageInfo:
-      properties:
-        end_cursor:
-          description: Cursor pointing to the last item in the current page
-          example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
-          nullable: true
-          type: string
-        has_next_page:
-          description: When paginating forwards, are there more items?
-          example: true
-          type: boolean
-        has_previous_page:
-          description: When paginating backwards, are there more items?
-          example: false
-          type: boolean
-        start_cursor:
-          description: Cursor pointing to the first item in the current page
-          example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
-          nullable: true
-          type: string
-      required:
-      - has_next_page
-      - has_previous_page
-      type: object
-    EntityStage:
-      description: Lifecycle stage of the entity
-      enum:
-      - PRE_CREATED
-      - AI_CREATING
-      - AI_CREATION_FAILED
-      - AI_NEEDS_REVIEW
-      - DRAFT
-      - READY_FOR_PROPOSAL
-      - IMPLEMENTATION
-      - ACTIVE
-      - COMPLETED
-      - ARCHIVED
-      type: string
-    Error:
-      properties:
-        code:
-          description: Error code
-          example: INVALID_REQUEST
-          type: string
-        details:
-          items:
-            $ref: '#/components/schemas/FieldError'
-          nullable: true
-          type: array
-        message:
-          description: Error message
-          example: Invalid request parameters
-          type: string
-      required:
-      - code
-      - message
-      type: object
-    AssetClass:
-      properties:
-        display_name:
-          description: Display name of the asset class
-          example: Equities
-          type: string
-        id:
-          description: Asset class ID
-          example: asset_class_01ARZ3NDEKTSV4RRFFQ69G5FAV
-          type: string
-      required:
-      - id
-      - display_name
-      type: object
     Asset:
       properties:
         asset_class:
@@ -245,8 +174,9 @@ components:
         external_id:
           description: External ID from the static asset (if available)
           example: AAPL-12345
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         id:
           description: Asset ID
           example: assetv2_01ARZ3NDEKTSV4RRFFQ69G5FAV
@@ -262,79 +192,39 @@ components:
       - value
       - asset_class
       type: object
-    Entity:
+    PageInfo:
       properties:
-        created_at:
-          description: Timestamp when the entity was created
-          example: '2024-01-15T09:30:00Z'
-          format: date-time
-          type: string
-        display_name:
-          description: Display name of the entity
-          example: My Revocable Trust
-          type: string
-        external_id:
-          description: Customer-supplied identifier from an external system. Unique within the caller's tenant when set.
-          example: crm-entity-12345
-          minLength: 1
-          nullable: true
-          type: string
-        household_id:
-          description: Household ID this entity belongs to
-          example: household_01ARZ3NDEKTSV4RRFFQ69G5FAV
-          type: string
-        id:
-          description: Unique identifier with entity_ prefix
-          example: entity_01ARZ3NDEKTSV4RRFFQ69G5FAV
-          type: string
-        in_estate_status:
-          $ref: '#/components/schemas/InEstateStatus'
-        kind:
-          $ref: '#/components/schemas/EntityKind'
-        stage:
-          $ref: '#/components/schemas/EntityStage'
-        updated_at:
-          description: Timestamp when the entity was last updated
-          example: '2024-01-20T14:45:00Z'
-          format: date-time
-          type: string
+        end_cursor:
+          description: Cursor pointing to the last item in the current page
+          example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+          type:
+          - string
+          - 'null'
+        has_next_page:
+          description: When paginating forwards, are there more items?
+          example: true
+          type: boolean
+        has_previous_page:
+          description: When paginating backwards, are there more items?
+          example: false
+          type: boolean
+        start_cursor:
+          description: Cursor pointing to the first item in the current page
+          example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+          type:
+          - string
+          - 'null'
       required:
-      - id
-      - display_name
-      - kind
-      - stage
-      - in_estate_status
-      - household_id
-      - created_at
-      - updated_at
+      - has_next_page
+      - has_previous_page
       type: object
-    CreateAssetRequest:
-      properties:
-        asset_class_id:
-          description: Asset class ID to associate with this asset
-          example: asset_class_01ARZ3NDEKTSV4RRFFQ69G5FAV
-          type: string
-        display_name:
-          description: Display name of the asset
-          example: Apple Inc. Stock
-          minLength: 1
-          type: string
-        external_id:
-          description: External ID for the asset
-          example: AAPL-12345
-          minLength: 1
-          nullable: true
-          type: string
-        value:
-          description: Value of this asset in USD
-          example: 50000
-          format: double
-          type: number
-      required:
-      - display_name
-      - value
-      - asset_class_id
-      type: object
+    InEstateStatus:
+      description: Whether the entity is in or out of the estate
+      enum:
+      - in_estate
+      - out_of_estate
+      - none
+      type: string
     EntityKind:
       description: Type of entity - determines the specific subtype and applicable fields
       enum:
@@ -361,13 +251,107 @@ components:
       - SCORP_BUSINESS_ENTITY
       - CCORP_BUSINESS_ENTITY
       type: string
+    Error:
+      properties:
+        code:
+          description: Error code
+          example: INVALID_REQUEST
+          type: string
+        details:
+          items:
+            $ref: '#/components/schemas/FieldError'
+          type:
+          - array
+          - 'null'
+        message:
+          description: Error message
+          example: Invalid request parameters
+          type: string
+      required:
+      - code
+      - message
+      type: object
+    EntityStage:
+      description: Lifecycle stage of the entity
+      enum:
+      - PRE_CREATED
+      - AI_CREATING
+      - AI_CREATION_FAILED
+      - AI_NEEDS_REVIEW
+      - DRAFT
+      - READY_FOR_PROPOSAL
+      - IMPLEMENTATION
+      - ACTIVE
+      - COMPLETED
+      - ARCHIVED
+      type: string
+    CreateAssetRequest:
+      properties:
+        asset_class_id:
+          description: Asset class ID to associate with this asset
+          example: asset_class_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        display_name:
+          description: Display name of the asset
+          example: Apple Inc. Stock
+          minLength: 1
+          type: string
+        external_id:
+          description: External ID for the asset
+          example: AAPL-12345
+          minLength: 1
+          type:
+          - string
+          - 'null'
+        value:
+          description: Value of this asset in USD
+          example: 50000
+          format: double
+          type: number
+      required:
+      - display_name
+      - value
+      - asset_class_id
+      type: object
+    EntityList:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Entity'
+          type: array
+        page_info:
+          $ref: '#/components/schemas/PageInfo'
+        total_count:
+          description: Total number of items matching the query (across all pages)
+          example: 100
+          type: integer
+      required:
+      - data
+      - page_info
+      - total_count
+      type: object
+    AssetClass:
+      properties:
+        display_name:
+          description: Display name of the asset class
+          example: Equities
+          type: string
+        id:
+          description: Asset class ID
+          example: asset_class_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+      required:
+      - id
+      - display_name
+      type: object
     CreateValuationRequest:
       properties:
         description:
           description: Free-form notes about this valuation
           maxLength: 2048
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         directly_held_assets:
           description: List of assets to include in this valuation
           items:
@@ -382,13 +366,6 @@ components:
       - effective_date
       - directly_held_assets
       type: object
-    InEstateStatus:
-      description: Whether the entity is in or out of the estate
-      enum:
-      - in_estate
-      - out_of_estate
-      - none
-      type: string
     Valuation:
       properties:
         created_at:
@@ -399,8 +376,9 @@ components:
         description:
           description: Free-form notes about this valuation
           maxLength: 2048
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         directly_held_asset_value:
           description: Total value of all directly held assets in USD
           example: 1e+06
@@ -444,22 +422,52 @@ components:
       - created_at
       - updated_at
       type: object
-    EntityList:
+    Entity:
       properties:
-        data:
-          items:
-            $ref: '#/components/schemas/Entity'
-          type: array
-        page_info:
-          $ref: '#/components/schemas/PageInfo'
-        total_count:
-          description: Total number of items matching the query (across all pages)
-          example: 100
-          type: integer
+        created_at:
+          description: Timestamp when the entity was created
+          example: '2024-01-15T09:30:00Z'
+          format: date-time
+          type: string
+        display_name:
+          description: Display name of the entity
+          example: My Revocable Trust
+          type: string
+        external_id:
+          description: Customer-supplied identifier from an external system. Unique within the caller's tenant when set.
+          example: crm-entity-12345
+          minLength: 1
+          type:
+          - string
+          - 'null'
+        household_id:
+          description: Household ID this entity belongs to
+          example: household_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        id:
+          description: Unique identifier with entity_ prefix
+          example: entity_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        in_estate_status:
+          $ref: '#/components/schemas/InEstateStatus'
+        kind:
+          $ref: '#/components/schemas/EntityKind'
+        stage:
+          $ref: '#/components/schemas/EntityStage'
+        updated_at:
+          description: Timestamp when the entity was last updated
+          example: '2024-01-20T14:45:00Z'
+          format: date-time
+          type: string
       required:
-      - data
-      - page_info
-      - total_count
+      - id
+      - display_name
+      - kind
+      - stage
+      - in_estate_status
+      - household_id
+      - created_at
+      - updated_at
       type: object
     FieldError:
       properties:
@@ -475,7 +483,21 @@ components:
       - field
       - message
       type: object
+  responses:
+    DefaultError:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: General Error
   parameters:
+    BeforeCursor:
+      description: Cursor for backward pagination. Returns items before this cursor.
+      in: query
+      name: before
+      schema:
+        example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+        type: string
     Limit:
       description: Maximum number of items to return
       in: query
@@ -492,20 +514,6 @@ components:
       schema:
         example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
         type: string
-    BeforeCursor:
-      description: Cursor for backward pagination. Returns items before this cursor.
-      in: query
-      name: before
-      schema:
-        example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
-        type: string
-  responses:
-    DefaultError:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-      description: General Error
   securitySchemes:
     oauth2Profiles:
       flows:

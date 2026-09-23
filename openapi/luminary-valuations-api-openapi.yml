@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   description: RESTful API for managing Luminary data
-  title: Luminary Documents Valuations API
+  title: Luminary Valuations API
   version: 1.0.0
 servers:
 - description: Luminary API v1 server
@@ -61,39 +61,6 @@ paths:
       - Valuations
 components:
   schemas:
-    Error:
-      properties:
-        code:
-          description: Error code
-          example: INVALID_REQUEST
-          type: string
-        details:
-          items:
-            $ref: '#/components/schemas/FieldError'
-          nullable: true
-          type: array
-        message:
-          description: Error message
-          example: Invalid request parameters
-          type: string
-      required:
-      - code
-      - message
-      type: object
-    AssetClass:
-      properties:
-        display_name:
-          description: Display name of the asset class
-          example: Equities
-          type: string
-        id:
-          description: Asset class ID
-          example: asset_class_01ARZ3NDEKTSV4RRFFQ69G5FAV
-          type: string
-      required:
-      - id
-      - display_name
-      type: object
     Asset:
       properties:
         asset_class:
@@ -105,8 +72,9 @@ components:
         external_id:
           description: External ID from the static asset (if available)
           example: AAPL-12345
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         id:
           description: Asset ID
           example: assetv2_01ARZ3NDEKTSV4RRFFQ69G5FAV
@@ -121,6 +89,26 @@ components:
       - display_name
       - value
       - asset_class
+      type: object
+    Error:
+      properties:
+        code:
+          description: Error code
+          example: INVALID_REQUEST
+          type: string
+        details:
+          items:
+            $ref: '#/components/schemas/FieldError'
+          type:
+          - array
+          - 'null'
+        message:
+          description: Error message
+          example: Invalid request parameters
+          type: string
+      required:
+      - code
+      - message
       type: object
     CreateAssetRequest:
       properties:
@@ -137,8 +125,9 @@ components:
           description: External ID for the asset
           example: AAPL-12345
           minLength: 1
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         value:
           description: Value of this asset in USD
           example: 50000
@@ -148,6 +137,42 @@ components:
       - display_name
       - value
       - asset_class_id
+      type: object
+    AssetClass:
+      properties:
+        display_name:
+          description: Display name of the asset class
+          example: Equities
+          type: string
+        id:
+          description: Asset class ID
+          example: asset_class_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+      required:
+      - id
+      - display_name
+      type: object
+    CreateValuationRequest:
+      properties:
+        description:
+          description: Free-form notes about this valuation
+          maxLength: 2048
+          type:
+          - string
+          - 'null'
+        directly_held_assets:
+          description: List of assets to include in this valuation
+          items:
+            $ref: '#/components/schemas/CreateAssetRequest'
+          type: array
+        effective_date:
+          description: The date this valuation is effective
+          example: '2024-01-15'
+          format: date
+          type: string
+      required:
+      - effective_date
+      - directly_held_assets
       type: object
     Valuation:
       properties:
@@ -159,8 +184,9 @@ components:
         description:
           description: Free-form notes about this valuation
           maxLength: 2048
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         directly_held_asset_value:
           description: Total value of all directly held assets in USD
           example: 1e+06
@@ -203,27 +229,6 @@ components:
       - directly_held_assets
       - created_at
       - updated_at
-      type: object
-    CreateValuationRequest:
-      properties:
-        description:
-          description: Free-form notes about this valuation
-          maxLength: 2048
-          nullable: true
-          type: string
-        directly_held_assets:
-          description: List of assets to include in this valuation
-          items:
-            $ref: '#/components/schemas/CreateAssetRequest'
-          type: array
-        effective_date:
-          description: The date this valuation is effective
-          example: '2024-01-15'
-          format: date
-          type: string
-      required:
-      - effective_date
-      - directly_held_assets
       type: object
     FieldError:
       properties:

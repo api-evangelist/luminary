@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   description: RESTful API for managing Luminary data
-  title: Luminary Documents Individuals API
+  title: Luminary Individuals API
   version: 1.0.0
 servers:
 - description: Luminary API v1 server
@@ -160,8 +160,9 @@ components:
         end_cursor:
           description: Cursor pointing to the last item in the current page
           example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         has_next_page:
           description: When paginating forwards, are there more items?
           example: true
@@ -173,8 +174,9 @@ components:
         start_cursor:
           description: Cursor pointing to the first item in the current page
           example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       required:
       - has_next_page
       - has_previous_page
@@ -188,8 +190,9 @@ components:
         details:
           items:
             $ref: '#/components/schemas/FieldError'
-          nullable: true
-          type: array
+          type:
+          - array
+          - 'null'
         message:
           description: Error message
           example: Invalid request parameters
@@ -198,28 +201,157 @@ components:
       - code
       - message
       type: object
+    CreateIndividualRequest:
+      properties:
+        address_line1:
+          description: Street address line 1
+          minLength: 1
+          type:
+          - string
+          - 'null'
+        address_line2:
+          description: Street address line 2
+          minLength: 1
+          type:
+          - string
+          - 'null'
+        city:
+          description: City
+          minLength: 1
+          type:
+          - string
+          - 'null'
+        country:
+          description: Country
+          minLength: 1
+          type:
+          - string
+          - 'null'
+        date_of_birth:
+          description: Date of birth
+          format: date
+          type:
+          - string
+          - 'null'
+        email:
+          description: Email address
+          format: email
+          type:
+          - string
+          - 'null'
+        first_name:
+          description: First name of the individual
+          example: John
+          minLength: 1
+          type: string
+        household_id:
+          description: Household ID this individual belongs to
+          example: household_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        is_beneficiary:
+          default: false
+          description: Whether this client profile should be an eligible beneficiary for entities and gifts
+          type: boolean
+        is_deceased:
+          default: false
+          description: Whether the individual is deceased
+          type: boolean
+        is_grantor:
+          default: false
+          description: Whether this client profile should be an eligible grantor/owner/other principal for entities
+          type: boolean
+        is_primary:
+          default: false
+          description: Whether this is a primary client of the household (at most 2 per household)
+          type: boolean
+        is_trustee:
+          default: false
+          description: Whether this client profile should be an eligible trustee for entities
+          type: boolean
+        last_name:
+          description: Last name of the individual
+          example: Smith
+          minLength: 1
+          type: string
+        middle_name:
+          description: Middle name of the individual
+          minLength: 1
+          type:
+          - string
+          - 'null'
+        notes:
+          description: Notes about the client profile
+          maxLength: 65536
+          type:
+          - string
+          - 'null'
+        postal_code:
+          description: ZIP or postal code
+          minLength: 1
+          type:
+          - string
+          - 'null'
+        state:
+          description: State or province code (2 letter code)
+          maxLength: 2
+          minLength: 2
+          type:
+          - string
+          - 'null'
+        suffix:
+          description: Name suffix
+          minLength: 1
+          type:
+          - string
+          - 'null'
+      required:
+      - first_name
+      - last_name
+      - household_id
+      type: object
+    IndividualList:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Individual'
+          type: array
+        page_info:
+          $ref: '#/components/schemas/PageInfo'
+        total_count:
+          description: Total number of items matching the query (across all pages)
+          example: 100
+          type: integer
+      required:
+      - data
+      - page_info
+      - total_count
+      type: object
     Individual:
       properties:
         address_line1:
           description: Street address line 1 (from address edge)
           example: 123 Main St
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         address_line2:
           description: Street address line 2 (from address edge)
           example: Apt 4B
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         city:
           description: City (from address edge)
           example: San Francisco
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         country:
           description: Country (from address edge)
           example: USA
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         created_at:
           description: Timestamp when the individual was created
           example: '2024-01-15T09:30:00Z'
@@ -229,24 +361,28 @@ components:
           description: Date of birth (encrypted field)
           example: '1980-05-15'
           format: date
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         date_of_death:
           description: Date of death if applicable (encrypted field)
           format: date
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         deleted_at:
           description: Timestamp when the individual was soft deleted
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         email:
           description: Email address
           example: john.smith@example.com
           format: email
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         first_name:
           description: First name of the individual
           example: John
@@ -286,28 +422,33 @@ components:
         middle_name:
           description: Middle name of the individual
           example: Michael
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         notes:
           description: Notes about the client profile
           maxLength: 65536
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         postal_code:
           description: ZIP or postal code (from address edge)
           example: '94102'
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         state:
           description: State or province (from address edge)
           example: CA
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         suffix:
           description: Name suffix (Jr., Sr., III, etc.)
           example: Jr.
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         updated_at:
           description: Timestamp when the individual was last updated
           example: '2024-01-20T14:45:00Z'
@@ -326,157 +467,50 @@ components:
       - created_at
       - updated_at
       type: object
-    CreateIndividualRequest:
-      properties:
-        address_line1:
-          description: Street address line 1
-          minLength: 1
-          nullable: true
-          type: string
-        address_line2:
-          description: Street address line 2
-          minLength: 1
-          nullable: true
-          type: string
-        city:
-          description: City
-          minLength: 1
-          nullable: true
-          type: string
-        country:
-          description: Country
-          minLength: 1
-          nullable: true
-          type: string
-        date_of_birth:
-          description: Date of birth
-          format: date
-          nullable: true
-          type: string
-        email:
-          description: Email address
-          format: email
-          nullable: true
-          type: string
-        first_name:
-          description: First name of the individual
-          example: John
-          minLength: 1
-          type: string
-        household_id:
-          description: Household ID this individual belongs to
-          example: household_01ARZ3NDEKTSV4RRFFQ69G5FAV
-          type: string
-        is_beneficiary:
-          default: false
-          description: Whether this client profile should be an eligible beneficiary for entities and gifts
-          type: boolean
-        is_deceased:
-          default: false
-          description: Whether the individual is deceased
-          type: boolean
-        is_grantor:
-          default: false
-          description: Whether this client profile should be an eligible grantor/owner/other principal for entities
-          type: boolean
-        is_primary:
-          default: false
-          description: Whether this is a primary client of the household (at most 2 per household)
-          type: boolean
-        is_trustee:
-          default: false
-          description: Whether this client profile should be an eligible trustee for entities
-          type: boolean
-        last_name:
-          description: Last name of the individual
-          example: Smith
-          minLength: 1
-          type: string
-        middle_name:
-          description: Middle name of the individual
-          minLength: 1
-          nullable: true
-          type: string
-        notes:
-          description: Notes about the client profile
-          maxLength: 65536
-          nullable: true
-          type: string
-        postal_code:
-          description: ZIP or postal code
-          minLength: 1
-          nullable: true
-          type: string
-        state:
-          description: State or province code (2 letter code)
-          maxLength: 2
-          minLength: 2
-          nullable: true
-          type: string
-        suffix:
-          description: Name suffix
-          minLength: 1
-          nullable: true
-          type: string
-      required:
-      - first_name
-      - last_name
-      - household_id
-      type: object
-    IndividualList:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/Individual'
-          type: array
-        page_info:
-          $ref: '#/components/schemas/PageInfo'
-        total_count:
-          description: Total number of items matching the query (across all pages)
-          example: 100
-          type: integer
-      required:
-      - data
-      - page_info
-      - total_count
-      type: object
     UpdateIndividualRequest:
       properties:
         address_line1:
           description: Street address line 1
           minLength: 1
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         address_line2:
           description: Street address line 2
           minLength: 1
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         city:
           description: City
           minLength: 1
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         country:
           description: Country
           minLength: 1
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         date_of_birth:
           description: Date of birth
           format: date
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         date_of_death:
           description: Date of death if applicable
           format: date
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         email:
           description: Email address
           format: email
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         first_name:
           description: First name of the individual
           minLength: 1
@@ -503,29 +537,34 @@ components:
         middle_name:
           description: Middle name of the individual
           minLength: 1
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         notes:
           description: Notes about the client profile
           maxLength: 65536
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         postal_code:
           description: ZIP or postal code
           minLength: 1
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         state:
           description: State or province code (2 letter code)
           maxLength: 2
           minLength: 2
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         suffix:
           description: Name suffix
           minLength: 1
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       type: object
     FieldError:
       properties:
@@ -558,17 +597,17 @@ components:
         maximum: 1000
         minimum: 1
         type: integer
-    AfterCursor:
-      description: Cursor for forward pagination. Returns items after this cursor.
-      in: query
-      name: after
-      schema:
-        example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
-        type: string
     BeforeCursor:
       description: Cursor for backward pagination. Returns items before this cursor.
       in: query
       name: before
+      schema:
+        example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+        type: string
+    AfterCursor:
+      description: Cursor for forward pagination. Returns items after this cursor.
+      in: query
+      name: after
       schema:
         example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
         type: string

@@ -1,21 +1,26 @@
 generated: '2026-07-20'
 method: searched
 host: https://api.withluminary.com
-documents:
-- path: /.well-known/openid-configuration
-  status: 200
-  file: luminary-openid-configuration.json
-- path: /.well-known/oauth-authorization-server
-  status: 200
-  file: luminary-oauth-authorization-server.json
-- path: /.well-known/security.txt
-  status: 404
-- path: /.well-known/api-catalog
-  status: 404
-- path: /.well-known/ai-plugin.json
-  status: 404
-notes: >-
-  OIDC discovery and RFC 8414 authorization-server metadata are served at both
-  api.withluminary.com and auth.withluminary.com. security.txt / api-catalog /
-  ai-plugin.json are not published (the app returns its SPA login redirect, not a
-  real document).
+notes: OIDC discovery and RFC 8414 authorization-server metadata are served at both api.withluminary.com
+  and auth.withluminary.com. security.txt / api-catalog / ai-plugin.json are not published (the app returns
+  its SPA login redirect, not a real document).
+hosts:
+- host: https://api.withluminary.com
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: luminary-openid-configuration.json
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: luminary-oauth-authorization-server.json
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+x-shape-fix:
+  converted: '2026-08-20'
+  from: documents
+  note: Rewritten into hosts[] -> documents[], the only shape well_known_docs() in score.rb reads. A served
+    .well-known surface recorded in any other shape scores as absent.

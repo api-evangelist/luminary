@@ -1,12 +1,7 @@
 {
   "provider": "luminary",
   "sources": [
-    "luminary-documents-api-openapi.yml",
-    "luminary-entities-api-openapi.yml",
-    "luminary-households-api-openapi.yml",
-    "luminary-individuals-api-openapi.yml",
-    "luminary-users-api-openapi.yml",
-    "luminary-valuations-api-openapi.yml"
+    "_original/luminary-openapi-original.yml"
   ],
   "outputs": [
     "luminary-documents-api-openapi.yml",
@@ -19,6 +14,23 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "luminary-openapi-original.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "luminary-openapi-original.yml: declared missing tag: Documents",
+    "luminary-openapi-original.yml: declared missing tag: Entities",
+    "luminary-openapi-original.yml: declared missing tag: Households",
+    "luminary-openapi-original.yml: declared missing tag: Individuals",
+    "luminary-openapi-original.yml: declared missing tag: Users",
+    "luminary-openapi-original.yml: declared missing tag: Valuations",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "luminary-documents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "luminary-entities-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "luminary-households-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "luminary-individuals-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "luminary-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "luminary-valuations-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
