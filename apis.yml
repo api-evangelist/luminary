@@ -50,7 +50,7 @@ tags:
 - Company
 - Estate Planning
 - Wealth Management
-- Financial-Services
+- Financial Services
 - Legal Tech
 - Document AI
 - Family Office
@@ -64,6 +64,7 @@ tags_raw:
 - Document AI
 - Family Office
 - OAuth2
+- Financial-Services
 apis:
 - aid: luminary:luminary-documents-api
   name: Luminary Documents API
