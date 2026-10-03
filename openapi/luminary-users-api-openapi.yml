@@ -97,6 +97,23 @@ components:
       - created_at
       - updated_at
       type: object
+    UserList:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/User'
+          type: array
+        page_info:
+          $ref: '#/components/schemas/PageInfo'
+        total_count:
+          description: Total number of items matching the query (across all pages)
+          example: 100
+          type: integer
+      required:
+      - data
+      - page_info
+      - total_count
+      type: object
     FieldError:
       properties:
         field:
@@ -109,6 +126,26 @@ components:
           type: string
       required:
       - field
+      - message
+      type: object
+    Error:
+      properties:
+        code:
+          description: Error code
+          example: INVALID_REQUEST
+          type: string
+        details:
+          items:
+            $ref: '#/components/schemas/FieldError'
+          type:
+          - array
+          - 'null'
+        message:
+          description: Error message
+          example: Invalid request parameters
+          type: string
+      required:
+      - code
       - message
       type: object
     PageInfo:
@@ -136,43 +173,6 @@ components:
       required:
       - has_next_page
       - has_previous_page
-      type: object
-    UserList:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/User'
-          type: array
-        page_info:
-          $ref: '#/components/schemas/PageInfo'
-        total_count:
-          description: Total number of items matching the query (across all pages)
-          example: 100
-          type: integer
-      required:
-      - data
-      - page_info
-      - total_count
-      type: object
-    Error:
-      properties:
-        code:
-          description: Error code
-          example: INVALID_REQUEST
-          type: string
-        details:
-          items:
-            $ref: '#/components/schemas/FieldError'
-          type:
-          - array
-          - 'null'
-        message:
-          description: Error message
-          example: Invalid request parameters
-          type: string
-      required:
-      - code
-      - message
       type: object
   parameters:
     Limit:

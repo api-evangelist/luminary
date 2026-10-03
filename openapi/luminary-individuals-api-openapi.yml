@@ -155,22 +155,138 @@ paths:
       - Individuals
 components:
   schemas:
-    IndividualList:
+    FieldError:
       properties:
-        data:
-          items:
-            $ref: '#/components/schemas/Individual'
-          type: array
-        page_info:
-          $ref: '#/components/schemas/PageInfo'
-        total_count:
-          description: Total number of items matching the query (across all pages)
-          example: 100
-          type: integer
+        field:
+          description: Field that failed validation
+          example: name
+          type: string
+        message:
+          description: Error message
+          example: Name is required
+          type: string
       required:
-      - data
-      - page_info
-      - total_count
+      - field
+      - message
+      type: object
+    UpdateIndividualRequest:
+      properties:
+        address_line1:
+          description: Street address line 1
+          minLength: 1
+          type:
+          - string
+          - 'null'
+        address_line2:
+          description: Street address line 2
+          minLength: 1
+          type:
+          - string
+          - 'null'
+        city:
+          description: City
+          minLength: 1
+          type:
+          - string
+          - 'null'
+        country:
+          description: Country
+          minLength: 1
+          type:
+          - string
+          - 'null'
+        date_of_birth:
+          description: Date of birth
+          format: date
+          type:
+          - string
+          - 'null'
+        date_of_death:
+          description: Date of death if applicable
+          format: date
+          type:
+          - string
+          - 'null'
+        email:
+          description: Email address
+          format: email
+          type:
+          - string
+          - 'null'
+        first_name:
+          description: First name of the individual
+          minLength: 1
+          type: string
+        is_beneficiary:
+          description: Whether this client profile should be an eligible beneficiary for entities and gifts
+          type: boolean
+        is_deceased:
+          description: Whether the individual is deceased
+          type: boolean
+        is_grantor:
+          description: Whether this client profile should be an eligible grantor/owner/other principal for entities
+          type: boolean
+        is_primary:
+          description: Whether this is a primary client of the household (at most 2 per household)
+          type: boolean
+        is_trustee:
+          description: Whether this client profile should be an eligible trustee for entities
+          type: boolean
+        last_name:
+          description: Last name of the individual
+          minLength: 1
+          type: string
+        middle_name:
+          description: Middle name of the individual
+          minLength: 1
+          type:
+          - string
+          - 'null'
+        notes:
+          description: Notes about the client profile
+          maxLength: 65536
+          type:
+          - string
+          - 'null'
+        postal_code:
+          description: ZIP or postal code
+          minLength: 1
+          type:
+          - string
+          - 'null'
+        state:
+          description: State or province code (2 letter code)
+          maxLength: 2
+          minLength: 2
+          type:
+          - string
+          - 'null'
+        suffix:
+          description: Name suffix
+          minLength: 1
+          type:
+          - string
+          - 'null'
+      type: object
+    Error:
+      properties:
+        code:
+          description: Error code
+          example: INVALID_REQUEST
+          type: string
+        details:
+          items:
+            $ref: '#/components/schemas/FieldError'
+          type:
+          - array
+          - 'null'
+        message:
+          description: Error message
+          example: Invalid request parameters
+          type: string
+      required:
+      - code
+      - message
       type: object
     Individual:
       properties:
@@ -313,118 +429,31 @@ components:
       - created_at
       - updated_at
       type: object
-    UpdateIndividualRequest:
+    PageInfo:
       properties:
-        address_line1:
-          description: Street address line 1
-          minLength: 1
+        end_cursor:
+          description: Cursor pointing to the last item in the current page
+          example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
           type:
           - string
           - 'null'
-        address_line2:
-          description: Street address line 2
-          minLength: 1
-          type:
-          - string
-          - 'null'
-        city:
-          description: City
-          minLength: 1
-          type:
-          - string
-          - 'null'
-        country:
-          description: Country
-          minLength: 1
-          type:
-          - string
-          - 'null'
-        date_of_birth:
-          description: Date of birth
-          format: date
-          type:
-          - string
-          - 'null'
-        date_of_death:
-          description: Date of death if applicable
-          format: date
-          type:
-          - string
-          - 'null'
-        email:
-          description: Email address
-          format: email
-          type:
-          - string
-          - 'null'
-        first_name:
-          description: First name of the individual
-          minLength: 1
-          type: string
-        is_beneficiary:
-          description: Whether this client profile should be an eligible beneficiary for entities and gifts
+        has_next_page:
+          description: When paginating forwards, are there more items?
+          example: true
           type: boolean
-        is_deceased:
-          description: Whether the individual is deceased
+        has_previous_page:
+          description: When paginating backwards, are there more items?
+          example: false
           type: boolean
-        is_grantor:
-          description: Whether this client profile should be an eligible grantor/owner/other principal for entities
-          type: boolean
-        is_primary:
-          description: Whether this is a primary client of the household (at most 2 per household)
-          type: boolean
-        is_trustee:
-          description: Whether this client profile should be an eligible trustee for entities
-          type: boolean
-        last_name:
-          description: Last name of the individual
-          minLength: 1
-          type: string
-        middle_name:
-          description: Middle name of the individual
-          minLength: 1
+        start_cursor:
+          description: Cursor pointing to the first item in the current page
+          example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
           type:
           - string
           - 'null'
-        notes:
-          description: Notes about the client profile
-          maxLength: 65536
-          type:
-          - string
-          - 'null'
-        postal_code:
-          description: ZIP or postal code
-          minLength: 1
-          type:
-          - string
-          - 'null'
-        state:
-          description: State or province code (2 letter code)
-          maxLength: 2
-          minLength: 2
-          type:
-          - string
-          - 'null'
-        suffix:
-          description: Name suffix
-          minLength: 1
-          type:
-          - string
-          - 'null'
-      type: object
-    FieldError:
-      properties:
-        field:
-          description: Field that failed validation
-          example: name
-          type: string
-        message:
-          description: Error message
-          example: Name is required
-          type: string
       required:
-      - field
-      - message
+      - has_next_page
+      - has_previous_page
       type: object
     CreateIndividualRequest:
       properties:
@@ -534,51 +563,22 @@ components:
       - last_name
       - household_id
       type: object
-    PageInfo:
+    IndividualList:
       properties:
-        end_cursor:
-          description: Cursor pointing to the last item in the current page
-          example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
-          type:
-          - string
-          - 'null'
-        has_next_page:
-          description: When paginating forwards, are there more items?
-          example: true
-          type: boolean
-        has_previous_page:
-          description: When paginating backwards, are there more items?
-          example: false
-          type: boolean
-        start_cursor:
-          description: Cursor pointing to the first item in the current page
-          example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
-          type:
-          - string
-          - 'null'
-      required:
-      - has_next_page
-      - has_previous_page
-      type: object
-    Error:
-      properties:
-        code:
-          description: Error code
-          example: INVALID_REQUEST
-          type: string
-        details:
+        data:
           items:
-            $ref: '#/components/schemas/FieldError'
-          type:
-          - array
-          - 'null'
-        message:
-          description: Error message
-          example: Invalid request parameters
-          type: string
+            $ref: '#/components/schemas/Individual'
+          type: array
+        page_info:
+          $ref: '#/components/schemas/PageInfo'
+        total_count:
+          description: Total number of items matching the query (across all pages)
+          example: 100
+          type: integer
       required:
-      - code
-      - message
+      - data
+      - page_info
+      - total_count
       type: object
   parameters:
     Limit:
