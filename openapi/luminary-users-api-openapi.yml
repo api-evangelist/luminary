@@ -59,6 +59,30 @@ paths:
       tags:
       - Users
 components:
+  parameters:
+    AfterCursor:
+      description: Cursor for forward pagination. Returns items after this cursor.
+      in: query
+      name: after
+      schema:
+        example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+        type: string
+    BeforeCursor:
+      description: Cursor for backward pagination. Returns items before this cursor.
+      in: query
+      name: before
+      schema:
+        example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+        type: string
+    Limit:
+      description: Maximum number of items to return
+      in: query
+      name: limit
+      schema:
+        default: 50
+        maximum: 1000
+        minimum: 1
+        type: integer
   schemas:
     User:
       properties:
@@ -96,37 +120,6 @@ components:
       - last_name
       - created_at
       - updated_at
-      type: object
-    UserList:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/User'
-          type: array
-        page_info:
-          $ref: '#/components/schemas/PageInfo'
-        total_count:
-          description: Total number of items matching the query (across all pages)
-          example: 100
-          type: integer
-      required:
-      - data
-      - page_info
-      - total_count
-      type: object
-    FieldError:
-      properties:
-        field:
-          description: Field that failed validation
-          example: name
-          type: string
-        message:
-          description: Error message
-          example: Name is required
-          type: string
-      required:
-      - field
-      - message
       type: object
     Error:
       properties:
@@ -174,30 +167,37 @@ components:
       - has_next_page
       - has_previous_page
       type: object
-  parameters:
-    Limit:
-      description: Maximum number of items to return
-      in: query
-      name: limit
-      schema:
-        default: 50
-        maximum: 1000
-        minimum: 1
-        type: integer
-    BeforeCursor:
-      description: Cursor for backward pagination. Returns items before this cursor.
-      in: query
-      name: before
-      schema:
-        example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
-        type: string
-    AfterCursor:
-      description: Cursor for forward pagination. Returns items after this cursor.
-      in: query
-      name: after
-      schema:
-        example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
-        type: string
+    FieldError:
+      properties:
+        field:
+          description: Field that failed validation
+          example: name
+          type: string
+        message:
+          description: Error message
+          example: Name is required
+          type: string
+      required:
+      - field
+      - message
+      type: object
+    UserList:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/User'
+          type: array
+        page_info:
+          $ref: '#/components/schemas/PageInfo'
+        total_count:
+          description: Total number of items matching the query (across all pages)
+          example: 100
+          type: integer
+      required:
+      - data
+      - page_info
+      - total_count
+      type: object
   responses:
     DefaultError:
       content:

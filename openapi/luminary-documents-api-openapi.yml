@@ -351,13 +351,72 @@ paths:
       - Documents
 components:
   schemas:
-    DocumentSummaryFormat:
-      default: MARKDOWN
-      description: Format of the summary content
-      enum:
-      - MARKDOWN
-      - PLAIN_TEXT
-      type: string
+    UpdateDocumentSummaryRequest:
+      properties:
+        display_name:
+          description: Display name for the summary
+          minLength: 1
+          type: string
+        entry_mode:
+          $ref: '#/components/schemas/DocumentSummaryEntryMode'
+        summary:
+          description: The summary text content
+          type: string
+        summary_format:
+          $ref: '#/components/schemas/DocumentSummaryFormat'
+      type: object
+    DocumentList:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Document'
+          type: array
+        page_info:
+          $ref: '#/components/schemas/PageInfo'
+        total_count:
+          description: Total number of items matching the query (across all pages)
+          example: 100
+          type: integer
+      required:
+      - data
+      - page_info
+      - total_count
+      type: object
+    CreateDocumentRequest:
+      properties:
+        enable_ai_suggestions:
+          default: false
+          description: Whether this document should be used for AI suggestions
+          type: boolean
+        entity_id:
+          description: Entity ID if this document is owned by an entity
+          example: entity_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        file:
+          description: The document file to upload
+          format: binary
+          type: string
+        household_id:
+          description: Household ID this document belongs to
+          example: household_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        individual_id:
+          description: Individual ID if associated with an individual
+          example: client_profile_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        name:
+          description: Display name of the document
+          example: Trust Agreement.pdf
+          minLength: 1
+          type: string
+        type:
+          $ref: '#/components/schemas/DocumentType'
+      required:
+      - name
+      - type
+      - household_id
+      - file
+      type: object
     FieldError:
       properties:
         field:
@@ -394,22 +453,55 @@ components:
         type:
           $ref: '#/components/schemas/DocumentType'
       type: object
-    DocumentList:
+    Document:
       properties:
-        data:
-          items:
-            $ref: '#/components/schemas/Document'
-          type: array
-        page_info:
-          $ref: '#/components/schemas/PageInfo'
-        total_count:
-          description: Total number of items matching the query (across all pages)
-          example: 100
-          type: integer
+        created_at:
+          description: Timestamp when the document was created
+          example: '2024-01-15T09:30:00Z'
+          format: date-time
+          type: string
+        enable_ai_suggestions:
+          default: false
+          description: Whether this document should be used for AI suggestions
+          type: boolean
+        entity_id:
+          description: Entity ID if this document is owned by an entity
+          example: entity_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type:
+          - string
+          - 'null'
+        household_id:
+          description: Household ID this document belongs to
+          example: household_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        id:
+          description: Unique identifier with document_ prefix
+          example: document_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        individual_id:
+          description: Individual ID if this document is associated with an individual
+          example: client_profile_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type:
+          - string
+          - 'null'
+        name:
+          description: Display name of the document
+          example: Trust Agreement.pdf
+          type: string
+        type:
+          $ref: '#/components/schemas/DocumentType'
+        updated_at:
+          description: Timestamp when the document was last updated
+          example: '2024-01-20T14:45:00Z'
+          format: date-time
+          type: string
       required:
-      - data
-      - page_info
-      - total_count
+      - id
+      - name
+      - type
+      - household_id
+      - created_at
+      - updated_at
       type: object
     DocumentSummaryEntryMode:
       default: AI_AUTO
@@ -417,6 +509,13 @@ components:
       enum:
       - AI_AUTO
       - USER
+      type: string
+    DocumentSummaryFormat:
+      default: MARKDOWN
+      description: Format of the summary content
+      enum:
+      - MARKDOWN
+      - PLAIN_TEXT
       type: string
     Error:
       properties:
@@ -485,6 +584,23 @@ components:
       - DEED
       - OTHER
       type: string
+    DocumentSummaryList:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/DocumentSummary'
+          type: array
+        page_info:
+          $ref: '#/components/schemas/PageInfo'
+        total_count:
+          description: Total number of items matching the query (across all pages)
+          example: 100
+          type: integer
+      required:
+      - data
+      - page_info
+      - total_count
+      type: object
     PageInfo:
       properties:
         end_cursor:
@@ -510,108 +626,6 @@ components:
       required:
       - has_next_page
       - has_previous_page
-      type: object
-    Document:
-      properties:
-        created_at:
-          description: Timestamp when the document was created
-          example: '2024-01-15T09:30:00Z'
-          format: date-time
-          type: string
-        enable_ai_suggestions:
-          default: false
-          description: Whether this document should be used for AI suggestions
-          type: boolean
-        entity_id:
-          description: Entity ID if this document is owned by an entity
-          example: entity_01ARZ3NDEKTSV4RRFFQ69G5FAV
-          type:
-          - string
-          - 'null'
-        household_id:
-          description: Household ID this document belongs to
-          example: household_01ARZ3NDEKTSV4RRFFQ69G5FAV
-          type: string
-        id:
-          description: Unique identifier with document_ prefix
-          example: document_01ARZ3NDEKTSV4RRFFQ69G5FAV
-          type: string
-        individual_id:
-          description: Individual ID if this document is associated with an individual
-          example: client_profile_01ARZ3NDEKTSV4RRFFQ69G5FAV
-          type:
-          - string
-          - 'null'
-        name:
-          description: Display name of the document
-          example: Trust Agreement.pdf
-          type: string
-        type:
-          $ref: '#/components/schemas/DocumentType'
-        updated_at:
-          description: Timestamp when the document was last updated
-          example: '2024-01-20T14:45:00Z'
-          format: date-time
-          type: string
-      required:
-      - id
-      - name
-      - type
-      - household_id
-      - created_at
-      - updated_at
-      type: object
-    DocumentSummaryList:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/DocumentSummary'
-          type: array
-        page_info:
-          $ref: '#/components/schemas/PageInfo'
-        total_count:
-          description: Total number of items matching the query (across all pages)
-          example: 100
-          type: integer
-      required:
-      - data
-      - page_info
-      - total_count
-      type: object
-    CreateDocumentRequest:
-      properties:
-        enable_ai_suggestions:
-          default: false
-          description: Whether this document should be used for AI suggestions
-          type: boolean
-        entity_id:
-          description: Entity ID if this document is owned by an entity
-          example: entity_01ARZ3NDEKTSV4RRFFQ69G5FAV
-          type: string
-        file:
-          description: The document file to upload
-          format: binary
-          type: string
-        household_id:
-          description: Household ID this document belongs to
-          example: household_01ARZ3NDEKTSV4RRFFQ69G5FAV
-          type: string
-        individual_id:
-          description: Individual ID if associated with an individual
-          example: client_profile_01ARZ3NDEKTSV4RRFFQ69G5FAV
-          type: string
-        name:
-          description: Display name of the document
-          example: Trust Agreement.pdf
-          minLength: 1
-          type: string
-        type:
-          $ref: '#/components/schemas/DocumentType'
-      required:
-      - name
-      - type
-      - household_id
-      - file
       type: object
     DocumentSummary:
       properties:
@@ -655,21 +669,21 @@ components:
       - created_at
       - updated_at
       type: object
-    UpdateDocumentSummaryRequest:
-      properties:
-        display_name:
-          description: Display name for the summary
-          minLength: 1
-          type: string
-        entry_mode:
-          $ref: '#/components/schemas/DocumentSummaryEntryMode'
-        summary:
-          description: The summary text content
-          type: string
-        summary_format:
-          $ref: '#/components/schemas/DocumentSummaryFormat'
-      type: object
   parameters:
+    AfterCursor:
+      description: Cursor for forward pagination. Returns items after this cursor.
+      in: query
+      name: after
+      schema:
+        example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+        type: string
+    BeforeCursor:
+      description: Cursor for backward pagination. Returns items before this cursor.
+      in: query
+      name: before
+      schema:
+        example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+        type: string
     Limit:
       description: Maximum number of items to return
       in: query
@@ -679,20 +693,6 @@ components:
         maximum: 1000
         minimum: 1
         type: integer
-    BeforeCursor:
-      description: Cursor for backward pagination. Returns items before this cursor.
-      in: query
-      name: before
-      schema:
-        example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
-        type: string
-    AfterCursor:
-      description: Cursor for forward pagination. Returns items after this cursor.
-      in: query
-      name: after
-      schema:
-        example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
-        type: string
   responses:
     DefaultError:
       content:

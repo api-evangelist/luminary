@@ -214,221 +214,31 @@ paths:
       tags:
       - Households
 components:
+  parameters:
+    AfterCursor:
+      description: Cursor for forward pagination. Returns items after this cursor.
+      in: query
+      name: after
+      schema:
+        example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+        type: string
+    Limit:
+      description: Maximum number of items to return
+      in: query
+      name: limit
+      schema:
+        default: 50
+        maximum: 1000
+        minimum: 1
+        type: integer
+    BeforeCursor:
+      description: Cursor for backward pagination. Returns items before this cursor.
+      in: query
+      name: before
+      schema:
+        example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+        type: string
   schemas:
-    Entity:
-      properties:
-        created_at:
-          description: Timestamp when the entity was created
-          example: '2024-01-15T09:30:00Z'
-          format: date-time
-          type: string
-        display_name:
-          description: Display name of the entity
-          example: My Revocable Trust
-          type: string
-        external_id:
-          description: Customer-supplied identifier from an external system. Unique within the caller's tenant when set.
-          example: crm-entity-12345
-          minLength: 1
-          type:
-          - string
-          - 'null'
-        household_id:
-          description: Household ID this entity belongs to
-          example: household_01ARZ3NDEKTSV4RRFFQ69G5FAV
-          type: string
-        id:
-          description: Unique identifier with entity_ prefix
-          example: entity_01ARZ3NDEKTSV4RRFFQ69G5FAV
-          type: string
-        in_estate_status:
-          $ref: '#/components/schemas/InEstateStatus'
-        kind:
-          $ref: '#/components/schemas/EntityKind'
-        stage:
-          $ref: '#/components/schemas/EntityStage'
-        updated_at:
-          description: Timestamp when the entity was last updated
-          example: '2024-01-20T14:45:00Z'
-          format: date-time
-          type: string
-      required:
-      - id
-      - display_name
-      - kind
-      - stage
-      - in_estate_status
-      - household_id
-      - created_at
-      - updated_at
-      type: object
-    DocumentType:
-      description: Type of document
-      enum:
-      - GRAT_DESIGN_SUMMARY
-      - GENERATED_PRESENTATION
-      - ASSET_VALUATION
-      - SIGNED_TRUST_DOCUMENT
-      - TRUST_AMENDMENT
-      - TRANSFER_CONFIRMATION
-      - EXISTING_REMAINDER_TRUST_DOCUMENT
-      - BALANCE_SHEET
-      - WILL
-      - WILL_CODICIL
-      - POWER_OF_ATTORNEY
-      - ASSIGNMENT_OF_INTEREST
-      - ASSIGNMENT_OF_TANGIBLE_PROPERTY
-      - LOAN_NOTE_AGREEMENT
-      - ARTICLES_OF_INCORPORATION
-      - OPERATING_AGREEMENT
-      - PARTNERSHIP_AGREEMENT
-      - ACCOUNT_DOCUMENTATION_STATEMENT
-      - TAX_ID_CONFIRMATION
-      - GIFT_TAX_RETURN
-      - INCOME_TAX_RETURN
-      - TAX_RECEIPT
-      - TAX_FILING
-      - CORPORATE_BYLAWS
-      - LLC_AGREEMENT
-      - LLC_AGREEMENT_AMENDMENT
-      - OPERATING_AGREEMENT_AMENDMENT
-      - PARTNERSHIP_AGREEMENT_AMENDMENT
-      - SHAREHOLDERS_AGREEMENT
-      - STATE_BUSINESS_FILING
-      - LOGGED_CONTRIBUTION
-      - LOGGED_DISTRIBUTION
-      - INSURANCE_POLICY
-      - CRUMMEY_LETTER
-      - INSURANCE_PREMIUM_PAYMENT
-      - BENEFICIAL_OWNERSHIP_INFORMATION_REPORT
-      - FINCEN_FILING
-      - HEALTHCARE_PROXY
-      - LIVING_WILL
-      - DRIVERS_LICENSE
-      - PASSPORT
-      - DEED
-      - OTHER
-      type: string
-    PageInfo:
-      properties:
-        end_cursor:
-          description: Cursor pointing to the last item in the current page
-          example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
-          type:
-          - string
-          - 'null'
-        has_next_page:
-          description: When paginating forwards, are there more items?
-          example: true
-          type: boolean
-        has_previous_page:
-          description: When paginating backwards, are there more items?
-          example: false
-          type: boolean
-        start_cursor:
-          description: Cursor pointing to the first item in the current page
-          example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
-          type:
-          - string
-          - 'null'
-      required:
-      - has_next_page
-      - has_previous_page
-      type: object
-    CreatePrimaryIndividualRequest:
-      properties:
-        address_line1:
-          description: Street address line 1
-          minLength: 1
-          type:
-          - string
-          - 'null'
-        address_line2:
-          description: Street address line 2
-          minLength: 1
-          type:
-          - string
-          - 'null'
-        city:
-          description: City
-          minLength: 1
-          type:
-          - string
-          - 'null'
-        country:
-          description: Country
-          minLength: 1
-          type:
-          - string
-          - 'null'
-        date_of_birth:
-          description: Date of birth
-          format: date
-          type:
-          - string
-          - 'null'
-        email:
-          description: Email address
-          format: email
-          type:
-          - string
-          - 'null'
-        first_name:
-          description: First name of the individual
-          example: John
-          minLength: 1
-          type: string
-        is_beneficiary:
-          default: false
-          description: Whether this client profile should be an eligible beneficiary for entities and gifts
-          type: boolean
-        is_deceased:
-          default: false
-          description: Whether the individual is deceased
-          type: boolean
-        is_trustee:
-          default: false
-          description: Whether this client profile should be an eligible trustee for entities
-          type: boolean
-        last_name:
-          description: Last name of the individual
-          example: Smith
-          minLength: 1
-          type: string
-        middle_name:
-          description: Middle name of the individual
-          minLength: 1
-          type:
-          - string
-          - 'null'
-        notes:
-          description: Notes about the client profile
-          maxLength: 65536
-          type:
-          - string
-          - 'null'
-        postal_code:
-          description: ZIP or postal code
-          minLength: 1
-          type:
-          - string
-          - 'null'
-        state:
-          description: State or province code (2 letter code)
-          maxLength: 2
-          minLength: 2
-          type: string
-        suffix:
-          description: Name suffix
-          minLength: 1
-          type:
-          - string
-          - 'null'
-      required:
-      - first_name
-      - last_name
-      - state
-      type: object
     DocumentList:
       properties:
         data:
@@ -446,6 +256,59 @@ components:
       - page_info
       - total_count
       type: object
+    CreateHouseholdRequest:
+      properties:
+        external_id:
+          description: Customer-supplied identifier from an external system. Unique within the caller's tenant when set.
+          example: crm-household-12345
+          minLength: 1
+          type:
+          - string
+          - 'null'
+        notes:
+          description: Optional notes about the household
+          maxLength: 65536
+          type:
+          - string
+          - 'null'
+        primary_individuals:
+          description: Primary client profiles to create for this household (at most 2)
+          items:
+            $ref: '#/components/schemas/CreatePrimaryIndividualRequest'
+          maxItems: 2
+          minItems: 1
+          type: array
+        primary_relationship_owner_id:
+          description: User ID of the primary relationship owner
+          example: user_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+      required:
+      - primary_relationship_owner_id
+      type: object
+    EntityList:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Entity'
+          type: array
+        page_info:
+          $ref: '#/components/schemas/PageInfo'
+        total_count:
+          description: Total number of items matching the query (across all pages)
+          example: 100
+          type: integer
+      required:
+      - data
+      - page_info
+      - total_count
+      type: object
+    InEstateStatus:
+      description: Whether the entity is in or out of the estate
+      enum:
+      - in_estate
+      - out_of_estate
+      - none
+      type: string
     Household:
       properties:
         created_at:
@@ -495,35 +358,96 @@ components:
       - created_at
       - updated_at
       type: object
-    CreateHouseholdRequest:
+    HouseholdList:
       properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Household'
+          type: array
+        page_info:
+          $ref: '#/components/schemas/PageInfo'
+        total_count:
+          description: Total number of items matching the query (across all pages)
+          example: 100
+          type: integer
+      required:
+      - data
+      - page_info
+      - total_count
+      type: object
+    Entity:
+      properties:
+        created_at:
+          description: Timestamp when the entity was created
+          example: '2024-01-15T09:30:00Z'
+          format: date-time
+          type: string
+        display_name:
+          description: Display name of the entity
+          example: My Revocable Trust
+          type: string
         external_id:
           description: Customer-supplied identifier from an external system. Unique within the caller's tenant when set.
-          example: crm-household-12345
+          example: crm-entity-12345
           minLength: 1
           type:
           - string
           - 'null'
-        notes:
-          description: Optional notes about the household
-          maxLength: 65536
-          type:
-          - string
-          - 'null'
-        primary_individuals:
-          description: Primary client profiles to create for this household (at most 2)
-          items:
-            $ref: '#/components/schemas/CreatePrimaryIndividualRequest'
-          maxItems: 2
-          minItems: 1
-          type: array
-        primary_relationship_owner_id:
-          description: User ID of the primary relationship owner
-          example: user_01ARZ3NDEKTSV4RRFFQ69G5FAV
+        household_id:
+          description: Household ID this entity belongs to
+          example: household_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        id:
+          description: Unique identifier with entity_ prefix
+          example: entity_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        in_estate_status:
+          $ref: '#/components/schemas/InEstateStatus'
+        kind:
+          $ref: '#/components/schemas/EntityKind'
+        stage:
+          $ref: '#/components/schemas/EntityStage'
+        updated_at:
+          description: Timestamp when the entity was last updated
+          example: '2024-01-20T14:45:00Z'
+          format: date-time
           type: string
       required:
-      - primary_relationship_owner_id
+      - id
+      - display_name
+      - kind
+      - stage
+      - in_estate_status
+      - household_id
+      - created_at
+      - updated_at
       type: object
+    EntityKind:
+      description: Type of entity - determines the specific subtype and applicable fields
+      enum:
+      - REVOCABLE_TRUST
+      - IRREVOCABLE_TRUST
+      - SLAT_TRUST
+      - ILIT_TRUST
+      - QPRT_TRUST
+      - GRAT_TRUST
+      - CRT_TRUST
+      - CLT_TRUST
+      - INDIVIDUAL_PERSONAL_ACCOUNT
+      - JOINT_PERSONAL_ACCOUNT
+      - CUSTODIAL_PERSONAL_ACCOUNT
+      - INSURANCE_PERSONAL_ACCOUNT
+      - QUALIFIED_TUITION_PERSONAL_ACCOUNT
+      - RETIREMENT_PERSONAL_ACCOUNT
+      - DONOR_ADVISED_FUND
+      - PRIVATE_FOUNDATION
+      - LLC_BUSINESS_ENTITY
+      - LP_BUSINESS_ENTITY
+      - GP_BUSINESS_ENTITY
+      - SOLE_PROPRIETORSHIP_BUSINESS_ENTITY
+      - SCORP_BUSINESS_ENTITY
+      - CCORP_BUSINESS_ENTITY
+      type: string
     UpdateHouseholdRequest:
       properties:
         external_id:
@@ -544,128 +468,53 @@ components:
           example: user_01ARZ3NDEKTSV4RRFFQ69G5FAV
           type: string
       type: object
-    InEstateStatus:
-      description: Whether the entity is in or out of the estate
+    DocumentType:
+      description: Type of document
       enum:
-      - in_estate
-      - out_of_estate
-      - none
+      - GRAT_DESIGN_SUMMARY
+      - GENERATED_PRESENTATION
+      - ASSET_VALUATION
+      - SIGNED_TRUST_DOCUMENT
+      - TRUST_AMENDMENT
+      - TRANSFER_CONFIRMATION
+      - EXISTING_REMAINDER_TRUST_DOCUMENT
+      - BALANCE_SHEET
+      - WILL
+      - WILL_CODICIL
+      - POWER_OF_ATTORNEY
+      - ASSIGNMENT_OF_INTEREST
+      - ASSIGNMENT_OF_TANGIBLE_PROPERTY
+      - LOAN_NOTE_AGREEMENT
+      - ARTICLES_OF_INCORPORATION
+      - OPERATING_AGREEMENT
+      - PARTNERSHIP_AGREEMENT
+      - ACCOUNT_DOCUMENTATION_STATEMENT
+      - TAX_ID_CONFIRMATION
+      - GIFT_TAX_RETURN
+      - INCOME_TAX_RETURN
+      - TAX_RECEIPT
+      - TAX_FILING
+      - CORPORATE_BYLAWS
+      - LLC_AGREEMENT
+      - LLC_AGREEMENT_AMENDMENT
+      - OPERATING_AGREEMENT_AMENDMENT
+      - PARTNERSHIP_AGREEMENT_AMENDMENT
+      - SHAREHOLDERS_AGREEMENT
+      - STATE_BUSINESS_FILING
+      - LOGGED_CONTRIBUTION
+      - LOGGED_DISTRIBUTION
+      - INSURANCE_POLICY
+      - CRUMMEY_LETTER
+      - INSURANCE_PREMIUM_PAYMENT
+      - BENEFICIAL_OWNERSHIP_INFORMATION_REPORT
+      - FINCEN_FILING
+      - HEALTHCARE_PROXY
+      - LIVING_WILL
+      - DRIVERS_LICENSE
+      - PASSPORT
+      - DEED
+      - OTHER
       type: string
-    Document:
-      properties:
-        created_at:
-          description: Timestamp when the document was created
-          example: '2024-01-15T09:30:00Z'
-          format: date-time
-          type: string
-        enable_ai_suggestions:
-          default: false
-          description: Whether this document should be used for AI suggestions
-          type: boolean
-        entity_id:
-          description: Entity ID if this document is owned by an entity
-          example: entity_01ARZ3NDEKTSV4RRFFQ69G5FAV
-          type:
-          - string
-          - 'null'
-        household_id:
-          description: Household ID this document belongs to
-          example: household_01ARZ3NDEKTSV4RRFFQ69G5FAV
-          type: string
-        id:
-          description: Unique identifier with document_ prefix
-          example: document_01ARZ3NDEKTSV4RRFFQ69G5FAV
-          type: string
-        individual_id:
-          description: Individual ID if this document is associated with an individual
-          example: client_profile_01ARZ3NDEKTSV4RRFFQ69G5FAV
-          type:
-          - string
-          - 'null'
-        name:
-          description: Display name of the document
-          example: Trust Agreement.pdf
-          type: string
-        type:
-          $ref: '#/components/schemas/DocumentType'
-        updated_at:
-          description: Timestamp when the document was last updated
-          example: '2024-01-20T14:45:00Z'
-          format: date-time
-          type: string
-      required:
-      - id
-      - name
-      - type
-      - household_id
-      - created_at
-      - updated_at
-      type: object
-    EntityStage:
-      description: Lifecycle stage of the entity
-      enum:
-      - PRE_CREATED
-      - AI_CREATING
-      - AI_CREATION_FAILED
-      - AI_NEEDS_REVIEW
-      - DRAFT
-      - READY_FOR_PROPOSAL
-      - IMPLEMENTATION
-      - ACTIVE
-      - COMPLETED
-      - ARCHIVED
-      type: string
-    EntityList:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/Entity'
-          type: array
-        page_info:
-          $ref: '#/components/schemas/PageInfo'
-        total_count:
-          description: Total number of items matching the query (across all pages)
-          example: 100
-          type: integer
-      required:
-      - data
-      - page_info
-      - total_count
-      type: object
-    FieldError:
-      properties:
-        field:
-          description: Field that failed validation
-          example: name
-          type: string
-        message:
-          description: Error message
-          example: Name is required
-          type: string
-      required:
-      - field
-      - message
-      type: object
-    Error:
-      properties:
-        code:
-          description: Error code
-          example: INVALID_REQUEST
-          type: string
-        details:
-          items:
-            $ref: '#/components/schemas/FieldError'
-          type:
-          - array
-          - 'null'
-        message:
-          description: Error message
-          example: Invalid request parameters
-          type: string
-      required:
-      - code
-      - message
-      type: object
     Individual:
       properties:
         address_line1:
@@ -807,32 +656,100 @@ components:
       - created_at
       - updated_at
       type: object
-    EntityKind:
-      description: Type of entity - determines the specific subtype and applicable fields
-      enum:
-      - REVOCABLE_TRUST
-      - IRREVOCABLE_TRUST
-      - SLAT_TRUST
-      - ILIT_TRUST
-      - QPRT_TRUST
-      - GRAT_TRUST
-      - CRT_TRUST
-      - CLT_TRUST
-      - INDIVIDUAL_PERSONAL_ACCOUNT
-      - JOINT_PERSONAL_ACCOUNT
-      - CUSTODIAL_PERSONAL_ACCOUNT
-      - INSURANCE_PERSONAL_ACCOUNT
-      - QUALIFIED_TUITION_PERSONAL_ACCOUNT
-      - RETIREMENT_PERSONAL_ACCOUNT
-      - DONOR_ADVISED_FUND
-      - PRIVATE_FOUNDATION
-      - LLC_BUSINESS_ENTITY
-      - LP_BUSINESS_ENTITY
-      - GP_BUSINESS_ENTITY
-      - SOLE_PROPRIETORSHIP_BUSINESS_ENTITY
-      - SCORP_BUSINESS_ENTITY
-      - CCORP_BUSINESS_ENTITY
-      type: string
+    CreatePrimaryIndividualRequest:
+      properties:
+        address_line1:
+          description: Street address line 1
+          minLength: 1
+          type:
+          - string
+          - 'null'
+        address_line2:
+          description: Street address line 2
+          minLength: 1
+          type:
+          - string
+          - 'null'
+        city:
+          description: City
+          minLength: 1
+          type:
+          - string
+          - 'null'
+        country:
+          description: Country
+          minLength: 1
+          type:
+          - string
+          - 'null'
+        date_of_birth:
+          description: Date of birth
+          format: date
+          type:
+          - string
+          - 'null'
+        email:
+          description: Email address
+          format: email
+          type:
+          - string
+          - 'null'
+        first_name:
+          description: First name of the individual
+          example: John
+          minLength: 1
+          type: string
+        is_beneficiary:
+          default: false
+          description: Whether this client profile should be an eligible beneficiary for entities and gifts
+          type: boolean
+        is_deceased:
+          default: false
+          description: Whether the individual is deceased
+          type: boolean
+        is_trustee:
+          default: false
+          description: Whether this client profile should be an eligible trustee for entities
+          type: boolean
+        last_name:
+          description: Last name of the individual
+          example: Smith
+          minLength: 1
+          type: string
+        middle_name:
+          description: Middle name of the individual
+          minLength: 1
+          type:
+          - string
+          - 'null'
+        notes:
+          description: Notes about the client profile
+          maxLength: 65536
+          type:
+          - string
+          - 'null'
+        postal_code:
+          description: ZIP or postal code
+          minLength: 1
+          type:
+          - string
+          - 'null'
+        state:
+          description: State or province code (2 letter code)
+          maxLength: 2
+          minLength: 2
+          type: string
+        suffix:
+          description: Name suffix
+          minLength: 1
+          type:
+          - string
+          - 'null'
+      required:
+      - first_name
+      - last_name
+      - state
+      type: object
     IndividualList:
       properties:
         data:
@@ -850,22 +767,129 @@ components:
       - page_info
       - total_count
       type: object
-    HouseholdList:
+    Document:
       properties:
-        data:
-          items:
-            $ref: '#/components/schemas/Household'
-          type: array
-        page_info:
-          $ref: '#/components/schemas/PageInfo'
-        total_count:
-          description: Total number of items matching the query (across all pages)
-          example: 100
-          type: integer
+        created_at:
+          description: Timestamp when the document was created
+          example: '2024-01-15T09:30:00Z'
+          format: date-time
+          type: string
+        enable_ai_suggestions:
+          default: false
+          description: Whether this document should be used for AI suggestions
+          type: boolean
+        entity_id:
+          description: Entity ID if this document is owned by an entity
+          example: entity_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type:
+          - string
+          - 'null'
+        household_id:
+          description: Household ID this document belongs to
+          example: household_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        id:
+          description: Unique identifier with document_ prefix
+          example: document_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        individual_id:
+          description: Individual ID if this document is associated with an individual
+          example: client_profile_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type:
+          - string
+          - 'null'
+        name:
+          description: Display name of the document
+          example: Trust Agreement.pdf
+          type: string
+        type:
+          $ref: '#/components/schemas/DocumentType'
+        updated_at:
+          description: Timestamp when the document was last updated
+          example: '2024-01-20T14:45:00Z'
+          format: date-time
+          type: string
       required:
-      - data
-      - page_info
-      - total_count
+      - id
+      - name
+      - type
+      - household_id
+      - created_at
+      - updated_at
+      type: object
+    Error:
+      properties:
+        code:
+          description: Error code
+          example: INVALID_REQUEST
+          type: string
+        details:
+          items:
+            $ref: '#/components/schemas/FieldError'
+          type:
+          - array
+          - 'null'
+        message:
+          description: Error message
+          example: Invalid request parameters
+          type: string
+      required:
+      - code
+      - message
+      type: object
+    EntityStage:
+      description: Lifecycle stage of the entity
+      enum:
+      - PRE_CREATED
+      - AI_CREATING
+      - AI_CREATION_FAILED
+      - AI_NEEDS_REVIEW
+      - DRAFT
+      - READY_FOR_PROPOSAL
+      - IMPLEMENTATION
+      - ACTIVE
+      - COMPLETED
+      - ARCHIVED
+      type: string
+    PageInfo:
+      properties:
+        end_cursor:
+          description: Cursor pointing to the last item in the current page
+          example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+          type:
+          - string
+          - 'null'
+        has_next_page:
+          description: When paginating forwards, are there more items?
+          example: true
+          type: boolean
+        has_previous_page:
+          description: When paginating backwards, are there more items?
+          example: false
+          type: boolean
+        start_cursor:
+          description: Cursor pointing to the first item in the current page
+          example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+          type:
+          - string
+          - 'null'
+      required:
+      - has_next_page
+      - has_previous_page
+      type: object
+    FieldError:
+      properties:
+        field:
+          description: Field that failed validation
+          example: name
+          type: string
+        message:
+          description: Error message
+          example: Name is required
+          type: string
+      required:
+      - field
+      - message
       type: object
   responses:
     DefaultError:
@@ -874,30 +898,6 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
       description: General Error
-  parameters:
-    AfterCursor:
-      description: Cursor for forward pagination. Returns items after this cursor.
-      in: query
-      name: after
-      schema:
-        example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
-        type: string
-    Limit:
-      description: Maximum number of items to return
-      in: query
-      name: limit
-      schema:
-        default: 50
-        maximum: 1000
-        minimum: 1
-        type: integer
-    BeforeCursor:
-      description: Cursor for backward pagination. Returns items before this cursor.
-      in: query
-      name: before
-      schema:
-        example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
-        type: string
   securitySchemes:
     oauth2Profiles:
       flows:

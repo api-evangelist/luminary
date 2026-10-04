@@ -60,105 +60,14 @@ paths:
       tags:
       - Valuations
 components:
+  responses:
+    DefaultError:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: General Error
   schemas:
-    AssetClass:
-      properties:
-        display_name:
-          description: Display name of the asset class
-          example: Equities
-          type: string
-        id:
-          description: Asset class ID
-          example: asset_class_01ARZ3NDEKTSV4RRFFQ69G5FAV
-          type: string
-      required:
-      - id
-      - display_name
-      type: object
-    FieldError:
-      properties:
-        field:
-          description: Field that failed validation
-          example: name
-          type: string
-        message:
-          description: Error message
-          example: Name is required
-          type: string
-      required:
-      - field
-      - message
-      type: object
-    CreateAssetRequest:
-      properties:
-        asset_class_id:
-          description: Asset class ID to associate with this asset
-          example: asset_class_01ARZ3NDEKTSV4RRFFQ69G5FAV
-          type: string
-        display_name:
-          description: Display name of the asset
-          example: Apple Inc. Stock
-          minLength: 1
-          type: string
-        external_id:
-          description: External ID for the asset
-          example: AAPL-12345
-          minLength: 1
-          type:
-          - string
-          - 'null'
-        value:
-          description: Value of this asset in USD
-          example: 50000
-          format: double
-          type: number
-      required:
-      - display_name
-      - value
-      - asset_class_id
-      type: object
-    CreateValuationRequest:
-      properties:
-        description:
-          description: Free-form notes about this valuation
-          maxLength: 2048
-          type:
-          - string
-          - 'null'
-        directly_held_assets:
-          description: List of assets to include in this valuation
-          items:
-            $ref: '#/components/schemas/CreateAssetRequest'
-          type: array
-        effective_date:
-          description: The date this valuation is effective
-          example: '2024-01-15'
-          format: date
-          type: string
-      required:
-      - effective_date
-      - directly_held_assets
-      type: object
-    Error:
-      properties:
-        code:
-          description: Error code
-          example: INVALID_REQUEST
-          type: string
-        details:
-          items:
-            $ref: '#/components/schemas/FieldError'
-          type:
-          - array
-          - 'null'
-        message:
-          description: Error message
-          example: Invalid request parameters
-          type: string
-      required:
-      - code
-      - message
-      type: object
     Valuation:
       properties:
         created_at:
@@ -215,6 +124,90 @@ components:
       - created_at
       - updated_at
       type: object
+    CreateAssetRequest:
+      properties:
+        asset_class_id:
+          description: Asset class ID to associate with this asset
+          example: asset_class_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        display_name:
+          description: Display name of the asset
+          example: Apple Inc. Stock
+          minLength: 1
+          type: string
+        external_id:
+          description: External ID for the asset
+          example: AAPL-12345
+          minLength: 1
+          type:
+          - string
+          - 'null'
+        value:
+          description: Value of this asset in USD
+          example: 50000
+          format: double
+          type: number
+      required:
+      - display_name
+      - value
+      - asset_class_id
+      type: object
+    Error:
+      properties:
+        code:
+          description: Error code
+          example: INVALID_REQUEST
+          type: string
+        details:
+          items:
+            $ref: '#/components/schemas/FieldError'
+          type:
+          - array
+          - 'null'
+        message:
+          description: Error message
+          example: Invalid request parameters
+          type: string
+      required:
+      - code
+      - message
+      type: object
+    AssetClass:
+      properties:
+        display_name:
+          description: Display name of the asset class
+          example: Equities
+          type: string
+        id:
+          description: Asset class ID
+          example: asset_class_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+      required:
+      - id
+      - display_name
+      type: object
+    CreateValuationRequest:
+      properties:
+        description:
+          description: Free-form notes about this valuation
+          maxLength: 2048
+          type:
+          - string
+          - 'null'
+        directly_held_assets:
+          description: List of assets to include in this valuation
+          items:
+            $ref: '#/components/schemas/CreateAssetRequest'
+          type: array
+        effective_date:
+          description: The date this valuation is effective
+          example: '2024-01-15'
+          format: date
+          type: string
+      required:
+      - effective_date
+      - directly_held_assets
+      type: object
     Asset:
       properties:
         asset_class:
@@ -244,13 +237,20 @@ components:
       - value
       - asset_class
       type: object
-  responses:
-    DefaultError:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-      description: General Error
+    FieldError:
+      properties:
+        field:
+          description: Field that failed validation
+          example: name
+          type: string
+        message:
+          description: Error message
+          example: Name is required
+          type: string
+      required:
+      - field
+      - message
+      type: object
   securitySchemes:
     oauth2Profiles:
       flows:
