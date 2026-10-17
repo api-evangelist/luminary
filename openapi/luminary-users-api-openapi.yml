@@ -67,13 +67,6 @@ components:
       schema:
         example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
         type: string
-    BeforeCursor:
-      description: Cursor for backward pagination. Returns items before this cursor.
-      in: query
-      name: before
-      schema:
-        example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
-        type: string
     Limit:
       description: Maximum number of items to return
       in: query
@@ -83,7 +76,57 @@ components:
         maximum: 1000
         minimum: 1
         type: integer
+    BeforeCursor:
+      description: Cursor for backward pagination. Returns items before this cursor.
+      in: query
+      name: before
+      schema:
+        example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+        type: string
   schemas:
+    UserList:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/User'
+          type: array
+        page_info:
+          $ref: '#/components/schemas/PageInfo'
+        total_count:
+          description: Total number of items matching the query (across all pages)
+          example: 100
+          type: integer
+      required:
+      - data
+      - page_info
+      - total_count
+      type: object
+    PageInfo:
+      properties:
+        end_cursor:
+          description: Cursor pointing to the last item in the current page
+          example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+          type:
+          - string
+          - 'null'
+        has_next_page:
+          description: When paginating forwards, are there more items?
+          example: true
+          type: boolean
+        has_previous_page:
+          description: When paginating backwards, are there more items?
+          example: false
+          type: boolean
+        start_cursor:
+          description: Cursor pointing to the first item in the current page
+          example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+          type:
+          - string
+          - 'null'
+      required:
+      - has_next_page
+      - has_previous_page
+      type: object
     User:
       properties:
         created_at:
@@ -141,32 +184,6 @@ components:
       - code
       - message
       type: object
-    PageInfo:
-      properties:
-        end_cursor:
-          description: Cursor pointing to the last item in the current page
-          example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
-          type:
-          - string
-          - 'null'
-        has_next_page:
-          description: When paginating forwards, are there more items?
-          example: true
-          type: boolean
-        has_previous_page:
-          description: When paginating backwards, are there more items?
-          example: false
-          type: boolean
-        start_cursor:
-          description: Cursor pointing to the first item in the current page
-          example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
-          type:
-          - string
-          - 'null'
-      required:
-      - has_next_page
-      - has_previous_page
-      type: object
     FieldError:
       properties:
         field:
@@ -180,23 +197,6 @@ components:
       required:
       - field
       - message
-      type: object
-    UserList:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/User'
-          type: array
-        page_info:
-          $ref: '#/components/schemas/PageInfo'
-        total_count:
-          description: Total number of items matching the query (across all pages)
-          example: 100
-          type: integer
-      required:
-      - data
-      - page_info
-      - total_count
       type: object
   responses:
     DefaultError:

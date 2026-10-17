@@ -351,20 +351,6 @@ paths:
       - Documents
 components:
   schemas:
-    UpdateDocumentSummaryRequest:
-      properties:
-        display_name:
-          description: Display name for the summary
-          minLength: 1
-          type: string
-        entry_mode:
-          $ref: '#/components/schemas/DocumentSummaryEntryMode'
-        summary:
-          description: The summary text content
-          type: string
-        summary_format:
-          $ref: '#/components/schemas/DocumentSummaryFormat'
-      type: object
     DocumentList:
       properties:
         data:
@@ -381,77 +367,6 @@ components:
       - data
       - page_info
       - total_count
-      type: object
-    CreateDocumentRequest:
-      properties:
-        enable_ai_suggestions:
-          default: false
-          description: Whether this document should be used for AI suggestions
-          type: boolean
-        entity_id:
-          description: Entity ID if this document is owned by an entity
-          example: entity_01ARZ3NDEKTSV4RRFFQ69G5FAV
-          type: string
-        file:
-          description: The document file to upload
-          format: binary
-          type: string
-        household_id:
-          description: Household ID this document belongs to
-          example: household_01ARZ3NDEKTSV4RRFFQ69G5FAV
-          type: string
-        individual_id:
-          description: Individual ID if associated with an individual
-          example: client_profile_01ARZ3NDEKTSV4RRFFQ69G5FAV
-          type: string
-        name:
-          description: Display name of the document
-          example: Trust Agreement.pdf
-          minLength: 1
-          type: string
-        type:
-          $ref: '#/components/schemas/DocumentType'
-      required:
-      - name
-      - type
-      - household_id
-      - file
-      type: object
-    FieldError:
-      properties:
-        field:
-          description: Field that failed validation
-          example: name
-          type: string
-        message:
-          description: Error message
-          example: Name is required
-          type: string
-      required:
-      - field
-      - message
-      type: object
-    UpdateDocumentRequest:
-      properties:
-        enable_ai_suggestions:
-          description: Whether this document should be used for AI suggestions
-          type: boolean
-        entity_id:
-          description: Entity ID if this document is owned by an entity
-          type:
-          - string
-          - 'null'
-        individual_id:
-          description: Individual ID if associated with an individual
-          type:
-          - string
-          - 'null'
-        name:
-          description: Display name of the document
-          minLength: 1
-          type: string
-        type:
-          $ref: '#/components/schemas/DocumentType'
       type: object
     Document:
       properties:
@@ -510,6 +425,41 @@ components:
       - AI_AUTO
       - USER
       type: string
+    CreateDocumentRequest:
+      properties:
+        enable_ai_suggestions:
+          default: false
+          description: Whether this document should be used for AI suggestions
+          type: boolean
+        entity_id:
+          description: Entity ID if this document is owned by an entity
+          example: entity_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        file:
+          description: The document file to upload
+          format: binary
+          type: string
+        household_id:
+          description: Household ID this document belongs to
+          example: household_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        individual_id:
+          description: Individual ID if associated with an individual
+          example: client_profile_01ARZ3NDEKTSV4RRFFQ69G5FAV
+          type: string
+        name:
+          description: Display name of the document
+          example: Trust Agreement.pdf
+          minLength: 1
+          type: string
+        type:
+          $ref: '#/components/schemas/DocumentType'
+      required:
+      - name
+      - type
+      - household_id
+      - file
+      type: object
     DocumentSummaryFormat:
       default: MARKDOWN
       description: Format of the summary content
@@ -517,25 +467,62 @@ components:
       - MARKDOWN
       - PLAIN_TEXT
       type: string
-    Error:
+    UpdateDocumentSummaryRequest:
       properties:
-        code:
-          description: Error code
-          example: INVALID_REQUEST
+        display_name:
+          description: Display name for the summary
+          minLength: 1
           type: string
-        details:
+        entry_mode:
+          $ref: '#/components/schemas/DocumentSummaryEntryMode'
+        summary:
+          description: The summary text content
+          type: string
+        summary_format:
+          $ref: '#/components/schemas/DocumentSummaryFormat'
+      type: object
+    DocumentSummaryList:
+      properties:
+        data:
           items:
-            $ref: '#/components/schemas/FieldError'
-          type:
-          - array
-          - 'null'
-        message:
-          description: Error message
-          example: Invalid request parameters
-          type: string
+            $ref: '#/components/schemas/DocumentSummary'
+          type: array
+        page_info:
+          $ref: '#/components/schemas/PageInfo'
+        total_count:
+          description: Total number of items matching the query (across all pages)
+          example: 100
+          type: integer
       required:
-      - code
-      - message
+      - data
+      - page_info
+      - total_count
+      type: object
+    PageInfo:
+      properties:
+        end_cursor:
+          description: Cursor pointing to the last item in the current page
+          example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+          type:
+          - string
+          - 'null'
+        has_next_page:
+          description: When paginating forwards, are there more items?
+          example: true
+          type: boolean
+        has_previous_page:
+          description: When paginating backwards, are there more items?
+          example: false
+          type: boolean
+        start_cursor:
+          description: Cursor pointing to the first item in the current page
+          example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+          type:
+          - string
+          - 'null'
+      required:
+      - has_next_page
+      - has_previous_page
       type: object
     DocumentType:
       description: Type of document
@@ -584,48 +571,41 @@ components:
       - DEED
       - OTHER
       type: string
-    DocumentSummaryList:
+    FieldError:
       properties:
-        data:
-          items:
-            $ref: '#/components/schemas/DocumentSummary'
-          type: array
-        page_info:
-          $ref: '#/components/schemas/PageInfo'
-        total_count:
-          description: Total number of items matching the query (across all pages)
-          example: 100
-          type: integer
+        field:
+          description: Field that failed validation
+          example: name
+          type: string
+        message:
+          description: Error message
+          example: Name is required
+          type: string
       required:
-      - data
-      - page_info
-      - total_count
+      - field
+      - message
       type: object
-    PageInfo:
+    UpdateDocumentRequest:
       properties:
-        end_cursor:
-          description: Cursor pointing to the last item in the current page
-          example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+        enable_ai_suggestions:
+          description: Whether this document should be used for AI suggestions
+          type: boolean
+        entity_id:
+          description: Entity ID if this document is owned by an entity
           type:
           - string
           - 'null'
-        has_next_page:
-          description: When paginating forwards, are there more items?
-          example: true
-          type: boolean
-        has_previous_page:
-          description: When paginating backwards, are there more items?
-          example: false
-          type: boolean
-        start_cursor:
-          description: Cursor pointing to the first item in the current page
-          example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+        individual_id:
+          description: Individual ID if associated with an individual
           type:
           - string
           - 'null'
-      required:
-      - has_next_page
-      - has_previous_page
+        name:
+          description: Display name of the document
+          minLength: 1
+          type: string
+        type:
+          $ref: '#/components/schemas/DocumentType'
       type: object
     DocumentSummary:
       properties:
@@ -669,18 +649,31 @@ components:
       - created_at
       - updated_at
       type: object
+    Error:
+      properties:
+        code:
+          description: Error code
+          example: INVALID_REQUEST
+          type: string
+        details:
+          items:
+            $ref: '#/components/schemas/FieldError'
+          type:
+          - array
+          - 'null'
+        message:
+          description: Error message
+          example: Invalid request parameters
+          type: string
+      required:
+      - code
+      - message
+      type: object
   parameters:
     AfterCursor:
       description: Cursor for forward pagination. Returns items after this cursor.
       in: query
       name: after
-      schema:
-        example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
-        type: string
-    BeforeCursor:
-      description: Cursor for backward pagination. Returns items before this cursor.
-      in: query
-      name: before
       schema:
         example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
         type: string
@@ -693,6 +686,13 @@ components:
         maximum: 1000
         minimum: 1
         type: integer
+    BeforeCursor:
+      description: Cursor for backward pagination. Returns items before this cursor.
+      in: query
+      name: before
+      schema:
+        example: eyJpZCI6ImhvdXNlaG9sZF8wMUFSWjNOREVLVFNWNFJSRkZRNjlHNUZBViJ9
+        type: string
   responses:
     DefaultError:
       content:
